@@ -16,7 +16,7 @@ function Home() {
           backgroundSize: "cover",
         }}
       >
-        <div className="w-1/2 h-[350px] flex flex-col items-center p-6 shadow-xl rounded-xl">
+        <div className="w-[80%] h-[350px] flex flex-col items-center p-6 shadow-xl rounded-xl">
           <img
             src={Logo}
             alt="Columbia Poker Club Logo"
