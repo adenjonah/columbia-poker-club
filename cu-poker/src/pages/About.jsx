@@ -15,10 +15,12 @@ function About() {
       <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-blue-300 text-text">
         <h1 className="text-4xl sm:text-7xl font-extrabold">History</h1>
         <p className="text-xl sm:text-3xl max-w-4xl mt-6">
-          Established in 2022, the Columbia Poker Club started as a small
-          gathering of students passionate about the game. Over the years, we
-          have grown into a thriving community that organizes tournaments,
-          strategy workshops, and social poker nights.
+          Founded in Fall 2021 by Mateo Maturana and Noah Krever,
+           the Columbia Poker Club began with meetings in Schermerhorn and Hamilton, 
+           hosting free games. The first tournament took place in November 2021 in Fairchild. 
+           The club offered workshops on rules and basic strategy, and successfully ran several tournaments. 
+           Official recognition as a club at Columbia was achieved during the 2022-2023 academic year. 
+           Initially without funding, the club has since gained sponsors and partners.
         </p>
       </section>
 
@@ -30,17 +32,17 @@ function About() {
 
         <div className="flex flex-wrap justify-center gap-8 mt-10 w-full max-w-5xl">
           {[
-            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Political Science & Statistics" },
+            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science" },
             { name: "David Eyal", role: "Co-President", class: "CC '26", major: "Computer Science and Statistics" },
             { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats" },
-            { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '26", major: "Business" },
-            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Engineering" },
-            { name: "Zachary Klein", role: "Outreach Chair", class: "CC '27", major: "Political Science" },
-            { name: "Lucy Rose", role: "Social Media Chair", class: "'25", major: "Art History" },
-            { name: "Liz Hu", role: "Senior Advisor", class: "CC '25", major: "Biology" },
+            { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture" },
+            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "???" },
+            { name: "Zachary Klein", role: "Outreach Chair", class: "SEAS '27", major: "Applied Math" },
+            { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology" },
+            { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science" },
             { name: "Bailey Ng", role: "Senior Advisor", class: "GS '25", major: "Financial Economics" },
-            { name: "Noah Krever", role: "Alumni Advisor", class: "'23?", major: "Econ?" },
-            { name: "Mateo Maturana", role: "Alumni Advisor", class: "'23?", major: "CS?" }
+            { name: "Noah Krever", role: "Alumni Advisor", class: "'CC '23", major: "" },
+            { name: "Mateo Maturana", role: "Alumni Advisor", class: "'CC '23", major: "" }
           ].map((member, index) => (
             <div
               key={index}
