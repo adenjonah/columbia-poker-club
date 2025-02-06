@@ -36,7 +36,7 @@ function About() {
             { name: "David Eyal", role: "Co-President", class: "CC '26", major: "Computer Science and Statistics" },
             { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats" },
             { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture" },
-            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "???" },
+            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science" },
             { name: "Zachary Klein", role: "Outreach Chair", class: "SEAS '27", major: "Applied Math" },
             { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology" },
             { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science" },
