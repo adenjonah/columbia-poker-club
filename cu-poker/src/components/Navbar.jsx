@@ -15,6 +15,7 @@ return (
             <div className="hidden md:flex space-x-6">
                 <Link to="/" className="hover:text-accent transition text-2xl">Home</Link>
                 <Link to="/about" className="hover:text-accent transition text-2xl">About</Link>
+                <Link to="/sponsors" className="hover:text-accent transition text-2xl">Sponsors</Link>
             </div>
 
             <button 

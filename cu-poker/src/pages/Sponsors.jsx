@@ -53,9 +53,9 @@ function Sponsors() {
         </h1>
         <div className="w-full">
           <Carousel
+            arrows={false}
             swipeable={true}
             draggable={true}
-            // Removed showDots and dotListClass to eliminate the dots
             responsive={responsive}
             ssr={true}
             infinite={true}
@@ -64,7 +64,6 @@ function Sponsors() {
             keyBoardControl={true}
             transitionDuration={500}
             containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
             itemClass="px-12 py-12"
           >
             {sponsors.map((sponsor, index) => (

@@ -5,6 +5,7 @@ import About from './pages/About'
 import Navbar from './components/Navbar'
 import './index.css'
 import Sponsors from './pages/Sponsors'
+
 function App() {
   return (
     <Router>
