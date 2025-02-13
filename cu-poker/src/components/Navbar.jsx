@@ -31,6 +31,7 @@ return (
             <div className="md:hidden bg-primary text-white w-full flex flex-col items-center py-4 space-y-4">
                 <Link to="/" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Home</Link>
                 <Link to="/about" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>About</Link>
+                <Link to="/sponsors" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Sponsors</Link>
             </div>
         )}
     </nav>
