@@ -1,6 +1,6 @@
-import Logo from "./logo.png";
-import Background from "./background.png";
-import Table from "./table.png";
+import Logo from "../assets/logo.png";
+import Background from "../assets/background.png";
+import Table from "../assets/table.png";
 
 function Home() {
   return (
