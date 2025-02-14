@@ -1,8 +1,8 @@
 function About() {
   return (
-    <div className="w-full text-text">
+    <div className="w-full text-text-dark">
       {/* Mission */}
-      <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-blue-500 text-white">
+      <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-primary text-text-dark" style={{ paddingBottom: '20vh' }}>
         <h1 className="text-4xl sm:text-7xl font-extrabold">Mission</h1>
         <p className="text-xl sm:text-3xl max-w-4xl mt-6">
           Our mission is to foster a community of poker enthusiasts at Columbia
@@ -12,28 +12,28 @@ function About() {
       </section>
 
       {/* History */}
-      <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-blue-300 text-text">
+      <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-primary-light text-text-dark">
         <h1 className="text-4xl sm:text-7xl font-extrabold">History</h1>
-        <p className="text-xl sm:text-3xl max-w-4xl mt-6">
+        <p className="text-xl sm:text-3xl max-w-4xl mt-6 leading-relaxed">
           Founded in Fall 2021 by Mateo Maturana and Noah Krever,
-           the Columbia Poker Club began with meetings in Schermerhorn and Hamilton, 
-           hosting free games. The first tournament took place in November 2021 in Fairchild. 
-           The club offered workshops on rules and basic strategy, and successfully ran several tournaments. 
-           Official recognition as a club at Columbia was achieved during the 2022-2023 academic year. 
-           Initially without funding, the club has since gained sponsors and partners.
+          the Columbia Poker Club began with meetings in Schermerhorn and Hamilton, 
+          hosting free games. The first tournament took place in November 2021 in Fairchild. 
+          The club offered workshops on rules and basic strategy, and successfully ran several tournaments. 
+          Official recognition as a club at Columbia was achieved during the 2022-2023 academic year. 
+          Initially without funding, the club has since gained sponsors and partners.
         </p>
       </section>
 
       {/* Board */}
-      <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-10 bg-blue-100 text-text">
+      <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 py-10 bg-primary-dark text-text-light">
         <h1 className="text-4xl sm:text-7xl font-extrabold text-center">
           Current Board
         </h1>
 
         <div className="flex flex-wrap justify-center gap-8 mt-10 w-full max-w-5xl">
           {[
-            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science" },
             { name: "David Eyal", role: "Co-President", class: "CC '26", major: "Computer Science and Statistics" },
+            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science" },
             { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats" },
             { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture" },
             { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science" },
@@ -46,19 +46,18 @@ function About() {
           ].map((member, index) => (
             <div
               key={index}
-              className="bg-white bg-opacity-20 p-6 rounded-lg text-center shadow-md flex flex-col items-center justify-center h-[250px] w-full md:w-[300px]"
+              className="bg-primary-light text-text-dark p-6 rounded-lg text-center shadow-md flex flex-col items-center justify-center h-[250px] w-full md:w-[300px]"
             >
               <h3 className="text-2xl sm:text-4xl font-bold">{member.name}</h3>
-              <p className="text-base sm:text-lg text-gray-700">
+              <p className="text-base sm:text-lg">
                 {member.role}
               </p>
-              <p className="text-base sm:text-lg text-gray-700">
+              <p className="text-base sm:text-lg">
                 {member.major}
               </p>
-              <p className="text-base sm:text-lg text-gray-700">
+              <p className="text-base sm:text-lg">
                 {member.class}
               </p>
-              
             </div>
           ))}
         </div>

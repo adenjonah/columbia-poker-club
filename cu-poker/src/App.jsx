@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Navbar from './components/Navbar'
 import './index.css'
+import Sponsors from './pages/Sponsors'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/sponsors" element={<Sponsors />} />
       </Routes>
     </Router>
   )
