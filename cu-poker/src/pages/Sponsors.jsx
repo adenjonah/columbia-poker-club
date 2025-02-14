@@ -47,8 +47,8 @@ const responsive = {
 function Sponsors() {
   return (
     <div className="w-full">
-      <section className="min-h-screen w-full flex flex-col items-center justify-center py-16 px-8 bg-blue-500">
-        <h1 className="text-4xl sm:text-7xl font-extrabold text-white mb-20">
+      <section className="min-h-screen w-full flex flex-col items-center justify-center py-20 px-8 bg-primary-light">
+        <h1 className="text-4xl sm:text-7xl font-extrabold text-text-dark mb-20">
           Our Sponsors
         </h1>
         <div className="w-full">
@@ -76,7 +76,7 @@ function Sponsors() {
                   alt={`${sponsor.name} logo`}
                   className="h-40 w-auto object-contain mb-4"
                 />
-                <p className="text-base sm:text-lg text-gray-700 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-base sm:text-lg text-text-DEFAULT text-center sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   {sponsor.description}
                 </p>
               </div>

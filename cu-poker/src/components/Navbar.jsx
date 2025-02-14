@@ -6,10 +6,10 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
 return (
-    <nav className="bg-primary text-white shadow-md fixed w-full top-0 z-50">
-        <div className="container mx-auto h-[5vh] flex justify-between items-center">
-            <Link to="/" className="flex items-center space-x-3">
-                <img src={Logo} alt="Columbia Poker Club Logo" className="h-10 w-10 rounded-full" />
+    <nav className="bg-primary-dark text-text-light shadow-md fixed w-full top-0 z-50">
+        <div className="container mx-auto h-[8vh] flex justify-between items-center">
+            <Link to="/" className="flex items-center space-x-3 pl-4 md:pl-0">
+                <img src={Logo} alt="Columbia Poker Club Logo" className="h-10 w-10 md:h-16 md:w-16 rounded-full" />
             </Link>
 
             <div className="hidden md:flex space-x-6">
@@ -19,7 +19,7 @@ return (
             </div>
 
             <button 
-                className="md:hidden text-white focus:outline-none"
+                className="md:hidden text-text-dark focus:outline-none"
                 onClick={() => setMenuOpen(!menuOpen)}
             >
                 <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -29,7 +29,7 @@ return (
         </div>
 
         {menuOpen && (
-            <div className="md:hidden bg-primary text-white w-full flex flex-col items-center py-4 space-y-4">
+            <div className="md:hidden bg-primary text-text-dark w-full flex flex-col items-center py-4 space-y-4">
                 <Link to="/" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Home</Link>
                 <Link to="/about" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>About</Link>
                 <Link to="/sponsors" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Sponsors</Link>
