@@ -7,19 +7,22 @@ const sponsors = [
     name: "Jane Street",
     logo: "/JS_Logo.png",
     description:
-      "Jane Street is a quantitative trading firm and liquidity provider with a unique focus on technology and collaborative problem solving."
+      "Jane Street is a quantitative trading firm and liquidity provider with a unique focus on technology and collaborative problem solving.",
+    link: "https://www.janestreet.com/"
   },
   {
     name: "SIG",
     logo: "/SIG_Logo.png",
     description:
-      "Susquehanna International Group (SIG) is a global quantitative trading firm that leverages its expertise in trading, technology, and research to provide liquidity and competitive pricing."
+      "Susquehanna International Group (SIG) is a global quantitative trading firm that leverages its expertise in trading, technology, and research to provide liquidity and competitive pricing.",
+    link: "https://www.sig.com/"
   },
   {
     name: "Hudson River Trading",
     logo: "/HRT_Logo.png",
     description:
-      "Hudson River Trading (HRT) is a multi-asset class quantitative trading firm that brings a scientific approach to trading financial products."
+      "Hudson River Trading (HRT) is a multi-asset class quantitative trading firm that brings a scientific approach to trading financial products.",
+    link: "https://www.hudsonrivertrading.com/"
   }
 ];
 
@@ -64,8 +67,11 @@ function Sponsors() {
             itemClass="px-4 py-4 sm:px-12 sm:py-12"
           >
             {sponsors.map((sponsor, index) => (
-              <div
+              <a
                 key={index}
+                href={sponsor.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex flex-col items-start sm:items-center justify-start sm:justify-between p-4 sm:p-8 m-4 rounded-xl hover:shadow-2xl transition duration-300 transform hover:scale-105"
               >
                 <img
@@ -76,7 +82,7 @@ function Sponsors() {
                 <p className="text-base sm:text-lg text-text-DEFAULT text-center sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   {sponsor.description}
                 </p>
-              </div>
+              </a>
             ))}
           </Carousel>
         </div>

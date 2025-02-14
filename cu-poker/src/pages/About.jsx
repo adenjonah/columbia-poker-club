@@ -46,7 +46,7 @@ function About() {
           ].map((member, index) => (
             <div
               key={index}
-              className="bg-primary-light text-text-dark p-6 rounded-lg text-center shadow-md flex flex-col items-center justify-center h-[250px] w-full md:w-[300px] cursor-pointer"
+              className="bg-primary-light text-text-dark p-6 rounded-lg text-center shadow-md flex flex-col items-center justify-center h-[250px] w-full md:w-[300px] cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg"
               {...(member.link && { onClick: () => window.open(member.link, "_blank") })}
             >
               <h3 className="text-2xl sm:text-4xl font-bold">{member.name}</h3>
