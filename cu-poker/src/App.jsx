@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/sponsors" element={<Sponsors />} />
-        <Route path="/spring-mTT" element={<MTTInterestForm />} />
+        <Route path="/spring-mtt" element={<MTTInterestForm />} />
       </Routes>
     </Router>
   )
