@@ -106,7 +106,7 @@ function Home() {
                     </>
                   ),
                 ],
-                link: "/spring-mTT",
+                link: "/spring-mtt",
               },
             ];
             const columns = 3;
