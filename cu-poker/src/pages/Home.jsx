@@ -1,6 +1,3 @@
-import Logo from "@assets/CU_Poker_Logo.png?url";
-import Background from "@assets/Hero_Background.png?url";
-import Table from "@assets/S24_MTT.png?url";
 
 function Home() {
   return (
@@ -12,14 +9,14 @@ function Home() {
       <div
         className="h-screen w-full flex flex-col items-center justify-center "
         style={{
-          backgroundImage: `url(${Background})`,
+          backgroundImage: `url(/Hero_Background.png)`,
           backgroundSize: "cover",
           paddingBottom: '20vh',
         }}
       >
         <div className="w-[90%] md:w-[80%] h-[300px] md:h-[350px] flex flex-col items-center p-4 md:p-6 shadow-xl rounded-xl">
           <img
-            src={Logo}
+            src="/CU_Poker_Logo.png"
             alt="Columbia Poker Club Logo"
             className="w-[120px] md:w-[170px] h-[120px] md:h-[170px] mb-4 rounded-full"
           />
@@ -43,7 +40,7 @@ function Home() {
 
           <div className="w-full md:w-1/2 p-4 md:p-6">
             <img
-              src={Table}
+              src="/S24_MTT.png"
               alt="Poker Table"
               className="w-full rounded-lg shadow-lg"
             />

@@ -1,26 +1,23 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import JaneStreet from "@assets/JS_Logo.png?url";
-import HudsonRiverTrading from "@assets/HRT_Logo.png?url";
-import SIG from "@assets/SIG_Logo.png?url";
 
 const sponsors = [
   {
     name: "Jane Street",
-    logo: JaneStreet,
+    logo: "/JS_Logo.png",
     description:
       "Jane Street is a quantitative trading firm and liquidity provider with a unique focus on technology and collaborative problem solving."
   },
   {
     name: "SIG",
-    logo: SIG,
+    logo: "/SIG_Logo.png",
     description:
       "Susquehanna International Group (SIG) is a global quantitative trading firm that leverages its expertise in trading, technology, and research to provide liquidity and competitive pricing."
   },
   {
     name: "Hudson River Trading",
-    logo: HudsonRiverTrading,
+    logo: "/HRT_Logo.png",
     description:
       "Hudson River Trading (HRT) is a multi-asset class quantitative trading firm that brings a scientific approach to trading financial products."
   }
