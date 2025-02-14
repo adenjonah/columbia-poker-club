@@ -2,14 +2,14 @@ function About() {
   return (
     <div className="w-full text-text-dark">
       {/* Mission */}
-      <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-primary text-text-dark" style={{ paddingBottom: '20vh' }}>
+      {/* <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-primary text-text-dark" style={{ paddingBottom: '20vh' }}>
         <h1 className="text-4xl sm:text-7xl font-extrabold">Mission</h1>
         <p className="text-xl sm:text-3xl max-w-4xl mt-6">
           Our mission is to foster a community of poker enthusiasts at Columbia
           University, providing a space for players of all skill levels to
           learn, compete, and enjoy the game in a fun and strategic environment.
         </p>
-      </section>
+      </section> */}
 
       {/* History */}
       <section className="min-h-screen w-full flex flex-col items-center justify-center text-center px-6 bg-primary-light text-text-dark">
