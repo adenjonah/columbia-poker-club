@@ -1,9 +1,9 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import JaneStreet from "@assets/JS_Logo.png";
-import HudsonRiverTrading from "@assets/HRT_Logo.png";
-import SIG from "@assets/SIG_Logo.png";
+import JaneStreet from "@assets/JS_Logo.png?url";
+import HudsonRiverTrading from "@assets/HRT_Logo.png?url";
+import SIG from "@assets/SIG_Logo.png?url";
 
 const sponsors = [
   {

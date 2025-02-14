@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '@assets/CU_Poker_Logo.png'; // Make sure your logo is in src/assets
+import Logo from '@assets/CU_Poker_Logo.png?url';
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
