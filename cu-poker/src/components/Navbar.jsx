@@ -1,25 +1,25 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from './logo.png'; // Make sure your logo is in src/assets
+import Logo from '@assets/CU_Poker_Logo.png'; // Make sure your logo is in src/assets
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
 return (
     <nav className="bg-primary-dark text-text-light shadow-md fixed w-full top-0 z-50">
-        <div className="container mx-auto h-[8vh] flex justify-between items-center">
-            <Link to="/" className="flex items-center space-x-3 pl-4 md:pl-0">
-                <img src={Logo} alt="Columbia Poker Club Logo" className="h-10 w-10 md:h-16 md:w-16 rounded-full" />
+        <div className="container mx-auto h-12 flex justify-between items-center">
+            <Link to="/" className="flex items-center space-x-3 pl-4">
+                <img src={Logo} alt="Columbia Poker Club Logo" className="h-10 w-10 rounded-full p-1" />
             </Link>
 
             <div className="hidden md:flex space-x-6">
-                <Link to="/" className="hover:text-accent transition text-2xl">Home</Link>
-                <Link to="/about" className="hover:text-accent transition text-2xl">About</Link>
-                <Link to="/sponsors" className="hover:text-accent transition text-2xl">Sponsors</Link>
+                <Link to="/" className="hover:text-accent transition text-lg">Home</Link>
+                <Link to="/about" className="hover:text-accent transition text-lg">About</Link>
+                <Link to="/sponsors" className="hover:text-accent transition text-lg">Sponsors</Link>
             </div>
 
             <button 
-                className="md:hidden text-text-dark focus:outline-none"
+                className="md:hidden text-text-light focus:outline-none"
                 onClick={() => setMenuOpen(!menuOpen)}
             >
                 <svg className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

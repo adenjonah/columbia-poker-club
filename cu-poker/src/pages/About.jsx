@@ -32,21 +32,22 @@ function About() {
 
         <div className="flex flex-wrap justify-center gap-8 mt-10 w-full max-w-5xl">
           {[
-            { name: "David Eyal", role: "Co-President", class: "CC '26", major: "Computer Science and Statistics" },
-            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science" },
-            { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats" },
-            { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture" },
-            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science" },
-            { name: "Zachary Klein", role: "Outreach Chair", class: "SEAS '27", major: "Applied Math" },
-            { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology" },
-            { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science" },
-            { name: "Bailey Ng", role: "Senior Advisor", class: "GS '25", major: "Financial Economics" },
-            { name: "Noah Krever", role: "Alumni Advisor", class: "'CC '23", major: "" },
-            { name: "Mateo Maturana", role: "Alumni Advisor", class: "'CC '23", major: "" }
+            { name: "David Eyal", role: "Co-President", class: "CC '26", major: "Computer Science and Statistics", link: "https://www.linkedin.com/in/david-eyal-9a19a624b/" },
+            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science", link: "https://www.linkedin.com/in/andrew-e-fahey/" },
+            { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats", link: "https://linkedin.com/in/jonah-aden" },
+            { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture", link: "https://www.linkedin.com/in/juliana-shepard/" },
+            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science", link: "https://www.linkedin.com/in/nicolai-sotorp-06a729255/" },
+            { name: "Zachary Klein", role: "Outreach Chair", class: "SEAS '27", major: "Applied Math", link: "https://www.linkedin.com/in/zachary-klein-794061292/" },
+            { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology"},
+            { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science", link: "https://www.linkedin.com/in/elizabethhu/" },
+            { name: "Bailey Ng", role: "Senior Advisor", class: "GS '25", major: "Financial Economics", link: "https://www.linkedin.com/in/baileyng/" },
+            { name: "Noah Krever", role: "Alumni Advisor", class: "'CC '23", major: "", link: "https://www.linkedin.com/in/noahkrever/" },
+            { name: "Mateo Maturana", role: "Alumni Advisor", class: "'CC '23", major: "", link: "https://www.linkedin.com/in/mateo-maturana-300187170/" }
           ].map((member, index) => (
             <div
               key={index}
-              className="bg-primary-light text-text-dark p-6 rounded-lg text-center shadow-md flex flex-col items-center justify-center h-[250px] w-full md:w-[300px]"
+              className="bg-primary-light text-text-dark p-6 rounded-lg text-center shadow-md flex flex-col items-center justify-center h-[250px] w-full md:w-[300px] cursor-pointer"
+              {...(member.link && { onClick: () => window.open(member.link, "_blank") })}
             >
               <h3 className="text-2xl sm:text-4xl font-bold">{member.name}</h3>
               <p className="text-base sm:text-lg">

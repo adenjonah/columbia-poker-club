@@ -1,9 +1,9 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import JaneStreet from "../assets/jane_street_transparent.png";
-import HudsonRiverTrading from "../assets/HRT_logo.png";
-import SIG from "../assets/SIG_logo.png";
+import JaneStreet from "@assets/JS_Logo.png";
+import HudsonRiverTrading from "@assets/HRT_Logo.png";
+import SIG from "@assets/SIG_Logo.png";
 
 const sponsors = [
   {
@@ -64,17 +64,17 @@ function Sponsors() {
             keyBoardControl={true}
             transitionDuration={500}
             containerClass="carousel-container"
-            itemClass="px-12 py-12"
+            itemClass="px-4 py-4 sm:px-12 sm:py-12"
           >
             {sponsors.map((sponsor, index) => (
               <div
                 key={index}
-                className="group flex flex-col items-center justify-between p-8 m-4 rounded-xl hover:shadow-2xl transition duration-300 transform hover:scale-105"
+                className="group flex flex-col items-start sm:items-center justify-start sm:justify-between p-4 sm:p-8 m-4 rounded-xl hover:shadow-2xl transition duration-300 transform hover:scale-105"
               >
                 <img
                   src={sponsor.logo}
                   alt={`${sponsor.name} logo`}
-                  className="h-40 w-auto object-contain mb-4"
+                  className="w-full h-auto object-contain mb-8 sm:mb-4 sm:h-60"
                 />
                 <p className="text-base sm:text-lg text-text-DEFAULT text-center sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
                   {sponsor.description}

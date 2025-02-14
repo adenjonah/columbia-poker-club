@@ -1,6 +1,6 @@
-import Logo from "../assets/logo.png";
-import Background from "../assets/background.png";
-import Table from "../assets/table.png";
+import Logo from "@assets/CU_Poker_Logo.png";
+import Background from "@assets/Hero_Background.png";
+import Table from "@assets/S24_MTT.png";
 
 function Home() {
   return (
