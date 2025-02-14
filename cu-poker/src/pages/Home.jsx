@@ -5,7 +5,6 @@ function Home() {
   return (
     <div
       className="h-auto w-full bg-background-DEFAULT flex flex-col items-center"
-      style={{ fontFamily: "futura, sans-serif" }}
     >
       {/* Hero Section */}
       <div
@@ -124,7 +123,7 @@ function Home() {
                     <div
                       key={index}
                       className={`bg-primary-light shadow-lg p-10 md:p-20 rounded-lg ${extraClass} ${
-                        event.link ? "cursor-pointer" : ""
+                        event.link ? "cursor-pointer hover:shadow-2xl transition-transform transform hover:scale-105" : ""
                       }`}
                       onClick={event.link ? () => navigate(event.link) : undefined}
                     >
