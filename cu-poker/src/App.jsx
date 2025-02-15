@@ -6,10 +6,12 @@ import './index.css'
 import Sponsors from './pages/Sponsors'
 import MTTInterestForm from './pages/MTT_Interest_Form'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <Routes>
