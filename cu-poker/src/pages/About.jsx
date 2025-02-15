@@ -41,8 +41,8 @@ function About() {
             { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology"},
             { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science", link: "https://www.linkedin.com/in/elizabethhu/" },
             { name: "Bailey Ng", role: "Senior Advisor", class: "GS '25", major: "Financial Economics", link: "https://www.linkedin.com/in/baileyng/" },
-            { name: "Noah Krever", role: "Alumni Advisor", class: "'CC '23", major: "", link: "https://www.linkedin.com/in/noahkrever/" },
-            { name: "Mateo Maturana", role: "Alumni Advisor", class: "'CC '23", major: "", link: "https://www.linkedin.com/in/mateo-maturana-300187170/" }
+            { name: "Noah Krever", role: "Alumni Advisor", class: "CC '22", major: "Computer Science and Statistics", link: "https://www.linkedin.com/in/noahkrever/" },
+            { name: "Mateo Maturana", role: "Alumni Advisor", class: "CC '23", major: "Computer Science", link: "https://www.linkedin.com/in/mateo-maturana-300187170/" }
           ].map((member, index) => (
             <div
               key={index}

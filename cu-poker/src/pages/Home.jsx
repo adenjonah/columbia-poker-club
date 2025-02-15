@@ -52,6 +52,24 @@ function Home() {
         </div>
       </section>
 
+      {/* Call to Action */}
+      <section className="w-full bg-primary-dark py-10 md:py-20 px-5 md:px-10 flex flex-col items-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-text-light mb-4">
+          Are you a Columbia student?
+        </h2>
+        <p className="text-xl md:text-2xl text-text-light mb-6">
+          Join our community and stay updated with our latest events!
+        </p>
+        <a
+          href="https://discord.gg/4yzGm64uQ8"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-primary-light text-text-dark text-lg md:text-xl font-bold py-3 px-6 rounded-full hover:bg-primary transition"
+        >
+          Join our Discord!
+        </a>
+      </section>
+
       {/* Upcoming Events */}
       <section className="w-full bg-primary py-10 md:py-20 px-5 md:px-10">
         <div className="max-w-[90%] md:max-w-[80%] mx-auto text-center">
