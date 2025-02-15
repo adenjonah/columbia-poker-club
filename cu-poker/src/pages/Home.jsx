@@ -53,7 +53,7 @@ function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="w-full bg-primary-dark py-10 md:py-20 px-5 md:px-10 flex flex-col items-center">
+      <section className="w-full bg-primary-dark py-10 md:py-20 px-5 md:px-10 flex flex-col items-center text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-text-light mb-4">
           Are you a Columbia student?
         </h2>
