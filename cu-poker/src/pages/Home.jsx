@@ -16,7 +16,7 @@ function Home() {
           backgroundPosition: "center",
         }}
       >
-        <div className="w-[90%] md:w-[80%] h-[300px] md:h-[350px] flex flex-col items-center p-4 md:p-6 shadow-xl rounded-xl">
+        <div className="w-[90%] md:w-[80%] h-[300px] md:h-[350px] flex flex-col items-center p-4 md:p-6 rounded-xl">
           <img
             src="/CU_Poker_Logo.png"
             alt="Columbia Poker Club Logo"
