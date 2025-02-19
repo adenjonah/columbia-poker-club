@@ -4,9 +4,9 @@ import About from './pages/About'
 import Navbar from './components/Navbar'
 import './index.css'
 import Sponsors from './pages/Sponsors'
-import MTTInterestForm from './pages/MTT_Interest_Form'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
+import SpringTournament from './pages/SpringTournament'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/sponsors" element={<Sponsors />} />
-          <Route path="/spring-mtt" element={<MTTInterestForm />} />
+          <Route path="/spring-tournament" element={<SpringTournament />} />
         </Routes>
         <Footer />
       </div>

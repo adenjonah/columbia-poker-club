@@ -30,6 +30,7 @@ function Navbar() {
           <Link to="/" className="hover:text-accent transition text-lg">Home</Link>
           <Link to="/about" className="hover:text-accent transition text-lg">About</Link>
           <Link to="/sponsors" className="hover:text-accent transition text-lg">Sponsors</Link>
+          <Link to="/spring-tournament" className="hover:text-accent transition text-lg">Spring Tournament</Link>
         </div>
 
         <button 
@@ -47,6 +48,7 @@ function Navbar() {
           <Link to="/" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link to="/about" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>About</Link>
           <Link to="/sponsors" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Sponsors</Link>
+          <Link to="/spring-tournament" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Spring Tournament</Link>
         </div>
       )}
     </nav>
