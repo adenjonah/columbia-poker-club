@@ -126,44 +126,44 @@ function Home() {
                 link: "/spring-mtt",
               },
             ];
-            const columns = 3;
-            const remainder = events.length % columns;
             return (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-                {events.map((event, index) => {
-                  // Determine if this event belongs to the bottom (incomplete) row
-                  const isLastRow =
-                    remainder !== 0 && index >= events.length - remainder;
-                  // For a single item bottom row, start it at column 2 on medium screens to center it
-                  const extraClass =
-                    isLastRow && remainder === 1 ? "md:col-start-2" : "";
-                  return (
-                    <div
-                      key={index}
-                      className={`bg-primary-light shadow-lg p-10 md:p-20 rounded-lg ${extraClass} ${
-                        event.link ? "cursor-pointer hover:shadow-2xl transition-transform transform hover:scale-105" : ""
-                      }`}
-                      onClick={event.link ? () => navigate(event.link) : undefined}
-                    >
-                      <h3 className="text-xl md:text-2xl font-bold text-text-dark mb-2">
-                        {event.title}
-                      </h3>
-                      {event.details.map((detail, dIndex) => (
-                        <p
-                          key={dIndex}
-                          className={`text-text-dark text-lg md:text-xl ${
-                            dIndex > 0 ? "mt-2" : ""
-                          }`}
-                        >
-                          {detail}
-                        </p>
-                      ))}
-                    </div>
-                  );
-                })}
+              <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+                {events.map((event, index) => (
+                  <div
+                    key={index}
+                    className={`w-full md:w-1/3 bg-primary-light shadow-lg p-10 md:p-20 rounded-lg ${
+                      event.link
+                        ? "cursor-pointer hover:shadow-2xl transition-transform transform hover:scale-105"
+                        : ""
+                    }`}
+                    onClick={event.link ? () => navigate(event.link) : undefined}
+                  >
+                    <h3 className="text-xl md:text-2xl font-bold text-text-dark mb-2">
+                      {event.title}
+                    </h3>
+                    {event.details.map((detail, dIndex) => (
+                      <p
+                        key={dIndex}
+                        className={`text-text-dark text-lg md:text-xl ${dIndex > 0 ? "mt-2" : ""}`}
+                      >
+                        {detail}
+                      </p>
+                    ))}
+                  </div>
+                ))}
               </div>
             );
           })()}
+
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=c_e9a2bda6adc3d9f883f7acc86756d418132483828382004ab9e93dd530e92f39%40group.calendar.google.com&ctz=America%2FNew_York"
+            className="block mx-auto mt-8"
+            style={{ border: 0 }}
+            width="800"
+            height="600"
+            frameBorder="0"
+            scrolling="no"
+          ></iframe>
         </div>
       </section>
     </div>
