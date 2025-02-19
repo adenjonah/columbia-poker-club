@@ -154,6 +154,16 @@ function Home() {
               </div>
             );
           })()}
+
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=c_e9a2bda6adc3d9f883f7acc86756d418132483828382004ab9e93dd530e92f39%40group.calendar.google.com&ctz=America%2FNew_York"
+            className="block mx-auto mt-8"
+            style={{ border: 0 }}
+            width="800"
+            height="600"
+            frameBorder="0"
+            scrolling="no"
+          ></iframe>
         </div>
       </section>
     </div>
