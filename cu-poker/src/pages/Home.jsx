@@ -16,7 +16,7 @@ function Home() {
           backgroundPosition: "center",
         }}
       >
-        <div className="w-[90%] md:w-[80%] h-[300px] md:h-[350px] flex flex-col items-center p-4 md:p-6 shadow-xl rounded-xl">
+        <div className="w-[90%] md:w-[80%] h-[300px] md:h-[350px] flex flex-col items-center p-4 md:p-6 rounded-xl">
           <img
             src="/CU_Poker_Logo.png"
             alt="Columbia Poker Club Logo"
@@ -28,12 +28,12 @@ function Home() {
         </div>
       </div>
 
-      {/* About */}
+      {/* Mission */}
       <section className="w-full bg-primary-light py-10 md:py-20 px-5 md:px-10 flex flex-col items-center">
         <div className="max-w-3xl md:max-w-5xl flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 p-4 md:p-6">
             <h2 className="text-4xl md:text-6xl font-bold text-text-dark mb-4">
-              About Us
+              Mission
             </h2>
             <p className="text-xl md:text-3xl text-text-dark">
               Columbia Poker Club brings together poker players for games,
@@ -111,7 +111,7 @@ function Home() {
                   (
                     <>
                       Compete in Columbia's largest poker tournament, 150 players in
-                      the field, over $1000 in prizes from our{" "}
+                      the field, over $1,500 in prizes from our{" "}
                       <Link
                         to="/sponsors"
                         onClick={(e) => e.stopPropagation()}
