@@ -1,7 +1,24 @@
 import { Link, useNavigate } from 'react-router-dom';
+import ImageCarousel from '../components/ImageCarousel';
 
 function Home() {
   const navigate = useNavigate();
+
+  const images = [
+    {
+      src: "/S24_MTT.png",
+      alt: "Spring 2024 Multi-Table Tournament"
+    },
+    {
+      src: "/Poker_Meeting_1.webp",
+      alt: "Poker Club Meeting"
+    },
+    {
+      src: "/Poker_Meeting_2.webp",
+      alt: "Poker Tournament Action"
+    }
+  ];
+
   return (
     <div
       className="h-auto w-full bg-background-DEFAULT flex flex-col items-center"
@@ -29,25 +46,21 @@ function Home() {
       </div>
 
       {/* Mission */}
-      <section className="w-full bg-primary-light py-10 md:py-20 px-5 md:px-10 flex flex-col items-center">
-        <div className="max-w-3xl md:max-w-5xl flex flex-col md:flex-row items-center">
-          <div className="w-full md:w-1/2 p-4 md:p-6">
-            <h2 className="text-4xl md:text-6xl font-bold text-text-dark mb-4">
+      <section className="w-full bg-primary-light py-8 md:py-20 px-4 md:px-10 flex flex-col items-center">
+        <div className="max-w-3xl md:max-w-5xl w-[90%] md:w-[80%] flex flex-col md:flex-row items-center gap-6 md:gap-8">
+          <div className="w-full md:w-1/2 p-3 md:p-6">
+            <h2 className="text-3xl md:text-6xl font-bold text-text-dark mb-3 md:mb-4">
               Mission
             </h2>
-            <p className="text-xl md:text-3xl text-text-dark">
+            <p className="text-lg md:text-3xl text-text-dark">
               Columbia Poker Club brings together poker players for games,
               workshops, and competitions. Whether you're a beginner or a
               seasoned pro, you'll find a welcoming community here.
             </p>
           </div>
 
-          <div className="w-full md:w-1/2 p-4 md:p-6">
-            <img
-              src="/S24_MTT.png"
-              alt="Poker Table"
-              className="w-full rounded-lg shadow-lg"
-            />
+          <div className="w-full md:w-1/2 p-3 md:p-6">
+            <ImageCarousel images={images} />
           </div>
         </div>
       </section>
@@ -111,7 +124,7 @@ function Home() {
                   (
                     <>
                       Compete in Columbia's largest poker tournament, 150 players in
-                      the field, over $1,500 in prizes from our{" "}
+                      the field, over $3,000 in prizes from our{" "}
                       <Link
                         to="/sponsors"
                         onClick={(e) => e.stopPropagation()}
@@ -127,11 +140,11 @@ function Home() {
               },
             ];
             return (
-              <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+              <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
                 {events.map((event, index) => (
                   <div
                     key={index}
-                    className={`w-full md:w-1/3 bg-primary-light shadow-lg p-10 md:p-20 rounded-lg ${
+                    className={`w-full sm:w-[calc(50%-1rem)] lg:w-1/3 bg-primary-light shadow-lg p-6 md:p-8 lg:p-10 rounded-lg ${
                       event.link
                         ? "cursor-pointer hover:shadow-2xl transition-transform transform hover:scale-105"
                         : ""
@@ -144,7 +157,7 @@ function Home() {
                     {event.details.map((detail, dIndex) => (
                       <p
                         key={dIndex}
-                        className={`text-text-dark text-lg md:text-xl ${dIndex > 0 ? "mt-2" : ""}`}
+                        className={`text-text-dark text-lg ${dIndex > 0 ? "mt-2" : ""}`}
                       >
                         {detail}
                       </p>
@@ -157,7 +170,7 @@ function Home() {
 
           <iframe
             src="https://calendar.google.com/calendar/embed?src=c_e9a2bda6adc3d9f883f7acc86756d418132483828382004ab9e93dd530e92f39%40group.calendar.google.com&ctz=America%2FNew_York"
-            className="block mx-auto mt-8"
+            className="block mx-auto mt-8 rounded-lg"
             style={{ border: 0, aspectRatio: '4/3', maxWidth: '800px' }}
             width="100%"
           ></iframe>
