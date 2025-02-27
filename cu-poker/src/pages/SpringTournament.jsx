@@ -49,7 +49,7 @@ function SpringTournament() {
             <strong>Time:</strong> 12:00 PM – 9:00 PM
           </p>
           <p className="text-xl sm:text-2xl text-text-dark">
-            <strong>Prize Pool:</strong> $1500+
+            <strong>Prize Pool:</strong> $3,000+
           </p>
           <p className="text-xl sm:text-2xl text-text-dark">
             Enjoy a free dinner and exciting gameplay sponsored by{' '}
