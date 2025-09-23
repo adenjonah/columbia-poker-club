@@ -1,92 +1,174 @@
 import React from 'react';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 
-const sponsors = [
-  {
-    name: "Jane Street",
-    logo: "/JS_Logo.png",
-    description:
-      "Jane Street is a quantitative trading firm and liquidity provider with a unique focus on technology and collaborative problem solving.",
-    link: "https://www.janestreet.com/"
-  },
-  {
-    name: "SIG",
-    logo: "/SIG_Logo.png",
-    description:
-      "Susquehanna International Group (SIG) is a global quantitative trading firm that leverages its expertise in trading, technology, and research to provide liquidity and competitive pricing.",
-    link: "https://www.sig.com/"
-  },
-  {
-    name: "Hudson River Trading",
-    logo: "/HRT_Logo.png",
-    description:
-      "Hudson River Trading (HRT) is a multi-asset class quantitative trading firm that brings a scientific approach to trading financial products.",
-    link: "https://www.hudsonrivertrading.com/"
-  }
-];
-
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 1
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 600 },
-    items: 2,
-    slidesToSlide: 1
-  },
-  mobile: {
-    breakpoint: { max: 600, min: 0 },
-    items: 1,
-    slidesToSlide: 1
-  }
+const sponsorTiers = {
+  gold: [
+    {
+      name: "Citadel Securities",
+      logo: "/CitSec_Logo.png",
+      link: "https://www.citadelsecurities.com/",
+      description: "Citadel Securities is a leading market maker that provides liquidity to investors around the world. We help improve market quality and reduce trading costs for millions of people."
+    },
+    {
+      name: "Hudson River Trading",
+      logo: "/HRT_Logo.png",
+      link: "https://www.hudsonrivertrading.com/",
+      description: "HRT is a quantitative trading firm focused on bringing a scientific approach to trading financial products. We use algorithms, cutting-edge technology, and rigorous research."
+    }
+  ],
+  silver: [
+    {
+      name: "Jane Street",
+      logo: "/JS_Logo.png",
+      link: "https://www.janestreet.com/",
+      description: "Jane Street is a quantitative trading firm and liquidity provider with a unique focus on technology and collaborative problem solving. We trade a wide range of financial instruments."
+    }
+  ],
+  bronze: [
+    {
+      name: "SIG",
+      logo: "/SIG_Logo.png",
+      link: "https://www.sig.com/",
+      description: "SIG is a global quantitative trading firm founded with an entrepreneurial mindset and a rigorous analytical approach. We leverage technology and research to provide liquidity across multiple asset classes."
+    }
+  ]
 };
 
 function Sponsors() {
   return (
-    <div className="w-full">
-      <section className="min-h-screen w-full flex flex-col items-center justify-center py-20 px-8 bg-primary-light">
-        <h1 className="text-4xl sm:text-7xl font-extrabold text-text-dark mb-20">
-          Our Sponsors
-        </h1>
-        <div className="w-full">
-          <Carousel
-            arrows={false}
-            swipeable={true}
-            draggable={true}
-            responsive={responsive}
-            ssr={true}
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            transitionDuration={500}
-            containerClass="carousel-container"
-            itemClass="px-4 py-4 sm:px-12 sm:py-12"
-          >
-            {sponsors.map((sponsor, index) => (
-              <a
-                key={index}
-                href={sponsor.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-start sm:items-center justify-start sm:justify-between p-4 sm:p-8 m-4 rounded-xl hover:shadow-2xl transition duration-300 transform hover:scale-105"
-              >
-                <img
-                  src={sponsor.logo}
-                  alt={`${sponsor.name} logo`}
-                  className="w-full h-auto object-contain mb-8 sm:mb-4 sm:h-60"
-                />
-                <p className="text-base sm:text-lg text-text-DEFAULT text-center sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
-                  {sponsor.description}
-                </p>
-              </a>
-            ))}
-          </Carousel>
+    <div className="w-full h-screen flex flex-col bg-primary-light text-text-dark">
+      {/* Header */}
+      <div className="pt-24 pb-8 text-center">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold">Our Sponsors</h1>
+      </div>
+
+      {/* Sponsors Grid */}
+      <div className="flex-1 flex items-center justify-center px-8">
+        <div className="w-full max-w-6xl">
+          
+          {/* Gold Tier - Top Row */}
+          <div className="mb-12">
+            <div className="text-center mb-6">
+              <span className="inline-block px-6 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 text-white font-bold text-lg rounded-full">
+                GOLD
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {sponsorTiers.gold.map((sponsor, index) => (
+                <a
+                  key={index}
+                  href={sponsor.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-lg p-8 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
+                >
+                  <div className="h-36 flex flex-col relative">
+                    {/* Logo */}
+                    <div className="flex items-center justify-center transition-all duration-500 group-hover:h-12 group-hover:flex-shrink-0 h-full w-full">
+                      <img
+                        src={sponsor.logo}
+                        alt={`${sponsor.name} logo`}
+                        className={`object-contain transition-all duration-500 ${
+                          sponsor.name === "Citadel Securities" 
+                            ? "max-h-full max-w-full scale-150 group-hover:scale-125" 
+                            : "max-h-full max-w-full group-hover:scale-75"
+                        }`}
+                      />
+                    </div>
+                    
+                    {/* Description - appears on hover */}
+                    <div className="flex-1 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 flex items-center justify-center">
+                      <p className="text-sm text-gray-700 text-center leading-relaxed px-2">
+                        {sponsor.description}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Silver & Bronze - Bottom Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            
+            {/* Silver Tier */}
+            <div>
+              <div className="text-center mb-6">
+                <span className="inline-block px-6 py-2 bg-gradient-to-r from-gray-400 to-gray-500 text-white font-bold text-lg rounded-full">
+                  SILVER
+                </span>
+              </div>
+              <div className="flex justify-center">
+                {sponsorTiers.silver.map((sponsor, index) => (
+                  <a
+                    key={index}
+                    href={sponsor.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group rounded-lg p-8 transition-all duration-300 transform hover:scale-105 w-full max-w-sm relative overflow-hidden"
+                  >
+                    <div className="h-32 flex flex-col relative">
+                      {/* Logo */}
+                      <div className="flex items-center justify-center transition-all duration-500 group-hover:h-10 group-hover:flex-shrink-0 h-full w-full">
+                        <img
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                          className="max-h-full max-w-full object-contain transition-all duration-500 group-hover:scale-75"
+                        />
+                      </div>
+                      
+                      {/* Description - appears on hover */}
+                      <div className="flex-1 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 flex items-center justify-center">
+                        <p className="text-sm text-gray-700 text-center leading-relaxed px-2">
+                          {sponsor.description}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Bronze Tier */}
+            <div>
+              <div className="text-center mb-6">
+                <span className="inline-block px-6 py-2 bg-gradient-to-r from-orange-400 to-amber-600 text-white font-bold text-lg rounded-full">
+                  BRONZE
+                </span>
+              </div>
+              <div className="flex justify-center">
+                {sponsorTiers.bronze.map((sponsor, index) => (
+                  <a
+                    key={index}
+                    href={sponsor.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group rounded-lg p-8 transition-all duration-300 transform hover:scale-105 w-full max-w-sm relative overflow-hidden"
+                  >
+                    <div className="h-32 flex flex-col relative">
+                      {/* Logo */}
+                      <div className="flex items-center justify-center transition-all duration-500 group-hover:h-10 group-hover:flex-shrink-0 h-full w-full">
+                        <img
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                          className="max-h-full max-w-full object-contain transition-all duration-500 group-hover:scale-75"
+                        />
+                      </div>
+                      
+                      {/* Description - appears on hover */}
+                      <div className="flex-1 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 flex items-center justify-center">
+                        <p className="text-sm text-gray-700 text-center leading-relaxed px-2">
+                          {sponsor.description}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

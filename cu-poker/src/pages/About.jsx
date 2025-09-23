@@ -37,6 +37,12 @@ function About() {
       season: "Now", 
       title: "Routine Events",
       description: "We run weekly games, monthly workshops, and yearly tournaments"
+    },
+    {
+      year: 2025,
+      season: "Fall", 
+      title: "Expanding Operations",
+      description: "Weekly free play and lectures. Monthly competitions and events. Semesterly Freeroll Tournaments. Women in Poker Tournament. Career and Educational events."
     }
   ];
 
@@ -72,15 +78,21 @@ function About() {
 
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-6 md:mt-10 w-full max-w-7xl">
           {[
-            { name: "David Eyal", role: "Co-President", class: "CC '26", major: "Computer Science and Statistics", link: "https://www.linkedin.com/in/david-eyal-9a19a624b/" },
-            { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science", link: "https://www.linkedin.com/in/andrew-e-fahey/" },
+            // { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science", link: "https://www.linkedin.com/in/andrew-e-fahey/" },
             { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats", link: "https://linkedin.com/in/jonah-aden" },
+            // { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science", link: "https://www.linkedin.com/in/nicolai-sotorp-06a729255/" },
+            { name: "Zachary Klein", role: "Vice President", class: "SEAS '27", major: "Applied Math", link: "https://www.linkedin.com/in/zachary-klein-794061292/" },
             { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture", link: "https://www.linkedin.com/in/juliana-shepard/" },
-            { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science", link: "https://www.linkedin.com/in/nicolai-sotorp-06a729255/" },
-            { name: "Zachary Klein", role: "Outreach Chair", class: "SEAS '27", major: "Applied Math", link: "https://www.linkedin.com/in/zachary-klein-794061292/" },
-            { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology"},
-            { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science", link: "https://www.linkedin.com/in/elizabethhu/" },
-            { name: "Bailey Ng", role: "Senior Advisor", class: "GS '25", major: "Financial Economics", link: "https://www.linkedin.com/in/baileyng/" },
+            { name: "Dylan Silverman", role: "Outreach Director", class: "CC '28", major: "???", link: "????" },
+            { name: "Sydney Smith", role: "Secretary", class: "CC? '26", major: "???", link: "????" },
+            { name: "Bohan Gao", role: "Social Media Coordinator", class: "??", major: "???", link: "????" },
+            { name: "Manni Lin", role: "Operations Coordinator", class: "??", major: "???", link: "????" },
+            { name: "Olivia Huang", role: "Operations Coordinator", class: "??", major: "???", link: "????" },
+            { name: "Bill Fei", role: "Operations Coordinator", class: "??", major: "???", link: "????" },
+            // { name: "Lucy Rose", role: "Social Media Chair", class: "CC '26", major: "Sociology"},
+            // { name: "Liz Hu", role: "Senior Advisor", class: "SEAS '25", major: "Computer Science", link: "https://www.linkedin.com/in/elizabethhu/" },
+            { name: "David Eyal", role: "Senior Advisor", class: "CC '26", major: "Computer Science and Statistics", link: "https://www.linkedin.com/in/david-eyal-9a19a624b/" },
+            // { name: "Bailey Ng", role: "Senior Advisor", class: "GS '25", major: "Financial Economics", link: "https://www.linkedin.com/in/baileyng/" },
           ].map((member, index) => (
             <div
               key={index}
