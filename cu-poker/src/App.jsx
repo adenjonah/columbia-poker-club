@@ -6,7 +6,7 @@ import './index.css'
 import Sponsors from './pages/Sponsors'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
-import SpringTournament from './pages/SpringTournament'
+import Tournament from './pages/Tournament'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/sponsors" element={<Sponsors />} />
-          <Route path="/spring-tournament" element={<SpringTournament />} />
+          <Route path="/tournament" element={<Tournament />} />
         </Routes>
         <Footer />
       </div>
