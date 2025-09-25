@@ -59,18 +59,28 @@ function Sponsors() {
                   href={sponsor.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg p-2 sm:p-6 lg:p-8 sm:transition-all sm:duration-300 sm:transform sm:hover:scale-105"
+                  className="group rounded-lg p-2 sm:p-6 lg:p-8 sm:transition-all sm:duration-300 sm:transform sm:hover:scale-105 sm:relative sm:overflow-hidden"
                 >
-                  <div className="h-16 sm:h-32 lg:h-36 flex items-center justify-center">
-                    <img
-                      src={sponsor.logo}
-                      alt={`${sponsor.name} logo`}
-                      className={`object-contain ${
-                        sponsor.name === "Citadel Securities" 
-                          ? "max-h-full max-w-full scale-110 sm:scale-150" 
-                          : "max-h-full max-w-full"
-                      }`}
-                    />
+                  <div className="h-16 sm:h-32 lg:h-36 flex flex-col sm:relative">
+                    {/* Logo */}
+                    <div className="flex items-center justify-center h-full w-full sm:transition-all sm:duration-500 sm:group-hover:h-8 md:group-hover:h-10 lg:group-hover:h-12 sm:group-hover:flex-shrink-0">
+                      <img
+                        src={sponsor.logo}
+                        alt={`${sponsor.name} logo`}
+                        className={`object-contain sm:transition-all sm:duration-500 ${
+                          sponsor.name === "Citadel Securities" 
+                            ? "max-h-full max-w-full scale-110 sm:scale-150 sm:group-hover:scale-100 md:group-hover:scale-125" 
+                            : "max-h-full max-w-full sm:group-hover:scale-75"
+                        }`}
+                      />
+                    </div>
+                    
+                    {/* Description - appears on hover (desktop only) */}
+                    <div className="hidden sm:flex sm:flex-1 sm:opacity-0 sm:group-hover:opacity-100 sm:transition-all sm:duration-500 sm:transform sm:translate-y-4 sm:group-hover:translate-y-0 sm:items-center sm:justify-center">
+                      <p className="text-xs md:text-sm text-gray-700 text-center leading-relaxed px-1 md:px-2">
+                        {sponsor.description}
+                      </p>
+                    </div>
                   </div>
                 </a>
               ))}
@@ -94,14 +104,24 @@ function Sponsors() {
                     href={sponsor.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-lg p-2 sm:p-6 lg:p-8 sm:transition-all sm:duration-300 sm:transform sm:hover:scale-105 w-full max-w-sm"
+                    className="group rounded-lg p-2 sm:p-6 lg:p-8 sm:transition-all sm:duration-300 sm:transform sm:hover:scale-105 w-full max-w-sm sm:relative sm:overflow-hidden"
                   >
-                    <div className="h-12 sm:h-28 lg:h-32 flex items-center justify-center">
-                      <img
-                        src={sponsor.logo}
-                        alt={`${sponsor.name} logo`}
-                        className="max-h-full max-w-full object-contain"
-                      />
+                    <div className="h-12 sm:h-28 lg:h-32 flex flex-col sm:relative">
+                      {/* Logo */}
+                      <div className="flex items-center justify-center h-full w-full sm:transition-all sm:duration-500 sm:group-hover:h-6 md:group-hover:h-8 lg:group-hover:h-10 sm:group-hover:flex-shrink-0">
+                        <img
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                          className="max-h-full max-w-full object-contain sm:transition-all sm:duration-500 sm:group-hover:scale-75"
+                        />
+                      </div>
+                      
+                      {/* Description - appears on hover (desktop only) */}
+                      <div className="hidden sm:flex sm:flex-1 sm:opacity-0 sm:group-hover:opacity-100 sm:transition-all sm:duration-500 sm:transform sm:translate-y-4 sm:group-hover:translate-y-0 sm:items-center sm:justify-center">
+                        <p className="text-xs md:text-sm text-gray-700 text-center leading-relaxed px-1 md:px-2">
+                          {sponsor.description}
+                        </p>
+                      </div>
                     </div>
                   </a>
                 ))}
@@ -122,14 +142,24 @@ function Sponsors() {
                     href={sponsor.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-lg p-2 sm:p-6 lg:p-8 sm:transition-all sm:duration-300 sm:transform sm:hover:scale-105 w-full max-w-sm"
+                    className="group rounded-lg p-2 sm:p-6 lg:p-8 sm:transition-all sm:duration-300 sm:transform sm:hover:scale-105 w-full max-w-sm sm:relative sm:overflow-hidden"
                   >
-                    <div className="h-12 sm:h-28 lg:h-32 flex items-center justify-center">
-                      <img
-                        src={sponsor.logo}
-                        alt={`${sponsor.name} logo`}
-                        className="max-h-full max-w-full object-contain"
-                      />
+                    <div className="h-12 sm:h-28 lg:h-32 flex flex-col sm:relative">
+                      {/* Logo */}
+                      <div className="flex items-center justify-center h-full w-full sm:transition-all sm:duration-500 sm:group-hover:h-6 md:group-hover:h-8 lg:group-hover:h-10 sm:group-hover:flex-shrink-0">
+                        <img
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                          className="max-h-full max-w-full object-contain sm:transition-all sm:duration-500 sm:group-hover:scale-75"
+                        />
+                      </div>
+                      
+                      {/* Description - appears on hover (desktop only) */}
+                      <div className="hidden sm:flex sm:flex-1 sm:opacity-0 sm:group-hover:opacity-100 sm:transition-all sm:duration-500 sm:transform sm:translate-y-4 sm:group-hover:translate-y-0 sm:items-center sm:justify-center">
+                        <p className="text-xs md:text-sm text-gray-700 text-center leading-relaxed px-1 md:px-2">
+                          {sponsor.description}
+                        </p>
+                      </div>
                     </div>
                   </a>
                 ))}
