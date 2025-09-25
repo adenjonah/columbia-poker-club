@@ -98,33 +98,26 @@ function Home() {
               {
                 title: "Weekly Meetings",
                 details: [
-                  "Next Thursday, 8:30 PM",
+                  "Every Thursday, 8:00 - 9:00 PM",
                   "Uris Hall, 3rd Floor",
                   "Join us for freeplay poker, educational workshops, and more!",
                 ],
               },
               {
-                title: "Tournament Qualifier #1",
+                title: "Lecture Series",
                 details: [
-                  "March 3rd, 7-10 PM",
-                  "Online qualifier for March 30th tournament.",
+                  "Every Other Sunday, 6:00 - 8:00 PM",
+                  "Uris Hall",
+                  "Educational poker strategy sessions and discussions.",
                 ],
               },
               {
-                title: "Tournament Qualifier #2",
+                title: "Fall 2025 Tournament",
                 details: [
-                  "March 8th, 1-4 PM",
-                  "Online qualifier for March 30th tournament.",
-                ],
-              },
-              {
-                title: "Spring Tournament",
-                details: [
-                  "Sunday, March 30th, Noon-9pm",
+                  "Saturday, September 28th, 5:00 PM - 12:00 AM",
                   (
                     <>
-                      Compete in Columbia's largest poker tournament, 150 players in
-                      the field, over $3,000 in prizes from our{" "}
+                      Join Columbia's biggest poker tournament at Roone Auditorium, Lerner Hall. Over $3,000 in giveaways from our{" "}
                       <Link
                         to="/sponsors"
                         onClick={(e) => e.stopPropagation()}
@@ -132,7 +125,7 @@ function Home() {
                       >
                         sponsors
                       </Link>
-                      .
+                      !
                     </>
                   ),
                 ],
