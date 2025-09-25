@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function SpringTournament() {
+function FallTournament() {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -10,7 +10,7 @@ function SpringTournament() {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const deadline = new Date('March 1, 2025 23:59:00 EST');
+      const deadline = new Date('September 28, 2025 17:00:00 EST');
       const now = new Date();
       const diff = deadline - now;
 
@@ -38,28 +38,31 @@ function SpringTournament() {
             Columbia Poker
           </h1>
           <h2 className="text-xl sm:text-4xl font-extrabold text-text-dark mt-2">
-            Spring Tournament
+            Fall 2025 Tournament
           </h2>
         </header>
         <article className="text-center max-w-xl mb-12 space-y-4">
           <p className="text-xl sm:text-2xl text-text-dark">
-            <strong>Date:</strong> Sunday, March 30th
+            <strong>Date:</strong> Saturday, September 28th, 2025
           </p>
           <p className="text-xl sm:text-2xl text-text-dark">
-            <strong>Time:</strong> 12:00 PM – 9:00 PM
+            <strong>Time:</strong> 5:00 PM – 12:00 AM
           </p>
           <p className="text-xl sm:text-2xl text-text-dark">
-            <strong>Prize Pool:</strong> $3,000+
+            <strong>Location:</strong> Roone Auditorium, Lerner Hall
           </p>
           <p className="text-xl sm:text-2xl text-text-dark">
-            Enjoy a free dinner and exciting gameplay sponsored by{' '}
+            <strong>Giveaways:</strong> $3,000+
+          </p>
+          <p className="text-xl sm:text-2xl text-text-dark">
+            Join us for an exciting night of poker with amazing prizes and giveaways sponsored by{' '}
             <a
-              href="https://www.janestreet.com/"
+              href="https://www.citadelsecurities.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-accent-dark hover:underline font-bold"
             >
-              Jane Street
+              Citadel Securities
             </a>
             ,{' '}
             <a
@@ -69,6 +72,15 @@ function SpringTournament() {
               className="text-accent-dark hover:underline font-bold"
             >
               HRT
+            </a>
+            ,{' '}
+            <a
+              href="https://www.janestreet.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-dark hover:underline font-bold"
+            >
+              Jane Street
             </a>
             , and{' '}
             <a
@@ -84,13 +96,13 @@ function SpringTournament() {
         </article>
         <aside className="bg-primary-dark text-text-light p-4 sm:p-6 rounded-lg shadow-lg mb-8 w-[90%] max-w-md mx-auto">
           <p className="text-lg sm:text-2xl font-bold text-center">
-            Registration closes in
+            Tournament starts in
           </p>
           <p className="text-2xl sm:text-5xl font-extrabold text-center mt-4">
             {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
           </p>
           <a
-            href="https://forms.gle/5BD5AmaLccMD9fus8"
+            href="https://forms.gle/YgLwtCjvQ7snDRmK6"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-primary-light text-text-dark text-lg sm:text-xl font-bold py-3 px-6 rounded-full hover:bg-primary transition text-center mt-4 block w-fit mx-auto"
@@ -121,4 +133,4 @@ function SpringTournament() {
   );
 }
 
-export default SpringTournament;
+export default FallTournament;
