@@ -21,7 +21,7 @@ function Home() {
 
   return (
     <div
-      className="h-auto w-full bg-background-DEFAULT flex flex-col items-center"
+      className="h-auto w-full bg-primary-light flex flex-col items-center"
     >
       {/* Hero Section */}
       <div

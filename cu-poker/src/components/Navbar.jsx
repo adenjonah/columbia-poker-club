@@ -29,6 +29,7 @@ function Navbar() {
         <div className="hidden md:flex space-x-6">
           <Link to="/" className="hover:text-accent transition text-lg">Home</Link>
           <Link to="/about" className="hover:text-accent transition text-lg">About</Link>
+          <Link to="/learn" className="hover:text-accent transition text-lg">Learn</Link>
           <Link to="/sponsors" className="hover:text-accent transition text-lg">Sponsors</Link>
           <Link to="/tournament" className="hover:text-accent transition text-lg">Tournament</Link>
         </div>
@@ -47,6 +48,7 @@ function Navbar() {
         <div className="md:hidden bg-primary-light text-text-dark w-full flex flex-col items-center py-4 space-y-4">
           <Link to="/" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link to="/about" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link to="/learn" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Learn</Link>
           <Link to="/sponsors" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Sponsors</Link>
           <Link to="/tournament" className="hover:text-accent transition" onClick={() => setMenuOpen(false)}>Tournament</Link>
         </div>

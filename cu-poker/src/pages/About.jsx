@@ -49,7 +49,7 @@ function About() {
   return (
     <div className="w-full text-text-dark">
       {/* Milestones Section - Added top padding for navbar */}
-      <section className="w-full flex flex-col items-center justify-center bg-primary text-text-dark min-h-[100dvh] pt-20 pb-10 sm:pt-24 md:py-0 px-4">
+      <section className="w-full flex flex-col items-center justify-center bg-primary-light text-text-dark min-h-[100dvh] pt-20 pb-10 sm:pt-24 md:py-0 px-4">
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-6 sm:mb-8">Club History</h1>
         <div className="max-w-4xl w-full space-y-4 sm:space-y-6">
           {milestones.map((milestone, index) => (
