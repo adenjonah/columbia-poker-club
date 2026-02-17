@@ -85,7 +85,7 @@ function About() {
             { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture", link: "https://www.linkedin.com/in/juliana-shepard/" },
             { name: "Dylan Silverman", role: "Outreach Director", class: "CC '28", major: "???", link: "????" },
             { name: "Sydney Smith", role: "Secretary", class: "GS TCD Dual BA '26", major: "Classical and Ancient Civilization with Political Science", link: "https://www.linkedin.com/in/sydney-smith-992771316" },
-            { name: "Bohan Gao", role: "Social Media Coordinator", class: "??", major: "???", link: "????" },
+            { name: "Bohan Gao", role: "Social Media Coordinator", class: "CC '28", major: "Classics and Creative Writing", link: "https://www.linkedin.com/in/bohangao0623/" },
             { name: "Manni Lin", role: "Operations Coordinator", class: "BC '28", major: "Mathematics and Statistics", link: "????" },
             { name: "Olivia Huang", role: "Operations Coordinator", class: "SEAS '28", major: "Operations Research: Financial Engineering", link: "https://www.linkedin.com/in/olivia-huang-a13690244/" },
             { name: "Bill Fei", role: "Operations Coordinator", class: "SEAS '28", major: "Computer Science", link: "????" },
