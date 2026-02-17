@@ -9,6 +9,7 @@ import Sponsors from './pages/Sponsors'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import Tournament from './pages/Tournament'
+import SpringMTT from './pages/SpringMTT'
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           <Route path="/learn" element={<Learn />} />
           <Route path="/learn/:id" element={<LectureDetail />} />
           <Route path="/sponsors" element={<Sponsors />} />
-          <Route path="/tournament" element={<Tournament />} />
+          <Route path="/spring-mtt" element={<SpringMTT />} />
+          <Route path="/tournament" element={<SpringMTT />} />
         </Routes>
         <Footer />
       </div>

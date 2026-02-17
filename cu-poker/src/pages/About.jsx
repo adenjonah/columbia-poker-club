@@ -79,12 +79,12 @@ function About() {
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-6 md:mt-10 w-full max-w-7xl">
           {[
             // { name: "Andrew Fahey", role: "Co-President", class: "CC '25", major: "Economics and Political Science", link: "https://www.linkedin.com/in/andrew-e-fahey/" },
-            { name: "Jonah Aden", role: "Vice President", class: "CC '26", major: "Computer Science and PoliSci - Stats", link: "https://linkedin.com/in/jonah-aden" },
+            { name: "Jonah Aden", role: "President", class: "CC '26", major: "Computer Science and PoliSci - Stats", link: "https://linkedin.com/in/jonah-aden" },
             // { name: "Nicolai Sotrop", role: "Secretary", class: "CC '27", major: "Financial Economics and Political Science", link: "https://www.linkedin.com/in/nicolai-sotorp-06a729255/" },
             { name: "Zachary Klein", role: "Vice President", class: "SEAS '27", major: "Applied Math", link: "https://www.linkedin.com/in/zachary-klein-794061292/" },
             { name: "Juliana Shepard", role: "Treasurer", class: "Barnard '27", major: "Architecture", link: "https://www.linkedin.com/in/juliana-shepard/" },
             { name: "Dylan Silverman", role: "Outreach Director", class: "CC '28", major: "???", link: "????" },
-            { name: "Sydney Smith", role: "Secretary", class: "CC? '26", major: "???", link: "????" },
+            { name: "Sydney Smith", role: "Secretary", class: "GS TCD Dual BA '26", major: "Classical and Ancient Civilization with Political Science", link: "????" },
             { name: "Bohan Gao", role: "Social Media Coordinator", class: "??", major: "???", link: "????" },
             { name: "Manni Lin", role: "Operations Coordinator", class: "??", major: "???", link: "????" },
             { name: "Olivia Huang", role: "Operations Coordinator", class: "??", major: "???", link: "????" },
