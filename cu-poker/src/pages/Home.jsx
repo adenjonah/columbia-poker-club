@@ -112,12 +112,12 @@ function Home() {
                 ],
               },
               {
-                title: "Fall 2025 Tournament",
+                title: "Spring 2026 Tournament",
                 details: [
-                  "Saturday, September 28th, 5:00 PM - 12:00 AM",
+                  "Sunday, February 22nd — Tournament Complete!",
                   (
                     <>
-                      Join Columbia's biggest poker tournament at Roone Auditorium, Lerner Hall. Over $3,000 in giveaways from our{" "}
+                      Over $5,000 in prizes were awarded at Roone Auditorium, Lerner Hall. Thanks to all participants and our{" "}
                       <Link
                         to="/sponsors"
                         onClick={(e) => e.stopPropagation()}
