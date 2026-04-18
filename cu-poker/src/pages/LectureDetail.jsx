@@ -56,28 +56,51 @@ function LectureDetail() {
   const videoId = getYouTubeVideoId(lecture.youtubeLink);
 
   return (
-    <div className="min-h-screen bg-primary-light pt-12">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <button
-              onClick={() => navigate('/learn')}
-              className="flex items-center gap-2 text-primary hover:text-primary-dark transition-colors mb-4"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Learn
-            </button>
-
-            <h1 className="text-4xl md:text-5xl font-bold text-text-dark mb-3">
-              {lecture.title}
-            </h1>
-            <p className="text-xl text-text-light mb-2">{lecture.description}</p>
-            {lecture.instructor && lecture.youtubeLink && (
-              <p className="text-sm text-text-light italic">
-                Video taught by {lecture.instructor}
-              </p>
+    <div className="min-h-screen bg-primary-light pt-4">
+      <div className="w-full px-4 py-4">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-4">
+            <div className="flex-1 min-w-0">
+              <button
+                onClick={() => navigate('/learn')}
+                className="flex items-center gap-2 text-primary hover:text-primary-dark transition-colors mb-2"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Learn
+              </button>
+              <h1 className="text-2xl md:text-3xl font-bold text-text-dark leading-tight">
+                {lecture.title}
+              </h1>
+              <p className="text-sm text-text-light mt-1">{lecture.description}</p>
+              {lecture.instructor && lecture.youtubeLink && (
+                <p className="text-xs text-text-light italic mt-1">
+                  Video taught by {lecture.instructor}
+                </p>
+              )}
+            </div>
+            {published && (
+              <div className="flex gap-2 shrink-0">
+                <a
+                  href={lecture.slidesPath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors text-sm font-medium"
+                >
+                  Open fullscreen ↗
+                </a>
+                {videoId && (
+                  <a
+                    href={lecture.youtubeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
+                  >
+                    Watch video ↗
+                  </a>
+                )}
+              </div>
             )}
           </div>
 
@@ -88,55 +111,30 @@ function LectureDetail() {
               <p className="text-text-light">This lesson hasn&apos;t been published yet.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-              <div className="xl:col-span-2 space-y-4">
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <h2 className="text-2xl font-bold text-text-dark">Slide Deck</h2>
-                  <div className="flex gap-2">
-                    <a
-                      href={lecture.slidesPath}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors text-sm font-medium"
-                    >
-                      Open fullscreen ↗
-                    </a>
-                    {videoId && (
-                      <a
-                        href={lecture.youtubeLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
-                      >
-                        Watch video ↗
-                      </a>
-                    )}
-                  </div>
-                </div>
-                <div className="bg-primary-light rounded-lg p-4">
-                  <div className="aspect-video bg-black rounded-lg overflow-hidden">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={lecture.slidesPath}
-                      title={`${lecture.title} — slides`}
-                      className="rounded-lg"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-                <p className="text-sm text-text-light">
-                  Tip: click into the slides, then use arrow keys to navigate. Press <kbd className="bg-gray-200 px-1 rounded">F</kbd> for fullscreen.
-                </p>
+            <>
+              <div className="bg-black rounded-lg overflow-hidden shadow-xl" style={{ height: 'calc(100vh - 180px)', minHeight: '500px' }}>
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={lecture.slidesPath}
+                  title={`${lecture.title} — slides`}
+                  className="block"
+                  allowFullScreen
+                />
               </div>
+              <p className="text-xs text-text-light mt-2 text-center">
+                Click into the slides, then use arrow keys to navigate. Press <kbd className="bg-gray-200 px-1 rounded">F</kbd> for fullscreen, or <kbd className="bg-gray-200 px-1 rounded">ESC</kbd> for overview.
+              </p>
 
-              <div className="xl:col-span-1 space-y-4">
-                <h2 className="text-2xl font-bold text-text-dark">Notes</h2>
-                {lecture.notesPath ? (
-                  <div className="bg-primary-light rounded-lg p-6 h-[600px] overflow-y-auto">
+              {lecture.notesPath && (
+                <details className="mt-8 bg-primary-light rounded-lg">
+                  <summary className="cursor-pointer px-6 py-4 text-xl font-bold text-text-dark select-none">
+                    Companion notes
+                  </summary>
+                  <div className="px-6 pb-6">
                     {loading ? (
-                      <div className="text-center py-8">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                      <div className="text-center py-4">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
                         <p className="text-text-light">Loading notes...</p>
                       </div>
                     ) : markdownContent ? (
@@ -144,17 +142,12 @@ function LectureDetail() {
                         <ReactMarkdown>{markdownContent}</ReactMarkdown>
                       </div>
                     ) : (
-                      <p className="text-text-light text-center">Notes unavailable.</p>
+                      <p className="text-text-light text-center py-4">Notes unavailable.</p>
                     )}
                   </div>
-                ) : (
-                  <div className="bg-primary-light rounded-lg p-8 text-center h-[600px] flex flex-col justify-center">
-                    <div className="text-6xl mb-4">📝</div>
-                    <p className="text-xl text-text-light">Companion notes not yet available for this lesson.</p>
-                  </div>
-                )}
-              </div>
-            </div>
+                </details>
+              )}
+            </>
           )}
         </div>
       </div>
