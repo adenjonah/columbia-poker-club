@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { findLectureById } from '../data/lectures';
+import ReactMarkdown from 'react-markdown';
+import { findLectureById, isPublished } from '../data/lectures';
 
 function LectureDetail() {
   const { id } = useParams();
@@ -8,42 +9,23 @@ function LectureDetail() {
   const [markdownContent, setMarkdownContent] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Find the lecture using the shared data
   const lecture = findLectureById(id);
 
   useEffect(() => {
-    if (lecture && lecture.status === 'completed') {
-      // Determine which markdown file to load
-      let markdownFile = '';
-      if (lecture.id === 1) {
-        markdownFile = '1-texas-holdem-basics.md';
-      } else if (lecture.id === 2) {
-        markdownFile = '2-positions-ranges-math.md';
-      } else if (lecture.id === 'add-1') {
-        markdownFile = 'add-1-tournament-poker.md';
-      } else if (lecture.id === 'add-2') {
-        markdownFile = 'add-2-intro-nlhe.md';
-      }
-
-      if (markdownFile) {
-        fetch(`/lecture-notes/${markdownFile}`)
-          .then(response => response.text())
-          .then(content => {
-            setMarkdownContent(content);
-            setLoading(false);
-          })
-          .catch(error => {
-            console.error('Error loading markdown:', error);
-            setMarkdownContent('# Notes not available\n\nSorry, the notes for this lecture are not available at this time.');
-            setLoading(false);
-          });
-      } else {
-        setMarkdownContent('# Notes not available\n\nSorry, the notes for this lecture are not available at this time.');
-        setLoading(false);
-      }
-    } else {
+    if (!lecture || !lecture.notesPath) {
       setLoading(false);
+      return;
     }
+    fetch(lecture.notesPath)
+      .then(response => (response.ok ? response.text() : Promise.reject(response.status)))
+      .then(content => {
+        setMarkdownContent(content);
+        setLoading(false);
+      })
+      .catch(() => {
+        setMarkdownContent('');
+        setLoading(false);
+      });
   }, [lecture]);
 
   if (!lecture) {
@@ -52,7 +34,7 @@ function LectureDetail() {
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl font-bold text-text-dark mb-4">Lecture Not Found</h1>
-            <p className="text-xl text-text-light mb-8">The lecture you're looking for doesn't exist.</p>
+            <p className="text-xl text-text-light mb-8">The lecture you&apos;re looking for doesn&apos;t exist.</p>
             <button
               onClick={() => navigate('/learn')}
               className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition-colors"
@@ -65,28 +47,18 @@ function LectureDetail() {
     );
   }
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'long', 
-      day: 'numeric', 
-      year: 'numeric' 
-    });
-  };
-
+  const published = isPublished(lecture);
   const getYouTubeVideoId = (url) => {
     if (!url) return null;
     const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
     return match ? match[1] : null;
   };
-
   const videoId = getYouTubeVideoId(lecture.youtubeLink);
 
   return (
     <div className="min-h-screen bg-primary-light pt-12">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="mb-8">
             <button
               onClick={() => navigate('/learn')}
@@ -97,119 +69,93 @@ function LectureDetail() {
               </svg>
               Back to Learn
             </button>
-            
-            <h1 className="text-4xl md:text-5xl font-bold text-text-dark mb-4">
+
+            <h1 className="text-4xl md:text-5xl font-bold text-text-dark mb-3">
               {lecture.title}
             </h1>
-            <p className="text-xl text-text-light mb-4">{lecture.description}</p>
-            <p className="text-lg text-text-light mb-2">
-              <strong>Date:</strong> {formatDate(lecture.date)}
-            </p>
-            <p className="text-lg text-text-light">
-              <strong>Instructor:</strong> {lecture.instructor}
-            </p>
+            <p className="text-xl text-text-light mb-2">{lecture.description}</p>
+            {lecture.instructor && lecture.youtubeLink && (
+              <p className="text-sm text-text-light italic">
+                Video taught by {lecture.instructor}
+              </p>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            {/* Video / Slides Section - Takes up 2/3 of the width on large screens */}
-            <div className="xl:col-span-2 space-y-6">
-              <h2 className="text-2xl font-bold text-text-dark">
-                {lecture.slidesLink && !videoId ? 'Slide Deck' : 'Video Recording'}
-              </h2>
-
-              {lecture.status === 'completed' && videoId ? (
+          {!published ? (
+            <div className="bg-primary-light rounded-lg p-12 text-center">
+              <div className="text-6xl mb-4">📝</div>
+              <p className="text-2xl text-text-dark mb-2">Coming soon</p>
+              <p className="text-text-light">This lesson hasn&apos;t been published yet.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+              <div className="xl:col-span-2 space-y-4">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <h2 className="text-2xl font-bold text-text-dark">Slide Deck</h2>
+                  <div className="flex gap-2">
+                    <a
+                      href={lecture.slidesPath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors text-sm font-medium"
+                    >
+                      Open fullscreen ↗
+                    </a>
+                    {videoId && (
+                      <a
+                        href={lecture.youtubeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm font-medium"
+                      >
+                        Watch video ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
                 <div className="bg-primary-light rounded-lg p-4">
                   <div className="aspect-video bg-black rounded-lg overflow-hidden">
                     <iframe
                       width="100%"
                       height="100%"
-                      src={`https://www.youtube.com/embed/${videoId}`}
-                      title={lecture.title}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="rounded-lg"
-                    ></iframe>
-                  </div>
-                </div>
-              ) : lecture.status === 'completed' && lecture.slidesLink ? (
-                <div className="bg-primary-light rounded-lg p-4 space-y-3">
-                  <div className="aspect-video bg-black rounded-lg overflow-hidden">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={lecture.slidesLink}
+                      src={lecture.slidesPath}
                       title={`${lecture.title} — slides`}
                       className="rounded-lg"
                       allowFullScreen
                     ></iframe>
                   </div>
-                  <a
-                    href={lecture.slidesLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors text-sm font-medium"
-                  >
-                    Open slides in new tab ↗
-                  </a>
                 </div>
-              ) : (
-                <div className="bg-primary-light rounded-lg p-8 text-center">
-                  <div className="text-6xl mb-4">📹</div>
-                  <p className="text-xl text-text-light">
-                    {lecture.status === 'upcoming'
-                      ? 'Video will be available after the lecture'
-                      : 'Video not available'}
-                  </p>
-                </div>
-              )}
-            </div>
+                <p className="text-sm text-text-light">
+                  Tip: click into the slides, then use arrow keys to navigate. Press <kbd className="bg-gray-200 px-1 rounded">F</kbd> for fullscreen.
+                </p>
+              </div>
 
-            {/* Notes Section - Takes up 1/3 of the width on large screens, scrollable */}
-            <div className="xl:col-span-1 space-y-6">
-              <h2 className="text-2xl font-bold text-text-dark">Lecture Notes</h2>
-              
-              {lecture.status === 'completed' ? (
-                <div className="bg-primary-light rounded-lg p-6 h-[600px] overflow-y-auto">
-                  {loading ? (
-                    <div className="text-center py-8">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-                      <p className="text-text-light">Loading notes...</p>
-                    </div>
-                  ) : (
-                    <div className="prose prose-lg max-w-none">
-                      <div 
-                        className="text-text-dark"
-                        dangerouslySetInnerHTML={{
-                          __html: markdownContent
-                            .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold mb-3 text-text-dark">$1</h1>')
-                            .replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold mb-2 text-text-dark">$1</h2>')
-                            .replace(/^### (.*$)/gim, '<h3 class="text-lg font-bold mb-2 text-text-dark">$1</h3>')
-                            .replace(/^#### (.*$)/gim, '<h4 class="text-base font-bold mb-2 text-text-dark">$1</h4>')
-                            .replace(/^\* (.*$)/gim, '<li class="mb-1">$1</li>')
-                            .replace(/^- (.*$)/gim, '<li class="mb-1">$1</li>')
-                            .replace(/^\d+\. (.*$)/gim, '<li class="mb-1">$1</li>')
-                            .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold">$1</strong>')
-                            .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-                            .replace(/\n\n/g, '</p><p class="mb-3">')
-                            .replace(/^(?!<[h|l])/gm, '<p class="mb-3">')
-                            .replace(/<li class="mb-1">/g, '<ul class="list-disc list-inside mb-3"><li class="mb-1">')
-                            .replace(/(<li class="mb-1">.*<\/li>)(?!.*<li)/g, '$1</ul>')
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="bg-primary-light rounded-lg p-8 text-center h-[600px] flex flex-col justify-center">
-                  <div className="text-6xl mb-4">📝</div>
-                  <p className="text-xl text-text-light">
-                    Notes will be available after the lecture
-                  </p>
-                </div>
-              )}
+              <div className="xl:col-span-1 space-y-4">
+                <h2 className="text-2xl font-bold text-text-dark">Notes</h2>
+                {lecture.notesPath ? (
+                  <div className="bg-primary-light rounded-lg p-6 h-[600px] overflow-y-auto">
+                    {loading ? (
+                      <div className="text-center py-8">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                        <p className="text-text-light">Loading notes...</p>
+                      </div>
+                    ) : markdownContent ? (
+                      <div className="prose prose-sm max-w-none text-text-dark">
+                        <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <p className="text-text-light text-center">Notes unavailable.</p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="bg-primary-light rounded-lg p-8 text-center h-[600px] flex flex-col justify-center">
+                    <div className="text-6xl mb-4">📝</div>
+                    <p className="text-xl text-text-light">Companion notes not yet available for this lesson.</p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

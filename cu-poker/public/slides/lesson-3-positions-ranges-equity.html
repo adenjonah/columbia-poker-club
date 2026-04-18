@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positions, Ranges, Pot Odds & Equity</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/slides/_shared/deck.css">
+  <link rel="stylesheet" href="/slides/_quiz/quiz.css">
+  <style>
+    /* Local tweaks: tighter range-grid cells for readability */
+    .range-grid { max-width: 520px; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- Title -->
+  <section>
+    <div class="label">Lesson 3 · Columbia Poker Club</div>
+    <h1>Positions, Ranges, Pot Odds & Equity</h1>
+    <p class="subtitle">The math that turns hard decisions into snap calls.</p>
+    <p><span class="mono dim">↓ arrow keys to advance</span></p>
+  </section>
+
+  <!-- Four pillars -->
+  <section>
+    <div class="label">The four pillars</div>
+    <h2>Every decision is one of four questions</h2>
+    <div class="grid-2">
+      <div class="card-box"><h3>Where am I sitting?</h3><p><strong>Position</strong> — early, middle, late, or blinds. Decides how many hands you can profitably play.</p></div>
+      <div class="card-box"><h3>What could they have?</h3><p><strong>Range</strong> — not a single hand, but a set of hands consistent with their actions.</p></div>
+      <div class="card-box"><h3>What's the price?</h3><p><strong>Pot odds</strong> — how much you must call relative to what's already there.</p></div>
+      <div class="card-box"><h3>How often do I win?</h3><p><strong>Equity</strong> — your hand's win percentage vs. their range.</p></div>
+    </div>
+    <p style="margin-top:1em;">The big idea: if your <span class="accent">equity</span> is greater than the <span class="accent">price</span>, you call. Otherwise, fold.</p>
+  </section>
+
+  <!-- Positions overview -->
+  <section>
+    <div class="label">Pillar 1 · Position</div>
+    <h2>The table, by position</h2>
+    <div class="positions">
+      <div class="pos early">UTG</div>
+      <div class="pos early">UTG+1</div>
+      <div class="pos middle">MP</div>
+      <div class="pos middle">HJ</div>
+      <div class="pos late">CO</div>
+      <div class="pos late">BTN</div>
+      <div class="pos blinds">SB</div>
+      <div class="pos blinds">BB</div>
+    </div>
+    <div class="grid-3">
+      <div class="card-box danger-box">
+        <h3>Early (UTG / UTG+1)</h3>
+        <p>7+ players still to act. Many chances to get a better hand behind you. Play <strong>tight</strong>.</p>
+      </div>
+      <div class="card-box">
+        <h3>Middle (MP / HJ)</h3>
+        <p>Open up a little. Position postflop will usually be decent but not great.</p>
+      </div>
+      <div class="card-box success-box">
+        <h3>Late (CO / BTN)</h3>
+        <p>Few players behind. Last to act postflop. Play the <strong>widest</strong> ranges here.</p>
+      </div>
+    </div>
+    <p style="margin-top:1em;">BTN plays roughly <strong>3× more hands</strong> than UTG. Same cards, different seat, entirely different decision.</p>
+  </section>
+
+  <!-- Ranges: what they are -->
+  <section>
+    <div class="label">Pillar 2 · Ranges</div>
+    <h2>Think in sets, not single hands</h2>
+    <p>You can't see their cards, so you shouldn't fixate on one holding. Instead, reason about a <strong>range</strong>: the plausible hands that fit every action so far.</p>
+    <div class="grid-2" style="margin-top:1em;">
+      <div class="card-box">
+        <h3>Beginner mistake</h3>
+        <p class="danger">"I think they have <span class="mono">KQ</span>."</p>
+        <p>Fixates on one hand. Usually wrong.</p>
+      </div>
+      <div class="card-box success-box">
+        <h3>Right instinct</h3>
+        <p class="success">"Their 3-bet range is roughly <span class="mono">QQ+, AK, maybe AQs</span>."</p>
+        <p>Now you can do math against a set of hands.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Range visualization -->
+  <section>
+    <div class="label">A BTN opening range</div>
+    <h2>~40% of hands</h2>
+    <p class="subtitle">Rows = first card. Columns = second card. <span class="accent">Gold = opened</span>. Top-left to bottom-right diagonal = pairs.</p>
+    <div class="range-grid" id="btn-range"></div>
+    <p style="font-size:0.6em;">All pairs, all broadways, most suited aces, suited connectors, and plenty of offsuit Aces and Kings. <em>Position lets you play wide.</em></p>
+    <script>
+      (function () {
+        const ranks = ['A','K','Q','J','T','9','8','7','6','5','4','3','2'];
+        // Very rough BTN open range: all pairs, all suited As/Ks/Qs broadway-plus, suited connectors down, AKo-A8o, KQo-KTo, QJo-QTo, JTo.
+        const inRange = new Set([
+          // pairs
+          'AA','KK','QQ','JJ','TT','99','88','77','66','55','44','33','22',
+          // suited Ax
+          'AKs','AQs','AJs','ATs','A9s','A8s','A7s','A6s','A5s','A4s','A3s','A2s',
+          // suited Kx
+          'KQs','KJs','KTs','K9s','K8s','K7s','K6s','K5s','K4s','K3s','K2s',
+          // suited Qx
+          'QJs','QTs','Q9s','Q8s','Q7s','Q6s','Q5s',
+          // suited Jx
+          'JTs','J9s','J8s','J7s',
+          // suited Tx
+          'T9s','T8s','T7s',
+          // suited 9x
+          '98s','97s','96s',
+          // suited 8x
+          '87s','86s',
+          // suited 7x
+          '76s','75s',
+          // suited 6x
+          '65s','64s',
+          // suited 5x
+          '54s',
+          // offsuit broadways
+          'AKo','AQo','AJo','ATo','A9o','A8o',
+          'KQo','KJo','KTo',
+          'QJo','QTo',
+          'JTo'
+        ]);
+        const grid = document.getElementById('btn-range');
+        for (let i = 0; i < 13; i++) {
+          for (let j = 0; j < 13; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'range-cell';
+            let label;
+            if (i === j) {
+              label = ranks[i] + ranks[j]; // pair
+            } else if (i < j) {
+              label = ranks[i] + ranks[j] + 's'; // suited above diagonal
+            } else {
+              label = ranks[j] + ranks[i] + 'o'; // offsuit below diagonal
+            }
+            cell.textContent = label;
+            if (inRange.has(label)) cell.classList.add('in');
+            grid.appendChild(cell);
+          }
+        }
+      })();
+    </script>
+  </section>
+
+  <!-- Quiz 1: ranges -->
+  <section>
+    <div class="quiz" data-answer="C">
+      <div class="quiz-label">Check your understanding</div>
+      <div class="quiz-question">An opponent opens from <strong>UTG</strong> (first to act preflop). Which of these is most likely in their range?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> <span class="mono">7♣ 2♥</span> — any two cards</button>
+        <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> <span class="mono">J♦ 4♣</span> — offsuit junk</button>
+        <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> <span class="mono">A♠ K♠</span> — premium</button>
+        <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> <span class="mono">5♥ 3♥</span> — speculative</button>
+      </div>
+      <div class="quiz-feedback" data-for="correct">Right. UTG opens a <strong>tight range</strong> — mostly big pairs and strong broadways. AK is a classic UTG open.</div>
+      <div class="quiz-feedback" data-for="D">Speculative hands are BTN/CO hands, not UTG. Reverse positions and this might be right.</div>
+      <div class="quiz-feedback" data-for="incorrect">UTG opens a tight range. Junk offsuit hands and random suited low cards aren't part of it.</div>
+    </div>
+  </section>
+
+  <!-- Pot odds intro -->
+  <section>
+    <div class="label">Pillar 3 · Pot odds</div>
+    <h2>What's the price?</h2>
+    <p>When you face a bet, <strong>pot odds</strong> tell you how often you need to win to break even.</p>
+    <div class="card-box" style="max-width:520px; margin:1em auto;">
+      <h3>The formula</h3>
+      <p class="mono" style="color:#fff; font-size:1em; text-align:center;">required equity  =  call / (pot + call)</p>
+    </div>
+    <p>Example: pot is 100, opponent bets 50. You have to call 50 into a pot of 150.</p>
+    <p class="mono" style="color:#fff; font-size:0.85em;">50 / (150 + 50) = 50 / 200 = <span class="accent">25%</span></p>
+    <p>If you'll win at least <strong>25%</strong> of the time, calling is at worst break-even.</p>
+  </section>
+
+  <!-- Pot odds shortcuts -->
+  <section>
+    <div class="label">Shortcuts to memorize</div>
+    <h2>Four common spots</h2>
+    <div style="max-width:520px; margin:0 auto;">
+      <div class="data-row"><span class="k">They bet ½ pot</span><span class="v">need 25%</span></div>
+      <div class="data-row"><span class="k">They bet ⅔ pot</span><span class="v">need 29%</span></div>
+      <div class="data-row"><span class="k">They bet full pot</span><span class="v">need 33%</span></div>
+      <div class="data-row"><span class="k">They bet 2× pot</span><span class="v">need 40%</span></div>
+    </div>
+    <p style="margin-top:1.2em;">Bigger bet → you need more equity to call. Intuitive, but worth memorizing the four.</p>
+  </section>
+
+  <!-- Quiz 2: pot odds -->
+  <section>
+    <div class="quiz" data-answer="B">
+      <div class="quiz-label">Check your understanding</div>
+      <div class="quiz-question">Pot is 200. Your opponent bets 100 on the turn. How much equity do you need to break even on a call?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> 20%</button>
+        <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> 25%</button>
+        <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> 33%</button>
+        <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> 50%</button>
+      </div>
+      <div class="quiz-feedback" data-for="correct">Correct. <span class="mono">100 / (200 + 100 + 100) = 100 / 400 = <strong>25%</strong></span>. A half-pot bet always gives you 25% pot odds — memorize this.</div>
+      <div class="quiz-feedback" data-for="incorrect">Formula: call / (pot after your call) = 100 / (200 + 100 + 100) = 100 / 400 = <strong>25%</strong>. A half-pot bet always gives 25%.</div>
+    </div>
+  </section>
+
+  <!-- Equity -->
+  <section>
+    <div class="label">Pillar 4 · Equity</div>
+    <h2>How often do I win?</h2>
+    <p><strong>Equity</strong> = the % of the time your hand beats your opponent's range by showdown.</p>
+    <div class="grid-2" style="margin-top:1em;">
+      <div class="card-box">
+        <h3>Made hand equity</h3>
+        <p>You already have something. E.g. top pair vs. a random hand is ~70%.</p>
+      </div>
+      <div class="card-box">
+        <h3>Draw equity — the Rule of 2 and 4</h3>
+        <p><strong>On the turn</strong>, multiply outs × 2 for your equity %.<br>
+        <strong>On the flop</strong> (two cards to come), multiply outs × 4.</p>
+      </div>
+    </div>
+    <p style="margin-top:1em;">Example: 9 outs for a flush on the flop → <span class="mono accent">9 × 4 ≈ 36%</span> equity to hit by the river.</p>
+  </section>
+
+  <!-- Combining pot odds + equity -->
+  <section>
+    <div class="label">Putting it together</div>
+    <h2>Equity vs. price</h2>
+    <div class="grid-2">
+      <div class="card-box success-box">
+        <h3>Equity &gt; required</h3>
+        <p class="success">Call.</p>
+        <p>You win often enough to justify the price.</p>
+      </div>
+      <div class="card-box danger-box">
+        <h3>Equity &lt; required</h3>
+        <p class="danger">Fold.</p>
+        <p>You're paying too much for how often you'll win.</p>
+      </div>
+    </div>
+    <p style="margin-top:1em;">Everything else — reading opponents, bluffing, bet sizing — is built on top of this single comparison.</p>
+  </section>
+
+  <!-- Quiz 3: call or fold -->
+  <section>
+    <div class="quiz" data-answer="A">
+      <div class="quiz-label">Check your understanding</div>
+      <div class="quiz-question">Flop: <span class="mono">K♠ 7♠ 2♦</span>. You hold <span class="mono">A♠ 4♠</span> — a nut flush draw (9 outs). Pot is 100, opponent bets 50. Call or fold?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> Call — equity beats required</button>
+        <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> Fold — equity is too low</button>
+        <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> Fold — you have no made hand</button>
+      </div>
+      <div class="quiz-feedback" data-for="correct">Right. Required equity: <span class="mono">50 / 200 = 25%</span>. Your equity: <span class="mono">9 outs × 4 ≈ 36%</span>. Equity (36%) &gt; price (25%), so <strong>call</strong>. Plus you have implied odds if you hit.</div>
+      <div class="quiz-feedback" data-for="B">9 outs × 4 ≈ 36% equity. Required is 25%. You have more equity than the price demands — it's a call.</div>
+      <div class="quiz-feedback" data-for="C">"No made hand" is a beginner reflex. A strong draw with correct pot odds is a call.</div>
+    </div>
+  </section>
+
+  <!-- Recap -->
+  <section>
+    <div class="label">Recap</div>
+    <h2>Four pillars, one decision</h2>
+    <ol style="text-align:left; display:inline-block; font-size:0.8em;">
+      <li><strong>Position</strong> — play wider late, tighter early.</li>
+      <li><strong>Ranges</strong> — reason about sets of hands, not one specific hand.</li>
+      <li><strong>Pot odds</strong> — <span class="mono">call / (pot + call)</span> = required equity.</li>
+      <li><strong>Equity</strong> — outs × 4 on flop, × 2 on turn. Compare to required.</li>
+    </ol>
+    <p style="margin-top:1.2em;">Memorize: <span class="mono accent">½ pot = 25%</span>, <span class="mono accent">⅔ pot = 29%</span>, <span class="mono accent">full pot = 33%</span>.</p>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    center: true,
+    width: 1100,
+    height: 700,
+    margin: 0.06,
+    plugins: [RevealNotes]
+  });
+</script>
+<script src="/slides/_quiz/quiz.js"></script>
+</body>
+</html>

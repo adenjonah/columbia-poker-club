@@ -1,75 +1,59 @@
-// Shared lecture data for both Learn and LectureDetail components
+// Shared lecture data for both Learn and LectureDetail components.
+//
+// Schema:
+//   id           stable key (number for progression, string like 'add-1' for additional)
+//   title        display title (do not prefix "Lesson N" — derived from array order)
+//   description  short blurb
+//   slidesPath   optional — URL to reveal.js deck. Presence of this = "published".
+//   notesPath    optional — URL to markdown notes file.
+//   youtubeLink  optional — YouTube URL. Only present if a recording exists.
+//   instructor   optional — only shown when youtubeLink is present.
 
 export const lectureProgression = [
   {
     id: 1,
-    title: "1. How to Play Texas Hold'em",
-    description: "Basic rules, hand rankings, and fundamental gameplay mechanics",
-    date: "2025-02-28",
-    instructor: "David Eyal",
-    status: "completed",
+    title: "How to Play Texas Hold'em",
+    description: "Rules, game flow, and the math behind hand rankings",
+    slidesPath: "/slides/poker-basics.html",
+    notesPath: "/lecture-notes/1-how-to-play.md",
     youtubeLink: "https://youtu.be/5roo2xOsrJg?si=DM_flyTTsFIEb6fa",
-    notesLink: "/notes/texas-holdem-basics"
+    instructor: "David Eyal"
   },
   {
     id: 2,
-    title: "2. Positions, Ranges, and Mathematical Concepts",
-    description: "Positions, ranges, GTO vs exploitative play, equity, and pot odds",
-    date: "2025-10-5",
-    instructor: "Jonah Aden",
-    status: "completed",
-    youtubeLink: "https://youtube.com/watch?v=example2",
-    notesLink: "/notes/positions-ranges-math"
+    title: "Basic Strategy",
+    description: "Hand selection, positional awareness, bet sizing, and common mistakes",
+    slidesPath: "/slides/lesson-2-basic-strategy.html",
+    notesPath: "/lecture-notes/2-basic-strategy.md"
   },
   {
     id: 3,
-    title: "TBD",
-    description: "Topic to be determined",
-    date: "2025-10-26",
-    instructor: "TBD",
-    status: "upcoming",
-    youtubeLink: null,
-    notesLink: null
+    title: "Positions, Ranges, Pot Odds & Equity",
+    description: "How position shapes ranges, and the math that decides calls",
+    slidesPath: "/slides/lesson-3-positions-ranges-equity.html",
+    notesPath: "/lecture-notes/3-positions-ranges-equity.md",
+    youtubeLink: "https://youtube.com/watch?v=example2",
+    instructor: "Jonah Aden"
   },
   {
     id: 4,
-    title: "TBD",
-    description: "Topic to be determined",
-    date: "2025-11-9",
-    instructor: "TBD",
-    status: "upcoming",
-    youtubeLink: null,
-    notesLink: null
+    title: "Lesson 4",
+    description: "Coming soon"
   },
   {
     id: 5,
-    title: "TBD",
-    description: "Topic to be determined",
-    date: "2025-11-16",
-    instructor: "TBD",
-    status: "upcoming",
-    youtubeLink: null,
-    notesLink: null
+    title: "Lesson 5",
+    description: "Coming soon"
   },
   {
     id: 6,
-    title: "TBD",
-    description: "Topic to be determined",
-    date: "2024-12-07",
-    instructor: "TBD",
-    status: "upcoming",
-    youtubeLink: null,
-    notesLink: null
+    title: "Lesson 6",
+    description: "Coming soon"
   },
   {
     id: 7,
-    title: "TBD",
-    description: "Topic to be determined",
-    date: "2024-12-08",
-    instructor: "TBD",
-    status: "upcoming",
-    youtubeLink: null,
-    notesLink: null
+    title: "Lesson 7",
+    description: "Coming soon"
   }
 ];
 
@@ -78,29 +62,15 @@ export const additionalLectures = [
     id: 'add-1',
     title: "How to Play Tournament Poker",
     description: "Tournament-specific strategies, structure, and gameplay differences",
-    date: "2025-3-02",
-    instructor: "Andrew Fahey",
-    status: "completed",
     youtubeLink: "https://youtu.be/KCCoB3suWNM?si=yUXLVV28UkJqsNMQ",
-    notesLink: null
-  },
-  {
-    id: 'add-2',
-    title: "Intro to No Limit Hold'em: Rules & Game Flow",
-    description: "A 30-minute beginner lesson: rules, game flow, and the combinatorial math behind hand rankings",
-    date: "2026-04-15",
-    instructor: "Jonah Aden",
-    status: "completed",
-    youtubeLink: null,
-    slidesLink: "/slides/poker-basics.html",
-    notesLink: "/notes/intro-nlhe"
+    instructor: "Andrew Fahey"
   }
 ];
 
-// Helper function to get all lectures
+export const isPublished = (lecture) => Boolean(lecture.slidesPath);
+
 export const getAllLectures = () => [...lectureProgression, ...additionalLectures];
 
-// Helper function to find a lecture by ID
 export const findLectureById = (id) => {
   const allLectures = getAllLectures();
   return allLectures.find(l => l.id.toString() === id);

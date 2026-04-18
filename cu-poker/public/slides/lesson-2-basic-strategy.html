@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Strategy — NLHE</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/slides/_shared/deck.css">
+  <link rel="stylesheet" href="/slides/_quiz/quiz.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- Title -->
+  <section>
+    <div class="label">Lesson 2 · Columbia Poker Club</div>
+    <h1>Basic Strategy</h1>
+    <p class="subtitle">Hand selection, position, aggression, and sizing — the four ideas that make you a winning beginner.</p>
+    <p><span class="mono dim">↓ use arrow keys or spacebar</span></p>
+  </section>
+
+  <!-- Why most beginners lose -->
+  <section>
+    <div class="label">Why beginners lose</div>
+    <h2>Three leaks cost everything</h2>
+    <div class="grid-3">
+      <div class="card-box danger-box">
+        <h3>Playing too many hands</h3>
+        <p>If you play 50% of hands, you're entering most pots with trash. Trash loses money over time.</p>
+      </div>
+      <div class="card-box danger-box">
+        <h3>Passive play</h3>
+        <p>Checking and calling lets opponents realize their equity for free. Bets build pots — and fold equity.</p>
+      </div>
+      <div class="card-box danger-box">
+        <h3>Ignoring position</h3>
+        <p>Playing the same hand the same way from every seat is a million-dollar mistake.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.2em;">Fix these three and you'll beat most home games without opening a book.</p>
+  </section>
+
+  <!-- Idea 1: Hand selection -->
+  <section>
+    <div class="label">Idea 1 of 4</div>
+    <h2>Play fewer, better hands</h2>
+    <div class="grid-2">
+      <div class="card-box success-box">
+        <h3>Premium — always playable</h3>
+        <p class="mono" style="color:#fff; font-size:0.75em;">AA · KK · QQ · JJ · AK</p>
+        <p style="margin-top:6px;">These hands dominate random holdings. Raise them every time.</p>
+      </div>
+      <div class="card-box">
+        <h3>Strong — playable from most seats</h3>
+        <p class="mono" style="color:#fff; font-size:0.75em;">TT · 99 · AQ · AJs · KQs</p>
+        <p style="margin-top:6px;">Solid but need to be handled with a little care out of position.</p>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="card-box">
+        <h3>Speculative — late position only</h3>
+        <p class="mono" style="color:#fff; font-size:0.75em;">Suited connectors · Small pairs · Suited aces</p>
+        <p style="margin-top:6px;">Big upside (straights, flushes, sets) but only when cheap and in position.</p>
+      </div>
+      <div class="card-box danger-box">
+        <h3>Trash — fold it</h3>
+        <p class="mono" style="color:#fff; font-size:0.75em;">J4 · 92 · 73 · K3o · Q5o</p>
+        <p style="margin-top:6px;">Unsuited, disconnected, not premium. Folding is a free plus-EV action.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz 1 -->
+  <section>
+    <div class="quiz" data-answer="C">
+      <div class="quiz-label">Check your understanding</div>
+      <div class="quiz-question">You're under the gun (first to act preflop). Which of these hands is the clearest fold?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> <span class="mono">A♠ K♠</span></button>
+        <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> <span class="mono">9♥ 9♣</span></button>
+        <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> <span class="mono">J♦ 4♣</span></button>
+        <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> <span class="mono">A♥ Q♥</span></button>
+      </div>
+      <div class="quiz-feedback" data-for="correct">Correct. <strong>J4 offsuit</strong> is trash — disconnected, unsuited, dominated by any real hand. Fold from any position, especially UTG.</div>
+      <div class="quiz-feedback" data-for="A">AKs is premium. Always raise.</div>
+      <div class="quiz-feedback" data-for="B">Pocket nines are a solid raising hand. Not close to a fold.</div>
+      <div class="quiz-feedback" data-for="D">AQs is a strong hand — play it.</div>
+    </div>
+  </section>
+
+  <!-- Idea 2: Position -->
+  <section>
+    <div class="label">Idea 2 of 4</div>
+    <h2>Position is money</h2>
+    <div class="positions">
+      <div class="pos early">UTG</div>
+      <div class="pos early">UTG+1</div>
+      <div class="pos middle">MP</div>
+      <div class="pos middle">HJ</div>
+      <div class="pos late">CO</div>
+      <div class="pos late">BTN</div>
+      <div class="pos blinds">SB</div>
+      <div class="pos blinds">BB</div>
+    </div>
+    <div class="grid-2">
+      <div class="card-box">
+        <h3>Out of position (OOP)</h3>
+        <p>You act <em>before</em> your opponent on every street. You show information first. <span class="danger">Harder.</span></p>
+      </div>
+      <div class="card-box success-box">
+        <h3>In position (IP)</h3>
+        <p>You act <em>after</em> your opponent. You see their action first. <span class="success">Easier. More profitable.</span></p>
+      </div>
+    </div>
+    <p style="margin-top:1em;">Rule of thumb: <strong>play more hands from late position</strong>, fewer from early position.</p>
+  </section>
+
+  <!-- Idea 3: Aggression -->
+  <section>
+    <div class="label">Idea 3 of 4</div>
+    <h2>Bet, don't call</h2>
+    <p>When you have a decision, <strong>raising and betting</strong> are usually better than calling or checking. Two reasons:</p>
+    <div class="grid-2">
+      <div class="card-box accent-box">
+        <h3>Value</h3>
+        <p>If your hand is good, betting gets more chips in the pot from worse hands.</p>
+      </div>
+      <div class="card-box accent-box">
+        <h3>Fold equity</h3>
+        <p>Even when your hand is weak, a bet can win the pot <em>right now</em> if your opponent folds. Calling never folds anyone out.</p>
+      </div>
+    </div>
+    <p style="margin-top:1em;"><em>Calling stations</em> — players who call too much — are the easiest opponents to beat. Don't be one.</p>
+  </section>
+
+  <!-- Idea 4: Bet sizing -->
+  <section>
+    <div class="label">Idea 4 of 4</div>
+    <h2>Bet sizing, simplified</h2>
+    <div class="grid-3">
+      <div class="card-box">
+        <h3>Preflop open</h3>
+        <p class="mono accent" style="font-size:0.9em;">2.5–3× BB</p>
+        <p>Standard opening size. Bigger from early position, smaller from the button.</p>
+      </div>
+      <div class="card-box">
+        <h3>Continuation bet</h3>
+        <p class="mono accent" style="font-size:0.9em;">33–50% pot</p>
+        <p>Small is fine when the board is dry. Go bigger on wet boards with draws.</p>
+      </div>
+      <div class="card-box">
+        <h3>Value bet (river)</h3>
+        <p class="mono accent" style="font-size:0.9em;">66–100% pot</p>
+        <p>When you're confident you're ahead, charge them.</p>
+      </div>
+    </div>
+    <p style="margin-top:1em;">Red flag: a very <em>small</em> bet screams "please call." A very <em>big</em> bet on the river usually means the nuts or a bluff.</p>
+  </section>
+
+  <!-- Quiz 2 -->
+  <section>
+    <div class="quiz" data-answer="B">
+      <div class="quiz-label">Check your understanding</div>
+      <div class="quiz-question">You open-raise preflop and one player calls. The flop comes <span class="mono">K♦ 7♣ 2♠</span> — a dry, disconnected board. You have <span class="mono">A♠ K♠</span> (top pair, top kicker). Best continuation bet sizing?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> Check — slow-play it</button>
+        <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> ~33% pot — small c-bet on a dry board</button>
+        <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> 150% pot — overbet to "protect"</button>
+        <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> All in</button>
+      </div>
+      <div class="quiz-feedback" data-for="correct">Right. On a <strong>dry, disconnected board</strong> there are few draws to charge. A small c-bet (33%) gets value from worse Kings and can fold out middle pairs cheaply. Bigger sizes price yourself out.</div>
+      <div class="quiz-feedback" data-for="A">Checking lets your opponent realize equity for free and wastes your range advantage. Bet.</div>
+      <div class="quiz-feedback" data-for="C">Overbetting a dry board mostly folds out worse hands and inflates the pot against better ones.</div>
+      <div class="quiz-feedback" data-for="D">Shoving for 50× the pot is a classic beginner overbet. Doesn't get called by worse.</div>
+    </div>
+  </section>
+
+  <!-- Common beginner mistakes -->
+  <section>
+    <div class="label">Leaks to avoid</div>
+    <h2>Beginner mistake checklist</h2>
+    <ul>
+      <li><strong>Limping</strong> — calling the big blind preflop. Either raise or fold.</li>
+      <li><strong>Slow-playing monsters</strong> — set, straight, flush — bet them. You'll get called more than you think.</li>
+      <li><strong>Calling "just to see"</strong> — you need a reason. "Curiosity" isn't one.</li>
+      <li><strong>Chasing with bad odds</strong> — covered in Lesson 3. Drawing needs math.</li>
+      <li><strong>Playing when tilted</strong> — losing a hand badly doesn't make the next hand a better call.</li>
+      <li><strong>Not paying attention</strong> — who raised? From where? Information is free at the table.</li>
+    </ul>
+  </section>
+
+  <!-- Quiz 3 -->
+  <section>
+    <div class="quiz" data-answer="D">
+      <div class="quiz-label">Check your understanding</div>
+      <div class="quiz-question">You open-raise from UTG with <span class="mono">A♠ A♥</span>. The button 3-bets you. The small blind cold 4-bets all-in for 200 big blinds. The button folds. What's the worst play?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> Call</button>
+        <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> Think for 10 seconds, then call</button>
+        <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> Call quickly to hide strength</button>
+        <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> Fold</button>
+      </div>
+      <div class="quiz-feedback" data-for="correct">Right. Folding <strong>Aces</strong> preflop against a single opponent is almost always a disaster — you're ahead of literally every other hand. This is a snap call (or re-raise).</div>
+      <div class="quiz-feedback" data-for="incorrect">Aces are the best preflop hand. Against one opponent, you should never fold them preflop — they're favored against every other starting hand in the deck.</div>
+    </div>
+  </section>
+
+  <!-- Recap -->
+  <section>
+    <div class="label">Recap</div>
+    <h2>Four ideas, in order</h2>
+    <ol style="text-align:left; display:inline-block; font-size:0.8em;">
+      <li><strong>Play fewer, better hands.</strong> Fold trash. Raise premiums.</li>
+      <li><strong>Use position.</strong> Play more from the button, less from UTG.</li>
+      <li><strong>Be the bettor.</strong> Raising and betting beat calling. Calling never folds anyone out.</li>
+      <li><strong>Size with purpose.</strong> Dry boards: small. Wet boards: bigger. River value: bigger still.</li>
+    </ol>
+    <p style="margin-top:1.5em;">Next lesson: <span class="accent">positions, ranges, pot odds & equity</span> — the math that decides hard hands.</p>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    center: true,
+    width: 1100,
+    height: 700,
+    margin: 0.06,
+    plugins: [RevealNotes]
+  });
+</script>
+<script src="/slides/_quiz/quiz.js"></script>
+</body>
+</html>

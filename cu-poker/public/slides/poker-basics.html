@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/slides/_quiz/quiz.css">
   <style>
     :root {
       --bg: #111113;
@@ -975,6 +976,22 @@
         <aside class="notes">All 10 hand rankings, best to worst. Top 5 are rare. The highlighted bottom 5 are what actually matters. One pair is the most common winning hand.</aside>
       </section>
 
+      <!-- ===== QUIZ: HAND RANKINGS ===== -->
+      <section>
+        <div class="quiz" data-answer="B">
+          <div class="quiz-label">Check your understanding</div>
+          <div class="quiz-question">Board: <span class="mono">A♠ A♦ K♥ K♣ Q♠</span>. Player A holds <span class="mono">A♥ 2♣</span>, Player B holds <span class="mono">K♠ K♦</span>. Who wins?</div>
+          <div class="quiz-options">
+            <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> Player A — Aces full of Kings</button>
+            <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> Player B — Four of a Kind</button>
+            <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> Split pot — both have a full house</button>
+          </div>
+          <div class="quiz-feedback" data-for="correct">Player B uses both Kings from hand + both Kings from the board = <strong>four Kings</strong>. Four of a kind beats any full house. Classic 5-of-7 trap.</div>
+          <div class="quiz-feedback" data-for="incorrect">Player B makes four Kings (two from the board, two from hand). Four of a kind beats Player A's full house.</div>
+        </div>
+        <aside class="notes">The "5-of-7 trap" — you always make the best 5 from your 7 cards, which can quietly add up to four of a kind.</aside>
+      </section>
+
       <!-- ===== SLIDE 5: HAND PROBABILITIES (was #6) ===== -->
       <section>
         <div class="label">The Math</div>
@@ -1479,6 +1496,25 @@
 
         <p style="text-align:center; margin-top:14px;">Every decision you'll ever make in poker comes down to these five.</p>
         <aside class="notes">Five choices. When nobody has bet yet: check or bet. When someone has already bet or you're facing a blind: fold, call, or raise. You CAN fold when nobody has bet, but you'd be giving up a free card.</aside>
+      </section>
+
+      <!-- ===== QUIZ: ACTIONS ===== -->
+      <section>
+        <div class="quiz" data-answer="C">
+          <div class="quiz-label">Check your understanding</div>
+          <div class="quiz-question">It's your turn. Nobody has bet this round and you don't want to put any chips in, but you'd like to stay in the hand. What action do you take?</div>
+          <div class="quiz-options">
+            <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> Fold</button>
+            <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> Call</button>
+            <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> Check</button>
+            <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> Raise</button>
+          </div>
+          <div class="quiz-feedback" data-for="correct"><strong>Check</strong> — pass action without putting chips in. Only available when nobody has bet yet this round.</div>
+          <div class="quiz-feedback" data-for="A">Folding gives up your hand. You can keep playing for free if nobody has bet yet.</div>
+          <div class="quiz-feedback" data-for="B">Calling requires matching a bet — but nobody has bet. The free-action move is <strong>Check</strong>.</div>
+          <div class="quiz-feedback" data-for="D">Raising puts chips in. The free-action move is <strong>Check</strong>.</div>
+        </div>
+        <aside class="notes">Check is only available when there's nothing to call. If anyone has bet, your options shrink to fold/call/raise.</aside>
       </section>
 
       <!-- ===== SLIDE 17: RAISE SIZING ===== -->
@@ -2066,6 +2102,24 @@
         <aside class="notes">Six things. Best 5 of 7. Know the common hand rankings. Blinds rotate. Four betting rounds. Five possible actions. And you can win without the best hand if everyone folds. That's the complete ruleset.</aside>
       </section>
 
+      <!-- ===== QUIZ: BETTING ORDER ===== -->
+      <section>
+        <div class="quiz" data-answer="B">
+          <div class="quiz-label">Check your understanding</div>
+          <div class="quiz-question">On the flop, turn, and river, who acts first?</div>
+          <div class="quiz-options">
+            <button class="quiz-option" data-choice="A"><span class="quiz-letter">A</span> The player left of the big blind (same as preflop)</button>
+            <button class="quiz-option" data-choice="B"><span class="quiz-letter">B</span> The first player left of the dealer button</button>
+            <button class="quiz-option" data-choice="C"><span class="quiz-letter">C</span> The player with the best visible hand</button>
+            <button class="quiz-option" data-choice="D"><span class="quiz-letter">D</span> The big blind</button>
+          </div>
+          <div class="quiz-feedback" data-for="correct">Correct. Postflop, action starts at the <strong>first live player left of the button</strong>. This is the single biggest rules gotcha for new players.</div>
+          <div class="quiz-feedback" data-for="A">That's the preflop rule. <strong>Postflop</strong>, action shifts to start left of the dealer button.</div>
+          <div class="quiz-feedback" data-for="incorrect">Postflop, action starts at the first live player left of the dealer button — not based on hand strength or blinds.</div>
+        </div>
+        <aside class="notes">The preflop/postflop betting order change trips up nearly every new player. Worth drilling.</aside>
+      </section>
+
       <!-- ===== SLIDE 30: CHEAT SHEET ===== -->
       <section>
         <h2>Cheat Sheet</h2>
@@ -2188,5 +2242,6 @@
       plugins: [RevealNotes]
     });
   </script>
+  <script src="/slides/_quiz/quiz.js"></script>
 </body>
 </html>
