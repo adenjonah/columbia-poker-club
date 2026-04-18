@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +6,145 @@
 
 @layer base {
   html {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background-light text-text-dark;
+  }
+
+  ::selection {
+    background: rgba(0, 180, 216, 0.35);
+    color: #03045e;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 119, 182, 0.35);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 119, 182, 0.6);
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .glass-dark {
+    background: rgba(3, 4, 94, 0.45);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    border: 1px solid rgba(144, 224, 239, 0.18);
+  }
+
+  .gradient-text {
+    background: linear-gradient(120deg, #caf0f8 0%, #90e0ef 40%, #48cae4 70%, #00b4d8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-ink {
+    background: linear-gradient(120deg, #03045e 0%, #00226a 40%, #0077b6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .border-gradient {
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1rem;
+  }
+  .border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.7), rgba(3, 4, 94, 0.25) 50%, rgba(144, 224, 239, 0.7));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-base md:text-lg shadow-glow-sm transition-all duration-300;
+    background: linear-gradient(120deg, #00b4d8, #0077b6);
+    color: #ffffff;
+    background-size: 200% 200%;
+  }
+  .btn-primary:hover {
+    @apply shadow-glow;
+    background-position: 100% 50%;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-base md:text-lg transition-all duration-300;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+    color: #caf0f8;
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
+    background: rgba(0, 180, 216, 0.12);
+    color: #00226a;
+    border: 1px solid rgba(0, 180, 216, 0.3);
+  }
+
+  .chip-dark {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider;
+    background: rgba(144, 224, 239, 0.12);
+    color: #caf0f8;
+    border: 1px solid rgba(144, 224, 239, 0.25);
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 119, 182, 0.35), transparent);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
   }
 }
