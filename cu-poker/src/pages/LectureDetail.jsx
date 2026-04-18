@@ -21,6 +21,8 @@ function LectureDetail() {
         markdownFile = '2-positions-ranges-math.md';
       } else if (lecture.id === 'add-1') {
         markdownFile = 'add-1-tournament-poker.md';
+      } else if (lecture.id === 'add-2') {
+        markdownFile = 'add-2-intro-nlhe.md';
       }
 
       if (markdownFile) {
@@ -109,10 +111,12 @@ function LectureDetail() {
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            {/* Video Section - Takes up 2/3 of the width on large screens */}
+            {/* Video / Slides Section - Takes up 2/3 of the width on large screens */}
             <div className="xl:col-span-2 space-y-6">
-              <h2 className="text-2xl font-bold text-text-dark">Video Recording</h2>
-              
+              <h2 className="text-2xl font-bold text-text-dark">
+                {lecture.slidesLink && !videoId ? 'Slide Deck' : 'Video Recording'}
+              </h2>
+
               {lecture.status === 'completed' && videoId ? (
                 <div className="bg-primary-light rounded-lg p-4">
                   <div className="aspect-video bg-black rounded-lg overflow-hidden">
@@ -128,12 +132,33 @@ function LectureDetail() {
                     ></iframe>
                   </div>
                 </div>
+              ) : lecture.status === 'completed' && lecture.slidesLink ? (
+                <div className="bg-primary-light rounded-lg p-4 space-y-3">
+                  <div className="aspect-video bg-black rounded-lg overflow-hidden">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={lecture.slidesLink}
+                      title={`${lecture.title} — slides`}
+                      className="rounded-lg"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <a
+                    href={lecture.slidesLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-primary-dark text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors text-sm font-medium"
+                  >
+                    Open slides in new tab ↗
+                  </a>
+                </div>
               ) : (
                 <div className="bg-primary-light rounded-lg p-8 text-center">
                   <div className="text-6xl mb-4">📹</div>
                   <p className="text-xl text-text-light">
-                    {lecture.status === 'upcoming' 
-                      ? 'Video will be available after the lecture' 
+                    {lecture.status === 'upcoming'
+                      ? 'Video will be available after the lecture'
                       : 'Video not available'}
                   </p>
                 </div>

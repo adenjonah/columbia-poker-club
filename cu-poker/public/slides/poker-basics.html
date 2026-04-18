@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No Limit Hold'em: Rules &amp; Game Flow</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #111113;
+      --bg-card: #18181b;
+      --bg-subtle: #1e1e22;
+      --border: rgba(255,255,255,0.07);
+      --border-mid: rgba(255,255,255,0.13);
+      --text: #e8e8ea;
+      --text-dim: #8a8a94;
+      --text-faint: #52525c;
+      --accent: #d4a94a;
+      --accent-dim: rgba(212,169,74,0.12);
+      --red-suit: #c0392b;
+      --card-bg: #ffffff;
+      --font: 'Inter', -apple-system, system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+
+    .reveal {
+      font-family: var(--font);
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .reveal .slides section {
+      background: var(--bg);
+      padding: 28px 44px;
+      text-align: center;
+      overflow: visible;
+    }
+
+    .reveal h1 {
+      font-size: 2.6em;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1.0;
+      color: #ffffff;
+      text-transform: none;
+      margin-bottom: 0.25em;
+    }
+
+    .reveal h2 {
+      font-size: 1.5em;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: #ffffff;
+      text-transform: none;
+      margin-bottom: 0.35em;
+    }
+
+    .label {
+      display: inline-block;
+      font-size: 0.55em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .reveal p {
+      font-size: 0.75em;
+      line-height: 1.55;
+      color: var(--text-dim);
+      margin-bottom: 0.4em;
+    }
+
+    .reveal strong { color: var(--text); font-weight: 600; }
+    .reveal em { color: var(--text-dim); font-style: italic; }
+
+    .accent  { color: var(--accent); }
+    .dim     { color: var(--text-dim); }
+    .faint   { color: var(--text-faint); }
+    .mono    { font-family: var(--mono); }
+
+    .big-num {
+      font-family: var(--mono);
+      font-size: 2.6em;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 0.9em;
+      font-weight: 400;
+      color: var(--text-dim);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Playing cards ── */
+    .card {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-bg);
+      border-radius: 5px;
+      padding: 4px 5px;
+      margin: 2px;
+      min-width: 34px;
+      min-height: 46px;
+      font-size: 0.95em;
+      font-weight: 700;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.12);
+      line-height: 1;
+      font-family: var(--font);
+      vertical-align: middle;
+    }
+
+    .card.lg { padding: 7px 9px; min-width: 46px; min-height: 62px; font-size: 1.15em; border-radius: 6px; }
+    .card.xl { padding: 9px 13px; min-width: 54px; min-height: 72px; font-size: 1.3em; border-radius: 7px; }
+    .card.sm { padding: 3px 4px; min-width: 28px; min-height: 38px; font-size: 0.78em; border-radius: 4px; }
+    .card.xs { padding: 2px 4px; min-width: 26px; min-height: 34px; font-size: 0.78em; border-radius: 3px; }
+    .card.xxs { padding: 1px 3px; min-width: 20px; min-height: 26px; font-size: 0.62em; border-radius: 2px; }
+
+    .card .rank { font-size: 1.1em; }
+    .card .suit { font-size: 0.95em; margin-top: 1px; }
+
+    .s-black { color: #1c1c1c; }
+    .s-red   { color: var(--red-suit); }
+
+    .card.facedown {
+      background: #1a2a40;
+      border: 1.5px solid #233550;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+
+    .card.dim-card { opacity: 0.28; }
+
+    .card.hi {
+      box-shadow: 0 1px 4px rgba(0,0,0,0.45), 0 0 0 2px var(--accent);
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+    }
+
+    .board {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      margin: 8px auto;
+      padding: 10px 16px;
+      background: #0c3d1e;
+      border-radius: 8px;
+    }
+
+    /* ── Table diagram ── */
+    .table-wrap {
+      position: relative;
+      width: 460px;
+      height: 250px;
+      margin: 8px auto;
+    }
+
+    .table-felt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 158px;
+      background: #0d3d1e;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .table-center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(255,255,255,0.18);
+      font-size: 0.58em;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .seat {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.62em;
+    }
+
+    .seat-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1.5px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.82em;
+      color: var(--text-dim);
+    }
+
+    .seat-dot.you { border-color: var(--accent); color: var(--accent); }
+    .seat-dot.dealer { border-color: rgba(255,255,255,0.5); color: #ffffff; }
+    .seat-dot.sb { border-color: rgba(255,255,255,0.3); color: var(--text); }
+    .seat-dot.bb { border-color: var(--accent); color: var(--accent); }
+
+    .seat-name { color: var(--text-faint); font-size: 0.9em; font-weight: 500; white-space: nowrap; }
+    .seat-name.bright { color: var(--text); }
+
+    .s1 { top: 2px; left: 50%; transform: translateX(-50%); }
+    .s2 { top: 10%; right: 16px; }
+    .s3 { bottom: 10%; right: 16px; }
+    .s4 { bottom: 2px; left: 50%; transform: translateX(-50%); }
+    .s5 { bottom: 10%; left: 16px; }
+    .s6 { top: 10%; left: 16px; }
+
+    /* ── Position chips ── */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 0.58em;
+      font-weight: 700;
+    }
+
+    .chip.d    { background: #ffffff; color: #111; }
+    .chip.sb   { background: var(--bg-subtle); border: 1.5px solid var(--border-mid); color: var(--text); }
+    .chip.bb   { background: var(--accent); color: #111; }
+
+    /* ── Table chips (on felt) ── */
+    .table-chip {
+      position: absolute;
+      z-index: 2;
+    }
+    .tc-s1 { top: 58px; left: 50%; transform: translateX(-50%); }
+    .tc-s2 { top: 55px; right: 88px; }
+    .tc-s3 { bottom: 55px; right: 88px; }
+    .tc-s4 { bottom: 58px; left: 50%; transform: translateX(-50%); }
+    .tc-s5 { bottom: 55px; left: 88px; }
+    .tc-s6 { top: 55px; left: 88px; }
+
+    /* ── Bet labels (on table during walkthrough) ── */
+    .bet-label {
+      position: absolute;
+      z-index: 3;
+      font-family: var(--mono);
+      font-size: 0.55em;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(30,30,34,0.85);
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--border-mid);
+    }
+    .bl-s1 { top: 62px; left: 50%; transform: translateX(-50%); }
+    .bl-s2 { top: 58px; right: 92px; }
+    .bl-s3 { bottom: 58px; right: 92px; }
+    .bl-s4 { bottom: 82px; left: 50%; transform: translateX(-50%); }
+    .bl-s5 { bottom: 58px; left: 92px; }
+    .bl-s6 { top: 58px; left: 92px; }
+
+    /* ── Fold badge (overlays seat) ── */
+    .fold-x {
+      position: absolute;
+      z-index: 5;
+      font-size: 0.42em;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      background: rgba(0,0,0,0.65);
+      padding: 1px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+    .fx-s1 { top: 14px; left: 50%; transform: translateX(-50%); }
+    .fx-s2 { top: 20%; right: 26px; }
+    .fx-s3 { bottom: 20%; right: 26px; }
+    .fx-s4 { bottom: 14px; left: 50%; transform: translateX(-50%); }
+    .fx-s5 { bottom: 20%; left: 26px; }
+    .fx-s6 { top: 20%; left: 26px; }
+
+    /* ── Pot center on table ── */
+    .pot-center {
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--mono);
+      font-size: 0.58em;
+      font-weight: 700;
+      color: var(--accent);
+      z-index: 4;
+      white-space: nowrap;
+    }
+
+    /* ── Dimmed seat (folded in prior street) ── */
+    .seat.folded { opacity: 0.22; }
+
+    /* ── Check badge (on table) ── */
+    .check-x {
+      position: absolute;
+      z-index: 5;
+      font-size: 0.42em;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: rgba(0,0,0,0.55);
+      padding: 1px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+    .cx-s1 { top: 14px; left: 50%; transform: translateX(-50%); }
+    .cx-s2 { top: 20%; right: 26px; }
+    .cx-s3 { bottom: 20%; right: 26px; }
+    .cx-s4 { bottom: 14px; left: 50%; transform: translateX(-50%); }
+    .cx-s5 { bottom: 20%; left: 26px; }
+    .cx-s6 { top: 20%; left: 26px; }
+
+    /* ── Muck animation (cards slide toward center on fold) ── */
+    .muck-cards {
+      position: absolute;
+      z-index: 6;
+      display: flex;
+      gap: 1px;
+    }
+    .muck-from-s3 { bottom: 8%; right: 22px; }
+    /* When the fragment becomes visible, animate cards into the muck */
+    .reveal .fragment.muck-cards {
+      opacity: 1;
+      visibility: inherit;
+      transition: none;
+    }
+    .reveal .fragment.muck-cards.visible {
+      opacity: 0;
+      transform: translate(-80px, -50px) rotate(-12deg) scale(0.5);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    /* Force fragments inside table to start hidden (specificity fix) */
+    .reveal .fragment.bet-label,
+    .reveal .fragment.fold-x,
+    .reveal .fragment.check-x,
+    .reveal .fragment.pot-center {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .reveal .fragment.bet-label.visible,
+    .reveal .fragment.fold-x.visible,
+    .reveal .fragment.check-x.visible,
+    .reveal .fragment.pot-center.visible {
+      opacity: 1;
+      visibility: inherit;
+    }
+
+    /* ── Fold animation (slide 1) ── */
+    @keyframes fold-toss {
+      0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+      40%  { opacity: 0.8; transform: translateY(-6px) rotate(-8deg); }
+      100% { opacity: 0; transform: translateY(12px) rotate(6deg) scale(0.85); }
+    }
+    .fold-anim .card {
+      animation: fold-toss 2.2s ease-in-out infinite;
+    }
+    .fold-anim .card:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    /* ── Action badges ── */
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 3px;
+      font-size: 0.58em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-mid);
+    }
+
+    .badge.fold  { color: var(--text-faint); }
+    .badge.check { color: var(--text-dim); }
+    .badge.call  { color: var(--text); }
+    .badge.bet   { color: var(--accent); }
+    .badge.raise { color: #ffffff; }
+
+    /* ── Callout / note ── */
+    .note {
+      background: var(--bg-subtle);
+      border-top: 2px solid var(--border-mid);
+      border-right: none;
+      border-bottom: none;
+      border-left: none;
+      border-radius: 0 0 4px 4px;
+      padding: 8px 16px;
+      margin: 10px auto;
+      max-width: 640px;
+      font-size: 0.68em;
+      text-align: left;
+      color: var(--text-dim);
+    }
+
+    .note.accent-note { border-top-color: var(--accent); }
+
+    /* ── Flow diagram ── */
+    .flow {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0;
+      margin: 14px 0;
+      font-size: 0.6em;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .flow-step { color: var(--text-faint); padding: 0 8px; }
+    .flow-step.active { color: var(--accent); font-weight: 700; }
+    .flow-sep { color: var(--text-faint); font-weight: 300; opacity: 0.4; }
+
+    /* ── Pot display ── */
+    .pot {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68em;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 8px 0;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Player row ── */
+    .player-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin: 4px 0;
+      font-size: 0.65em;
+    }
+
+    .player-name {
+      font-weight: 600;
+      min-width: 68px;
+      text-align: right;
+      color: var(--text-dim);
+    }
+
+    .vs-text { color: var(--text-faint); font-weight: 500; font-size: 0.6em; margin: 2px 0; }
+
+    /* ── Pie chart ── */
+    .pie-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 8px auto;
+      max-width: 640px;
+    }
+
+    .pie-svg { flex-shrink: 0; }
+
+    .pie-legend { list-style: none; padding: 0; margin: 0; }
+    .pie-legend li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 2px 0;
+      font-size: 0.55em;
+      color: var(--text-dim);
+    }
+    .pie-legend li strong { color: var(--text); font-weight: 600; }
+    .pie-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .pie-pct {
+      font-family: var(--mono);
+      font-size: 0.9em;
+      color: var(--text-faint);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    /* ── Two column layout ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      text-align: left;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .col-head {
+      font-size: 0.6em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .two-col ul { list-style: none; padding: 0; margin: 0; }
+    .two-col li {
+      padding: 4px 0;
+      font-size: 0.6em;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.45;
+    }
+
+    /* ── Hand ranking rows ── */
+    .rank-row {
+      display: grid;
+      grid-template-columns: 22px 120px minmax(120px, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 4px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.6em;
+    }
+    .rank-row.common-row { background: rgba(212,169,74,0.06); border-radius: 3px; }
+    .rank-num  { color: var(--text-faint); font-family: var(--mono); font-weight: 500; text-align: center; }
+    .rank-name { font-weight: 600; color: var(--text); }
+    .rank-name.common-hand { color: var(--accent); }
+    .rank-desc { color: var(--text-faint); font-size: 0.92em; }
+    .rank-row .cards { justify-content: flex-start; margin: 0; gap: 2px; }
+
+    /* ── Action cells ── */
+    .action-grid {
+      display: grid;
+      gap: 10px;
+      max-width: 640px;
+      margin: 14px auto;
+    }
+
+    .action-cell {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+
+    .action-cell .action-name {
+      font-weight: 700;
+      font-size: 0.68em;
+      margin-bottom: 5px;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .action-cell .action-desc {
+      font-size: 0.62em;
+      color: var(--text-faint);
+      line-height: 1.45;
+    }
+
+    /* ── Math block ── */
+    .math-block {
+      font-family: var(--mono);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-mid);
+      border-radius: 5px;
+      padding: 9px 18px;
+      margin: 10px auto;
+      max-width: 460px;
+      font-size: 0.7em;
+      text-align: center;
+      color: var(--text);
+    }
+
+    /* ── Grid helpers ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    /* ── Recap numbered list ── */
+    .recap-list { text-align: left; max-width: 580px; margin: 12px auto; }
+    .recap-list p {
+      display: flex;
+      gap: 10px;
+      font-size: 0.78em;
+      color: var(--text-dim);
+      margin-bottom: 0.55em;
+      line-height: 1.5;
+    }
+    .recap-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-family: var(--mono);
+      min-width: 20px;
+      flex-shrink: 0;
+    }
+
+    /* ── Suit display ── */
+    .suit-display { display: flex; gap: 6px; margin: 6px 0; }
+    .suit-tile {
+      background: var(--card-bg);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 1.2em;
+      line-height: 1;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    /* ── Walkthrough layout ── */
+    .wt-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 16px;
+      max-width: 860px;
+      margin: 6px auto;
+      align-items: start;
+    }
+    .wt-actions {
+      text-align: left;
+      font-size: 0.72em;
+    }
+    .wt-actions p { margin: 3px 0; }
+
+    /* ── Rotation chip overlay ── */
+    .rotation-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* ── Hand reference sidebar (practice slides) ── */
+    .hand-ref {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 10px;
+      font-size: 0.48em;
+      line-height: 1.7;
+      color: var(--text-faint);
+      text-align: left;
+      z-index: 10;
+    }
+    .hand-ref .hr-title {
+      font-size: 0.85em;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .hand-ref ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: hr;
+    }
+    .hand-ref li {
+      counter-increment: hr;
+      padding: 0;
+    }
+    .hand-ref li::before {
+      content: counter(hr) ". ";
+      color: var(--text-faint);
+      font-family: var(--mono);
+      font-size: 0.9em;
+    }
+    .hand-ref li.hr-common {
+      color: var(--accent);
+    }
+
+    /* Reveal overrides */
+    .reveal .slide-background { background: var(--bg); }
+    .reveal .controls { color: var(--accent); }
+    .reveal .progress span { background: var(--accent); }
+    .reveal .slide-number {
+      font-family: var(--mono);
+      font-size: 0.5em;
+      color: var(--text-faint);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ===== SLIDE 0: TITLE ===== -->
+      <section>
+        <img src="CU_Poker_Logo.png" alt="Columbia Poker Club" style="width:120px; margin-bottom:12px; border-radius:10px;">
+        <h1>No Limit<br>Texas Hold'em</h1>
+        <p class="subtitle">Rules &amp; Game Flow</p>
+        <br>
+        <p style="font-size:0.65em; color:var(--text-faint);">Columbia Business School Poker Club</p>
+        <p style="font-size:0.6em; color:var(--text-faint); margin-top:2px;">Instructor: <strong>Jonah Aden</strong></p>
+        <aside class="notes">Welcome. 30 minutes from now you'll know enough to sit down and play your first hand of poker tonight. Today is purely rules and mechanics. No strategy.</aside>
+      </section>
+
+      <!-- ===== SLIDE 1: YOUR 7 CARDS ===== -->
+      <section>
+        <div class="label">Setup</div>
+        <h2>Your 7 cards</h2>
+        <div style="display:flex; align-items:center; justify-content:center; gap:24px; margin:20px 0; flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <p style="font-size:0.65em; color:var(--text-faint); margin-bottom:6px;">2 hole cards &mdash; private</p>
+            <div class="cards">
+              <div class="card lg facedown"></div>
+              <div class="card lg facedown"></div>
+            </div>
+          </div>
+          <span style="font-size:1.4em; color:var(--text-faint);">+</span>
+          <div style="text-align:center;">
+            <p style="font-size:0.65em; color:var(--text-faint); margin-bottom:6px;">5 community cards &mdash; shared</p>
+            <div class="cards">
+              <div class="card facedown"></div>
+              <div class="card facedown"></div>
+              <div class="card facedown"></div>
+              <div class="card facedown"></div>
+              <div class="card facedown"></div>
+            </div>
+          </div>
+        </div>
+        <div class="math-block">
+          7 total cards &rarr; pick your <strong>best 5</strong>
+        </div>
+        <p style="text-align:center;">You don't have to use both hole cards. You can use 2, 1, or even 0.</p>
+        <aside class="notes">Everyone gets 2 private cards, called hole cards. Then 5 cards are dealt face-up in the center, shared by all players. From those 7 total, you pick the best possible 5-card hand. You don't have to use both hole cards.</aside>
+      </section>
+
+      <!-- ===== SLIDE 2: TWO WAYS TO WIN ===== -->
+      <section>
+        <div class="label">Overview</div>
+        <h2>Two ways to win</h2>
+        <div class="grid-2" style="margin-top:24px;">
+          <div style="text-align:center; padding:16px; background:var(--bg-card); border-radius:6px; border:1px solid var(--border);">
+            <p style="font-size:0.6em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Best hand</p>
+            <p style="color:var(--text-dim); margin-bottom:8px;">Make the strongest 5-card poker hand at showdown.</p>
+            <div style="margin-top:6px;">
+              <p style="font-size:0.55em; color:var(--text-faint); margin-bottom:4px;">Hole cards:</p>
+              <div class="cards" style="margin:2px 0;">
+                <span class="card sm"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+                <span class="card sm"><span class="s-red"><span class="rank">A</span><span class="suit">♦</span></span></span>
+              </div>
+              <p style="font-size:0.55em; color:var(--text-faint); margin:4px 0 2px;">Community:</p>
+              <div class="cards" style="margin:2px 0;">
+                <span class="card xs"><span class="s-black"><span class="rank">A</span><span class="suit">♣</span></span></span>
+                <span class="card xs"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+                <span class="card xs"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+                <span class="card xs"><span class="s-red"><span class="rank">Q</span><span class="suit">♦</span></span></span>
+                <span class="card xs"><span class="s-black"><span class="rank">10</span><span class="suit">♣</span></span></span>
+              </div>
+              <p style="font-size:0.58em; color:var(--accent); font-weight:600; margin-top:4px;">Four Aces</p>
+            </div>
+          </div>
+          <div style="text-align:center; padding:16px; background:var(--bg-card); border-radius:6px; border:1px solid var(--border);">
+            <p style="font-size:0.6em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Last one standing</p>
+            <p style="color:var(--text-dim); margin-bottom:8px;">Everyone else folds. You win the pot without ever showing your cards.</p>
+            <div class="fold-anim" style="margin-top:12px;">
+              <div class="cards" style="margin:0;">
+                <div class="card sm facedown"></div>
+                <div class="card sm facedown"></div>
+              </div>
+            </div>
+            <p style="font-size:0.58em; color:var(--text-faint); margin-top:6px;">Cards tossed &mdash; hand over</p>
+          </div>
+        </div>
+        <aside class="notes">Poker has exactly two ways to win. First: have the best hand when cards are compared. Here, pocket Aces plus two more Aces on the board makes four of a kind — Quad Aces. Second: bet in a way that makes everyone else give up. That second path is what separates poker from most card games.</aside>
+      </section>
+
+      <!-- ===== SLIDE 3: THE DECK ===== -->
+      <section>
+        <div class="label">The deck</div>
+        <h2>52 cards, 4 suits, 13 ranks</h2>
+        <div class="grid-2" style="margin-top:18px;">
+          <div>
+            <span class="col-head">Suits (no suit is "better")</span>
+            <div class="suit-display">
+              <span class="suit-tile s-black">♠</span>
+              <span class="suit-tile s-red">♥</span>
+              <span class="suit-tile s-red">♦</span>
+              <span class="suit-tile s-black">♣</span>
+            </div>
+            <p>Spades, Hearts, Diamonds, Clubs.</p>
+            <p>In Hold'em, suits are never ranked against each other. A flush in hearts and a flush in spades of the same ranks tie.</p>
+          </div>
+          <div>
+            <span class="col-head">Ranks (low to high)</span>
+            <div class="cards" style="justify-content:flex-start; gap:3px; margin-bottom:8px; flex-wrap:wrap;">
+              <span class="card xs"><span class="s-black"><span class="rank">2</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">4</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">5</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">6</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">7</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">8</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">9</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">10</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">Q</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">K</span><span class="suit">♣</span></span></span>
+              <span class="card xs hi"><span class="s-red"><span class="rank">A</span><span class="suit">♦</span></span></span>
+            </div>
+            <p>Ace is the highest card. It can also act as a low card in a straight (A-2-3-4-5), but that's the only exception.</p>
+          </div>
+        </div>
+        <aside class="notes">Standard 52-card deck. Four suits, 13 ranks per suit. Suits have no ranking in Hold'em. Ace is highest. It can also act as a 1 in the lowest possible straight: A-2-3-4-5.</aside>
+      </section>
+
+      <!-- ===== SLIDE 4: ALL HAND RANKINGS ===== -->
+      <section>
+        <div class="label">Hand Rankings</div>
+        <h2>All 10 hands, best to worst</h2>
+
+        <div style="max-width:780px; margin:8px auto;">
+          <div class="rank-row">
+            <span class="rank-num">1</span>
+            <span class="rank-name">Royal Flush</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-black"><span class="rank">10</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">Q</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+            </div>
+            <span class="rank-desc">A-K-Q-J-10, same suit</span>
+          </div>
+          <div class="rank-row">
+            <span class="rank-num">2</span>
+            <span class="rank-name">Straight Flush</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-red"><span class="rank">5</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">6</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">7</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">8</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">9</span><span class="suit">♥</span></span></span>
+            </div>
+            <span class="rank-desc">5 consecutive, same suit</span>
+          </div>
+          <div class="rank-row">
+            <span class="rank-num">3</span>
+            <span class="rank-name">Four of a Kind</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">K</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">3</span><span class="suit">♠</span></span></span>
+            </div>
+            <span class="rank-desc">4 of the same rank</span>
+          </div>
+          <div class="rank-row">
+            <span class="rank-num">4</span>
+            <span class="rank-name">Full House</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-red"><span class="rank">J</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">8</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">8</span><span class="suit">♣</span></span></span>
+            </div>
+            <span class="rank-desc">Three of a kind + a pair</span>
+          </div>
+          <div class="rank-row">
+            <span class="rank-num">5</span>
+            <span class="rank-name">Flush</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-red"><span class="rank">2</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">5</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">8</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">J</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">A</span><span class="suit">♦</span></span></span>
+            </div>
+            <span class="rank-desc">5 cards, same suit, any order</span>
+          </div>
+          <div class="rank-row common-row">
+            <span class="rank-num">6</span>
+            <span class="rank-name common-hand">Straight</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-black"><span class="rank">4</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">5</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">6</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">7</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">8</span><span class="suit">♣</span></span></span>
+            </div>
+            <span class="rank-desc">5 consecutive, mixed suits</span>
+          </div>
+          <div class="rank-row common-row">
+            <span class="rank-num">7</span>
+            <span class="rank-name common-hand">Three of a Kind</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-red"><span class="rank">9</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">9</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">4</span><span class="suit">♥</span></span></span>
+            </div>
+            <span class="rank-desc">3 of the same rank</span>
+          </div>
+          <div class="rank-row common-row">
+            <span class="rank-num">8</span>
+            <span class="rank-name common-hand">Two Pair</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">A</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">7</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+            </div>
+            <span class="rank-desc">2 different pairs</span>
+          </div>
+          <div class="rank-row common-row">
+            <span class="rank-num">9</span>
+            <span class="rank-name common-hand">One Pair</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-red"><span class="rank">Q</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">Q</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">5</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">2</span><span class="suit">♣</span></span></span>
+            </div>
+            <span class="rank-desc">2 of the same rank</span>
+          </div>
+          <div class="rank-row common-row">
+            <span class="rank-num">10</span>
+            <span class="rank-name common-hand">High Card</span>
+            <div class="cards">
+              <span class="card xs"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">8</span><span class="suit">♦</span></span></span>
+              <span class="card xs"><span class="s-black"><span class="rank">4</span><span class="suit">♣</span></span></span>
+              <span class="card xs"><span class="s-red"><span class="rank">2</span><span class="suit">♥</span></span></span>
+            </div>
+            <span class="rank-desc">Nothing, highest card plays</span>
+          </div>
+        </div>
+
+        <p style="text-align:center; margin-top:6px; font-size:0.62em;"><span class="accent">Highlighted rows</span> are the hands that decide most pots. One pair wins more than anything else.</p>
+        <aside class="notes">All 10 hand rankings, best to worst. Top 5 are rare. The highlighted bottom 5 are what actually matters. One pair is the most common winning hand.</aside>
+      </section>
+
+      <!-- ===== SLIDE 5: HAND PROBABILITIES (was #6) ===== -->
+      <section>
+        <div class="label">The Math</div>
+        <h2>How likely is each hand?</h2>
+        <p>Probability when dealt 7 random cards, best 5 of 7:</p>
+
+        <div class="pie-wrap">
+          <svg class="pie-svg" width="210" height="210" viewBox="-4 -4 208 208">
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#e8e8ea" stroke-width="28" stroke-dasharray="235.0 305.35" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#b0b0b8" stroke-width="28" stroke-dasharray="127.0 413.35" stroke-dashoffset="-235.0" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#7a7a86" stroke-width="28" stroke-dasharray="94.1 446.25" stroke-dashoffset="-362.0" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#d4a94a" stroke-width="28" stroke-dasharray="26.1 514.25" stroke-dashoffset="-456.1" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#b8903e" stroke-width="28" stroke-dasharray="25.0 515.35" stroke-dashoffset="-482.2" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#967636" stroke-width="28" stroke-dasharray="16.4 523.95" stroke-dashoffset="-507.2" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#4a4a56" stroke-width="28" stroke-dasharray="14.0 526.35" stroke-dashoffset="-523.6" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#3a3a48" stroke-width="28" stroke-dasharray="0.9 539.45" stroke-dashoffset="-537.6" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#2e2e3c" stroke-width="28" stroke-dasharray="1.0 539.35" stroke-dashoffset="-538.5" transform="rotate(-90 100 100)"/>
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#222230" stroke-width="28" stroke-dasharray="1.0 539.35" stroke-dashoffset="-539.5" transform="rotate(-90 100 100)"/>
+            <text x="100" y="94" text-anchor="middle" fill="#e8e8ea" font-family="Inter, sans-serif" font-size="11" font-weight="600">Best 5 of 7</text>
+            <text x="100" y="112" text-anchor="middle" fill="#64648a" font-family="Inter, sans-serif" font-size="8.5">133.8M possible deals</text>
+          </svg>
+
+          <ul class="pie-legend">
+            <li><span class="pie-swatch" style="background:#e8e8ea;"></span><strong>One Pair</strong><span class="pie-pct">43.8%</span></li>
+            <li><span class="pie-swatch" style="background:#b0b0b8;"></span><strong>Two Pair</strong><span class="pie-pct">23.5%</span></li>
+            <li><span class="pie-swatch" style="background:#7a7a86;"></span><strong>High Card</strong><span class="pie-pct">17.4%</span></li>
+            <li><span class="pie-swatch" style="background:#d4a94a;"></span><strong>Three of a Kind</strong><span class="pie-pct">4.83%</span></li>
+            <li><span class="pie-swatch" style="background:#b8903e;"></span><strong>Straight</strong><span class="pie-pct">4.62%</span></li>
+            <li><span class="pie-swatch" style="background:#967636;"></span><strong>Flush</strong><span class="pie-pct">3.03%</span></li>
+            <li><span class="pie-swatch" style="background:#4a4a56;"></span><strong>Full House</strong><span class="pie-pct">2.60%</span></li>
+            <li><span class="pie-swatch" style="background:#3a3a48;"></span><strong>Four of a Kind</strong><span class="pie-pct">0.17%</span></li>
+            <li><span class="pie-swatch" style="background:#2e2e3c;"></span><strong>Straight Flush</strong><span class="pie-pct">0.028%</span></li>
+            <li><span class="pie-swatch" style="background:#222230; border:1px solid #3a3a48;"></span><strong>Royal Flush</strong><span class="pie-pct">0.003%</span></li>
+          </ul>
+        </div>
+        <aside class="notes">One pair shows up almost 44% of the time. Two pair another 23%. Together those two make up two-thirds of all hands. Everything from three of a kind up is under 5%.</aside>
+      </section>
+
+      <!-- ===== SLIDE 6: 5 OF 7 EXAMPLE (was #7) ===== -->
+      <section>
+        <div class="label">Example</div>
+        <h2>5 of 7 in action</h2>
+
+        <div style="margin:12px 0;">
+          <p style="font-size:0.65em; color:var(--text-faint);">Your hole cards:</p>
+          <div class="cards">
+            <span class="card lg hi"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+            <span class="card lg hi"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:0.65em; color:var(--text-faint);">Community cards:</p>
+          <div class="board">
+            <span class="card hi"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+            <span class="card hi"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+            <span class="card dim-card"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+            <span class="card hi"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+            <span class="card dim-card"><span class="s-red"><span class="rank">2</span><span class="suit">♥</span></span></span>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <p style="font-size:0.7em; color:var(--text-faint);">Best 5 = <strong style="color:var(--accent);">Two Pair (Kings and Nines)</strong></p>
+          <div class="cards">
+            <span class="card hi"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+            <span class="card hi"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+            <span class="card hi"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+            <span class="card hi"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+            <span class="card hi"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+          </div>
+          <p style="text-align:center; margin-top:6px;">The 3&#9830; and 2&#9829; don't contribute. They're ignored.</p>
+        </div>
+        <aside class="notes">Your hand: King of hearts, 9 of diamonds. Board: K-7-3-9-2. Two Pair, Kings and Nines. The 3 and 2 don't help.</aside>
+      </section>
+
+      <!-- ===== SLIDES 7-11: BASIC PRACTICE HANDS ===== -->
+
+      <!-- BASIC PRACTICE 1: Pair vs Two Pair -->
+      <section>
+        <div class="label">Practice &mdash; Basic</div>
+        <h2>Who wins? #1</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-black"><span class="rank">8</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">5</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">3</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player 1:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player 2:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">J</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">5</span><span class="suit">♦</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name">Player 1:</span>
+            <span style="font-size:0.72em;"><strong>Pair of Kings</strong> (K&#9829; K&#9830; J&#9824; 9&#9830; 8&#9824;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name accent">Player 2:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Two Pair</strong>, Jacks and 5s (J&#9829; J&#9824; 5&#9827; 5&#9830; K&#9830;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player 2 wins.</span> Two pair beats one pair.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Player 1 has a pair of Kings. Player 2 has two pair, Jacks and 5s. Two pair always beats one pair, even though Kings are higher than Jacks.</aside>
+      </section>
+
+      <!-- BASIC PRACTICE 2: Trips vs Straight -->
+      <section>
+        <div class="label">Practice &mdash; Basic</div>
+        <h2>Who wins? #2</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">6</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">2</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">5</span><span class="suit">♣</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player 1:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">9</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player 2:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">8</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-black"><span class="rank">10</span><span class="suit">♠</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name">Player 1:</span>
+            <span style="font-size:0.72em;"><strong>Three 9s</strong> (9&#9824; 9&#9829; 9&#9830; 7&#9827; 6&#9830;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name accent">Player 2:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Straight</strong>, 6 through 10 (10&#9824; 9&#9824; 8&#9829; 7&#9827; 6&#9830;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player 2 wins.</span> A straight beats three of a kind.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Player 1 has trip 9s. Player 2 has a straight, 6 through 10. Straight beats trips.</aside>
+      </section>
+
+      <!-- BASIC PRACTICE 3: Flush vs Pair -->
+      <section>
+        <div class="label">Practice &mdash; Basic</div>
+        <h2>Who wins? #3</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-black"><span class="rank">3</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">7</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">Q</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">10</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">4</span><span class="suit">♥</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player 1:</span>
+          <span class="card sm"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+          <span class="card sm"><span class="s-black"><span class="rank">2</span><span class="suit">♠</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player 2:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">Q</span><span class="suit">♦</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name accent">Player 1:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Flush</strong>, Ace-high spades (A&#9824; 10&#9824; 7&#9824; 3&#9824; 2&#9824;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name">Player 2:</span>
+            <span style="font-size:0.72em;"><strong>Pair of Queens</strong> (Q&#9827; Q&#9830; K&#9829; 10&#9824; 7&#9824;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player 1 wins.</span> A flush beats a pair.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Player 1 has 5 spades for a flush. Player 2 paired Queens but that's not enough. Flush crushes a pair.</aside>
+      </section>
+
+      <!-- BASIC PRACTICE 4: CHOP -->
+      <section>
+        <div class="label">Practice &mdash; Basic</div>
+        <h2>Who wins? #4</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">9</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">4</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">7</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">2</span><span class="suit">♠</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player 1:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player 2:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">A</span><span class="suit">♦</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">9</span><span class="suit">♥</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name">Player 1:</span>
+            <span style="font-size:0.72em;"><strong>Two Pair</strong>, Aces and 9s (A&#9824; A&#9829; 9&#9827; 9&#9830; 7&#9829;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name">Player 2:</span>
+            <span style="font-size:0.72em;"><strong>Two Pair</strong>, Aces and 9s (A&#9824; A&#9830; 9&#9827; 9&#9829; 7&#9829;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Chop! (Split pot)</span></p>
+          <p style="font-size:0.68em; color:var(--text-faint);">Both players' best 5 cards are identical. The pot is split evenly.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Same hand! Both make two pair, Aces and 9s, with a 7 kicker from the board. When both players' best 5 cards are identical, it's a chop. The pot is split evenly. Suits never break ties.</aside>
+      </section>
+
+      <!-- BASIC PRACTICE 5: Pair vs High Card -->
+      <section>
+        <div class="label">Practice &mdash; Basic</div>
+        <h2>Who wins? #5</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-red"><span class="rank">2</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">8</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">5</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">3</span><span class="suit">♣</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player 1:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">J</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">4</span><span class="suit">♦</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player 2:</span>
+          <span class="card sm"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name accent">Player 1:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Pair of Jacks</strong> (J&#9829; J&#9824; 8&#9827; 5&#9829; 4&#9830;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name">Player 2:</span>
+            <span style="font-size:0.72em;"><strong>Ace-high</strong> (A&#9824; K&#9829; J&#9824; 8&#9827; 5&#9829;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player 1 wins.</span> Any pair beats any high card.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Player 2 has Ace-King but didn't pair either one. Player 1 paired a Jack. Any pair beats high card, even when your unpaired cards look impressive.</aside>
+      </section>
+
+      <!-- ===== SLIDE 12: THE TABLE (was #8) ===== -->
+      <section>
+        <div class="label">The Table</div>
+        <h2>6 players, 1 oval</h2>
+        <div class="table-wrap">
+          <div class="table-felt">
+            <span class="table-center-text">Community Cards</span>
+          </div>
+          <div class="seat s1">
+            <div class="seat-dot">P1</div>
+            <span class="seat-name">Player 1</span>
+          </div>
+          <div class="seat s2">
+            <div class="seat-dot">P2</div>
+            <span class="seat-name">Player 2</span>
+          </div>
+          <div class="seat s3">
+            <div class="seat-dot">P3</div>
+            <span class="seat-name">Player 3</span>
+          </div>
+          <div class="seat s4">
+            <div class="seat-dot you">YOU</div>
+            <span class="seat-name bright">You</span>
+          </div>
+          <div class="seat s5">
+            <div class="seat-dot">P5</div>
+            <span class="seat-name">Player 5</span>
+          </div>
+          <div class="seat s6">
+            <div class="seat-dot">P6</div>
+            <span class="seat-name">Player 6</span>
+          </div>
+        </div>
+        <p style="text-align:center;">A typical table seats 6 to 9 players. Community cards go face-up in the center.</p>
+        <aside class="notes">Standard poker table. 6 to 9 players around an oval. Community cards dealt face-up in the middle. Now let's talk about positions.</aside>
+      </section>
+
+      <!-- ===== SLIDE 13: DEALER BUTTON (was #9) ===== -->
+      <section>
+        <div class="label">Positions</div>
+        <h2>The Dealer Button</h2>
+        <div class="table-wrap">
+          <div class="table-felt">
+            <span class="table-center-text">Pot</span>
+          </div>
+          <div class="seat s1">
+            <div class="seat-dot">P1</div>
+            <span class="seat-name">Player 1</span>
+          </div>
+          <div class="seat s2">
+            <div class="seat-dot dealer">D</div>
+            <span class="seat-name bright">Dealer</span>
+          </div>
+          <div class="seat s3">
+            <div class="seat-dot">P3</div>
+            <span class="seat-name">Player 3</span>
+          </div>
+          <div class="seat s4">
+            <div class="seat-dot">P4</div>
+            <span class="seat-name">Player 4</span>
+          </div>
+          <div class="seat s5">
+            <div class="seat-dot">P5</div>
+            <span class="seat-name">Player 5</span>
+          </div>
+          <div class="seat s6">
+            <div class="seat-dot">P6</div>
+            <span class="seat-name">Player 6</span>
+          </div>
+          <!-- Dealer chip on table -->
+          <div class="table-chip tc-s2"><div class="chip d">D</div></div>
+        </div>
+        <p style="text-align:center;">A white disc marked <strong>"D"</strong> sits in front of one player each hand.<br>It marks the nominal dealer position and determines who posts blinds.</p>
+        <aside class="notes">The dealer button sits in front of one player. Even in casinos where a dedicated dealer handles the cards, the button rotates to mark position. Everything about who pays and who acts first is relative to this button.</aside>
+      </section>
+
+      <!-- ===== SLIDE 14: BLINDS (was #10) ===== -->
+      <section>
+        <div class="label">Positions</div>
+        <h2>Blinds: forced bets</h2>
+        <div class="table-wrap">
+          <div class="table-felt">
+            <span class="table-center-text">Pot: 3 chips</span>
+          </div>
+          <div class="seat s1">
+            <div class="seat-dot">P1</div>
+            <span class="seat-name">Player 1</span>
+          </div>
+          <div class="seat s2">
+            <div class="seat-dot dealer">D</div>
+            <span class="seat-name bright">Dealer</span>
+          </div>
+          <div class="seat s3">
+            <div class="seat-dot sb">SB</div>
+            <span class="seat-name bright">Small Blind (1)</span>
+          </div>
+          <div class="seat s4">
+            <div class="seat-dot bb">BB</div>
+            <span class="seat-name bright">Big Blind (2)</span>
+          </div>
+          <div class="seat s5">
+            <div class="seat-dot">P5</div>
+            <span class="seat-name">Player 5</span>
+          </div>
+          <div class="seat s6">
+            <div class="seat-dot">P6</div>
+            <span class="seat-name">Player 6</span>
+          </div>
+          <!-- Position chips on table -->
+          <div class="table-chip tc-s2"><div class="chip d">D</div></div>
+          <div class="table-chip tc-s3"><div class="chip sb">SB</div></div>
+          <div class="table-chip tc-s4"><div class="chip bb">BB</div></div>
+        </div>
+        <div class="note accent-note" style="text-align:center;">
+          <p style="margin:0;"><strong>Before any cards are dealt</strong>, the two players left of the dealer post forced bets.</p>
+          <p style="margin:5px 0 0 0;">Small Blind = half the minimum &nbsp;/&nbsp; Big Blind = the full minimum. Guarantees there's always a pot to play for.</p>
+        </div>
+        <aside class="notes">Before cards are dealt, the two seats left of the button post forced bets called blinds. In a 1/2 game, that means 1 chip and 2 chips. Without blinds, nobody would have any incentive to play a hand.</aside>
+      </section>
+
+      <!-- ===== SLIDE 15: BUTTON ROTATION (was #11, redesigned) ===== -->
+      <section>
+        <div class="label">Positions</div>
+        <h2>The button rotates every hand</h2>
+        <p>Everyone takes turns paying. Nobody is stuck.</p>
+
+        <div class="table-wrap" style="margin-top:10px;">
+          <div class="table-felt"></div>
+          <div class="seat s1">
+            <div class="seat-dot">A</div>
+            <span class="seat-name">Alice</span>
+          </div>
+          <div class="seat s2">
+            <div class="seat-dot">B</div>
+            <span class="seat-name">Bob</span>
+          </div>
+          <div class="seat s3">
+            <div class="seat-dot">C</div>
+            <span class="seat-name">Carol</span>
+          </div>
+          <div class="seat s4">
+            <div class="seat-dot">D</div>
+            <span class="seat-name">Dave</span>
+          </div>
+          <div class="seat s5">
+            <div class="seat-dot">E</div>
+            <span class="seat-name">Eve</span>
+          </div>
+          <div class="seat s6">
+            <div class="seat-dot">F</div>
+            <span class="seat-name">Frank</span>
+          </div>
+
+          <!-- Hand 1: D=Alice(s1), SB=Bob(s2), BB=Carol(s3) -->
+          <div class="fragment fade-in-then-out" data-fragment-index="0" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+            <div class="table-chip tc-s1"><div class="chip d">D</div></div>
+            <div class="table-chip tc-s2"><div class="chip sb">SB</div></div>
+            <div class="table-chip tc-s3"><div class="chip bb">BB</div></div>
+          </div>
+
+          <!-- Hand 2: D=Bob(s2), SB=Carol(s3), BB=Dave(s4) -->
+          <div class="fragment fade-in-then-out" data-fragment-index="1" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+            <div class="table-chip tc-s2"><div class="chip d">D</div></div>
+            <div class="table-chip tc-s3"><div class="chip sb">SB</div></div>
+            <div class="table-chip tc-s4"><div class="chip bb">BB</div></div>
+          </div>
+
+          <!-- Hand 3: D=Carol(s3), SB=Dave(s4), BB=Eve(s5) -->
+          <div class="fragment fade-in" data-fragment-index="2" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+            <div class="table-chip tc-s3"><div class="chip d">D</div></div>
+            <div class="table-chip tc-s4"><div class="chip sb">SB</div></div>
+            <div class="table-chip tc-s5"><div class="chip bb">BB</div></div>
+          </div>
+        </div>
+
+        <!-- Hand labels: stacked in a relative container so they overlap correctly -->
+        <div style="position:relative; height:1.6em; margin-top:8px; font-size:0.7em; text-align:center;">
+          <p class="fragment fade-in-then-out" data-fragment-index="0" style="position:absolute; width:100%; margin:0;"><strong>Hand 1:</strong> Alice deals, Bob = SB, Carol = BB</p>
+          <p class="fragment fade-in-then-out" data-fragment-index="1" style="position:absolute; width:100%; margin:0;"><strong>Hand 2:</strong> Bob deals, Carol = SB, Dave = BB</p>
+          <p class="fragment fade-in" data-fragment-index="2" style="position:absolute; width:100%; margin:0;"><strong>Hand 3:</strong> Carol deals, Dave = SB, Eve = BB</p>
+        </div>
+
+        <p class="fragment" data-fragment-index="3" style="text-align:center; margin-top:10px;">Clockwise, every hand. Fair by design.</p>
+        <aside class="notes">Watch the chips rotate clockwise around the table. Click through hands 1, 2, and 3. Over a full orbit every player pays the exact same amount in blinds.</aside>
+      </section>
+
+      <!-- ===== SLIDE 16: FIVE ACTIONS (was #12, redesigned) ===== -->
+      <section>
+        <div class="label">Actions</div>
+        <h2>Your five options</h2>
+        <p>The available actions depend on whether someone has already bet.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:780px; margin:18px auto 0;">
+          <!-- Left column: no bet -->
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:18px 16px;">
+            <p style="font-size:0.6em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); margin-bottom:14px; text-align:center;">No bet before you</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <div class="action-cell">
+                <div class="action-name" style="color:var(--text-dim);">Check</div>
+                <div class="action-desc">Pass without betting. Stay in for free.</div>
+              </div>
+              <div class="action-cell">
+                <div class="action-name" style="color:var(--accent);">Bet</div>
+                <div class="action-desc">Put chips in first. Others must now respond.</div>
+              </div>
+            </div>
+            <p style="font-size:0.55em; color:var(--text-faint); text-align:center; margin-top:10px;">You <em>can</em> fold here, but why give up a free card?</p>
+          </div>
+          <!-- Right column: facing a bet -->
+          <div style="background:var(--bg-card); border:1px solid var(--accent); border-radius:8px; padding:18px 16px;">
+            <p style="font-size:0.6em; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; text-align:center;">Bet or blind before you</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+              <div class="action-cell">
+                <div class="action-name" style="color:var(--text-faint);">Fold</div>
+                <div class="action-desc">Give up. Out of this pot.</div>
+              </div>
+              <div class="action-cell">
+                <div class="action-name">Call</div>
+                <div class="action-desc">Match the current bet to stay in.</div>
+              </div>
+              <div class="action-cell">
+                <div class="action-name" style="color:#fff;">Raise</div>
+                <div class="action-desc">Increase the bet. Force others to decide again.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="text-align:center; margin-top:14px;">Every decision you'll ever make in poker comes down to these five.</p>
+        <aside class="notes">Five choices. When nobody has bet yet: check or bet. When someone has already bet or you're facing a blind: fold, call, or raise. You CAN fold when nobody has bet, but you'd be giving up a free card.</aside>
+      </section>
+
+      <!-- ===== SLIDE 17: RAISE SIZING ===== -->
+      <section>
+        <div class="label">Betting Rules</div>
+        <h2>How much can you bet?</h2>
+        <p>This is <strong>No Limit</strong> Hold'em. There's no cap on bet size.</p>
+
+        <div style="max-width:700px; margin:16px auto;">
+          <div style="display:grid; grid-template-columns:auto 1fr; gap:8px 18px; font-size:0.72em; text-align:left;">
+            <span style="font-weight:700; color:var(--accent);">Minimum bet</span>
+            <span style="color:var(--text-dim);">Equal to the big blind. In a 1/2 game, min bet = <strong>2</strong>.</span>
+
+            <span style="font-weight:700; color:var(--accent);">Minimum raise</span>
+            <span style="color:var(--text-dim);">At least the size of the previous bet or raise on top.</span>
+
+            <span style="font-weight:700; color:var(--accent);">Maximum raise</span>
+            <span style="color:var(--text-dim);"><strong>All-in</strong> &mdash; push your entire stack. No limit means no cap.</span>
+          </div>
+        </div>
+
+        <div class="note accent-note" style="text-align:left; margin-top:18px; max-width:700px;">
+          <p style="margin:0 0 6px 0; font-weight:600; color:var(--text);">Example &mdash; 1/2 game:</p>
+          <div style="font-family:var(--mono); font-size:0.95em; line-height:2;">
+            <p style="margin:0;">Player A bets <strong class="accent">10</strong></p>
+            <p style="margin:0;" class="fragment">Player B min-raises to <strong class="accent">20</strong> <span style="color:var(--text-faint);">(raise of 10 on top)</span></p>
+            <p style="margin:0;" class="fragment">Player C min-raises to <strong class="accent">30</strong> <span style="color:var(--text-faint);">(raise of 10 on top)</span></p>
+            <p style="margin:0;" class="fragment">Player D could raise to <strong class="accent">anything &ge; 40</strong> &hellip;or shove <strong class="accent">all-in</strong></p>
+          </div>
+        </div>
+
+        <aside class="notes">No Limit means there's no cap on how much you can bet. The minimum bet is the big blind. When raising, you have to raise by at least the size of the previous bet or raise. So if someone bets 10, you can raise to 20 or more — the raise amount is at least 10. The maximum? Everything you have. That's all-in.</aside>
+      </section>
+
+      <!-- ===== SLIDE 18: BET NAMING ===== -->
+      <section>
+        <div class="label">Betting Rules</div>
+        <h2>Raise naming: the number system</h2>
+        <p>Bets and raises are numbered by how many aggressive actions have happened.</p>
+
+        <div style="max-width:720px; margin:16px auto;">
+          <div style="display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; margin-bottom:18px;">
+            <div style="text-align:center; padding:8px 12px;">
+              <div class="badge" style="font-size:0.7em; padding:4px 10px; color:var(--text-faint);">BB posts 2</div>
+              <p style="font-size:0.52em; color:var(--text-faint); margin-top:4px;">1-bet</p>
+            </div>
+            <span style="color:var(--text-faint); font-size:0.8em;">&rarr;</span>
+            <div style="text-align:center; padding:8px 12px;" class="fragment">
+              <div class="badge raise" style="font-size:0.7em; padding:4px 10px;">You raise to 6</div>
+              <p style="font-size:0.52em; color:var(--accent); margin-top:4px; font-weight:600;">2-bet (open)</p>
+            </div>
+            <span style="color:var(--text-faint); font-size:0.8em;" class="fragment">&rarr;</span>
+            <div style="text-align:center; padding:8px 12px;" class="fragment">
+              <div class="badge raise" style="font-size:0.7em; padding:4px 10px;">Alice raises to 18</div>
+              <p style="font-size:0.52em; color:var(--accent); margin-top:4px; font-weight:600;">3-bet</p>
+            </div>
+            <span style="color:var(--text-faint); font-size:0.8em;" class="fragment">&rarr;</span>
+            <div style="text-align:center; padding:8px 12px;" class="fragment">
+              <div class="badge raise" style="font-size:0.7em; padding:4px 10px;">You re-raise to 50</div>
+              <p style="font-size:0.52em; color:var(--accent); margin-top:4px; font-weight:600;">4-bet</p>
+            </div>
+            <span style="color:var(--text-faint); font-size:0.8em;" class="fragment">&rarr;</span>
+            <div style="text-align:center; padding:8px 12px;" class="fragment">
+              <div class="badge raise" style="font-size:0.7em; padding:4px 10px;">Alice all-in</div>
+              <p style="font-size:0.52em; color:var(--accent); margin-top:4px; font-weight:600;">5-bet</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="note" style="text-align:center; max-width:640px;">
+          <p style="margin:0;">You'll mostly hear <strong>"3-bet"</strong> in poker conversation. It just means someone raised a raise. Don't overthink the numbering &mdash; it just counts the bets.</p>
+        </div>
+
+        <aside class="notes">The numbering counts the aggressive actions. Preflop, the big blind counts as the first bet. The open raise is the 2-bet. A re-raise is the 3-bet. You'll hear 3-bet constantly in poker — it just means someone raised a raise. 4-bets and 5-bets are rare and usually mean someone is going all-in.</aside>
+      </section>
+
+      <!-- ===== ANATOMY OF A HAND ===== -->
+      <section>
+        <div class="label">Game Flow</div>
+        <h2>Anatomy of a hand</h2>
+
+        <div class="flow">
+          <span class="flow-step">Preflop</span>
+          <span class="flow-sep">/</span>
+          <span class="flow-step">Flop</span>
+          <span class="flow-sep">/</span>
+          <span class="flow-step">Turn</span>
+          <span class="flow-sep">/</span>
+          <span class="flow-step">River</span>
+          <span class="flow-sep">/</span>
+          <span class="flow-step">Showdown</span>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px; font-size:0.78em;">
+          <div>
+            <p><strong>Preflop</strong><br>2 hole cards dealt. Betting round.</p>
+            <p><strong>Flop</strong><br>3 community cards revealed. Betting round.</p>
+            <p><strong>Turn</strong><br>4th community card. Betting round.</p>
+          </div>
+          <div>
+            <p><strong>River</strong><br>5th and final community card. Betting round.</p>
+            <p><strong>Showdown</strong><br>Remaining players reveal cards. Best hand wins.</p>
+            <p style="color:var(--accent);"><strong>A hand can end at any stage</strong> if everyone folds to one player.</p>
+          </div>
+        </div>
+
+        <p style="text-align:center; margin-top:10px;">Let's walk through a full hand with 6 players:<br>
+          <strong>Alice</strong> (Dealer), <strong>Bob</strong> (SB), <strong>Carol</strong> (BB), <strong>Dave</strong>, <strong>Eve</strong>, <strong class="accent">You</strong>.</p>
+        <aside class="notes">Every hand follows this flow. Five stages. Most hands don't reach showdown. If everyone folds except one player, that player wins immediately. Let's walk through a complete hand step by step with all 6 players.</aside>
+      </section>
+
+      <!-- ===== SLIDE 18: PREFLOP (was #14, 6-player table) ===== -->
+      <section>
+        <div class="flow" style="margin-bottom:4px;">
+          <span class="flow-step active">Preflop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Flop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Turn</span><span class="flow-sep">/</span>
+          <span class="flow-step">River</span><span class="flow-sep">/</span>
+          <span class="flow-step">Showdown</span>
+        </div>
+
+        <p style="font-size:0.62em;">Bob posts <strong>SB (1)</strong>, Carol posts <strong>BB (2)</strong>. Everyone gets 2 cards.</p>
+
+        <div class="wt-layout">
+          <div class="table-wrap" style="width:420px; height:260px; margin:0;">
+            <div class="table-felt" style="width:270px; height:142px;"></div>
+            <!-- Seats with hole cards -->
+            <div class="seat s1">
+              <div class="seat-dot dealer">A</div>
+              <span class="seat-name bright">Alice (D)</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s2">
+              <div class="seat-dot sb">B</div>
+              <span class="seat-name bright">Bob (SB)</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s3">
+              <div class="seat-dot bb">C</div>
+              <span class="seat-name bright">Carol (BB)</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s4">
+              <div class="seat-dot you">YOU</div>
+              <div class="cards" style="margin:2px 0;gap:1px;">
+                <span class="card xxs hi"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+                <span class="card xxs hi"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+              </div>
+            </div>
+            <div class="seat s5">
+              <div class="seat-dot">D</div>
+              <span class="seat-name">Dave</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s6">
+              <div class="seat-dot">E</div>
+              <span class="seat-name">Eve</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <!-- Position chips on table -->
+            <div class="table-chip tc-s1"><div class="chip d" style="width:22px;height:22px;font-size:0.5em;">D</div></div>
+            <div class="table-chip tc-s2"><div class="chip sb" style="width:22px;height:22px;font-size:0.5em;">SB</div></div>
+            <div class="table-chip tc-s3"><div class="chip bb" style="width:22px;height:22px;font-size:0.5em;">BB</div></div>
+            <!-- Bet labels (order: You=0, Dave=1, Eve=2, Alice=3, Bob=4, Carol=5) -->
+            <span class="fragment bet-label bl-s4" data-fragment-index="0">6</span>
+            <span class="fragment fold-x fx-s5" data-fragment-index="1">FOLD</span>
+            <span class="fragment fold-x fx-s6" data-fragment-index="2">FOLD</span>
+            <span class="fragment bet-label bl-s1" data-fragment-index="3">6</span>
+            <span class="fragment fold-x fx-s2" data-fragment-index="4">FOLD</span>
+            <span class="fragment bet-label bl-s3" data-fragment-index="5">6</span>
+            <!-- Pot -->
+            <span class="fragment pot-center" data-fragment-index="6">Pot: 19</span>
+          </div>
+
+          <div class="wt-actions">
+            <div class="note accent-note" style="margin:0 0 8px 0; padding:5px 10px;">
+              <p style="margin:0; font-size:0.85em;"><strong>Preflop order:</strong> starts left of the Big Blind (that's you).</p>
+            </div>
+            <p class="fragment" data-fragment-index="0"><strong class="accent">You</strong>: <span class="badge raise">Raise to 6</span></p>
+            <p class="fragment" data-fragment-index="1"><strong>Dave</strong>: <span class="badge fold">Fold</span></p>
+            <p class="fragment" data-fragment-index="2"><strong>Eve</strong>: <span class="badge fold">Fold</span></p>
+            <p class="fragment" data-fragment-index="3"><strong>Alice</strong>: <span class="badge call">Call 6</span></p>
+            <p class="fragment" data-fragment-index="4"><strong>Bob</strong>: <span class="badge fold">Fold</span> <span style="color:var(--text-faint); font-size:0.85em;">(loses SB of 1)</span></p>
+            <p class="fragment" data-fragment-index="5"><strong>Carol</strong>: <span class="badge call">Call 6</span> <span style="color:var(--text-faint); font-size:0.85em;">(adds 4 to her 2)</span></p>
+            <div class="pot fragment" data-fragment-index="6">Pot: 19 chips</div>
+          </div>
+        </div>
+        <aside class="notes">Blinds go in. Preflop, action starts left of the big blind — that's you. You raise to 6 with Ace-King. Dave and Eve fold. Alice calls. Bob folds his small blind. Carol calls. Pot is 19. Three players to the flop.</aside>
+      </section>
+
+      <!-- ===== SLIDE 19: FLOP (was #15) ===== -->
+      <section>
+        <div class="flow" style="margin-bottom:4px;">
+          <span class="flow-step">Preflop</span><span class="flow-sep">/</span>
+          <span class="flow-step active">Flop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Turn</span><span class="flow-sep">/</span>
+          <span class="flow-step">River</span><span class="flow-sep">/</span>
+          <span class="flow-step">Showdown</span>
+        </div>
+
+        <p style="font-size:0.62em;">3 community cards dealt. Your A&#9829; K&#9830; + board K&#9824; = <span class="accent" style="font-weight:600;">Pair of Kings</span></p>
+
+        <div class="wt-layout">
+          <div class="table-wrap" style="width:420px; height:260px; margin:0;">
+            <div class="table-felt" style="width:270px; height:142px;">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;gap:3px;">
+                <span class="card xxs"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+                <span class="card xxs"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+                <span class="card xxs"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+              </div>
+            </div>
+            <div class="seat s1">
+              <div class="seat-dot dealer">A</div>
+              <span class="seat-name bright">Alice</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s2 folded"><div class="seat-dot">B</div><span class="seat-name">Bob</span></div>
+            <div class="seat s3">
+              <div class="seat-dot">C</div>
+              <span class="seat-name bright">Carol</span>
+            </div>
+            <!-- Carol's cards — slide to muck on fold -->
+            <div class="fragment muck-cards muck-from-s3" data-fragment-index="3">
+              <div class="card xxs facedown"></div><div class="card xxs facedown"></div>
+            </div>
+            <div class="seat s4">
+              <div class="seat-dot you">YOU</div>
+              <div class="cards" style="margin:2px 0;gap:1px;">
+                <span class="card xxs hi"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+                <span class="card xxs hi"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+              </div>
+            </div>
+            <div class="seat s5 folded"><div class="seat-dot">D</div><span class="seat-name">Dave</span></div>
+            <div class="seat s6 folded"><div class="seat-dot">E</div><span class="seat-name">Eve</span></div>
+            <!-- Actions on table -->
+            <span class="fragment check-x cx-s3" data-fragment-index="0">CHECK</span>
+            <span class="fragment bet-label bl-s4" data-fragment-index="1">10</span>
+            <span class="fragment bet-label bl-s1" data-fragment-index="2">10</span>
+            <span class="fragment fold-x fx-s3" data-fragment-index="3">FOLD</span>
+            <span class="fragment pot-center" data-fragment-index="4">Pot: 39</span>
+          </div>
+
+          <div class="wt-actions">
+            <div class="note accent-note" style="margin:0 0 8px 0; padding:5px 10px;">
+              <p style="margin:0; font-size:0.85em;"><strong>Postflop order:</strong> starts left of the Dealer.</p>
+            </div>
+            <p class="fragment" data-fragment-index="0"><strong>Carol</strong>: <span class="badge check">Check</span></p>
+            <p class="fragment" data-fragment-index="1"><strong class="accent">You</strong>: <span class="badge bet">Bet 10</span></p>
+            <p class="fragment" data-fragment-index="2"><strong>Alice</strong>: <span class="badge call">Call 10</span></p>
+            <p class="fragment" data-fragment-index="3"><strong>Carol</strong>: <span class="badge fold">Fold</span></p>
+            <div class="pot fragment" data-fragment-index="4">Pot: 39 chips</div>
+          </div>
+        </div>
+        <aside class="notes">Flop: King-7-3. You paired your King. Postflop, action starts left of the DEALER. Carol checks, you bet 10, Alice calls, Carol folds. Pot is 39.</aside>
+      </section>
+
+      <!-- ===== SLIDE 20: TURN (was #16) ===== -->
+      <section>
+        <div class="flow" style="margin-bottom:4px;">
+          <span class="flow-step">Preflop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Flop</span><span class="flow-sep">/</span>
+          <span class="flow-step active">Turn</span><span class="flow-sep">/</span>
+          <span class="flow-step">River</span><span class="flow-sep">/</span>
+          <span class="flow-step">Showdown</span>
+        </div>
+
+        <p style="font-size:0.62em;">4th community card. Just you and Alice now.</p>
+
+        <div class="wt-layout">
+          <div class="table-wrap" style="width:420px; height:260px; margin:0;">
+            <div class="table-felt" style="width:270px; height:142px;">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;gap:3px;">
+                <span class="card xxs"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+                <span class="card xxs"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+                <span class="card xxs"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+                <span class="card xxs hi"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+              </div>
+            </div>
+            <div class="seat s1">
+              <div class="seat-dot dealer">A</div>
+              <span class="seat-name bright">Alice</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s2 folded"><div class="seat-dot">B</div><span class="seat-name">Bob</span></div>
+            <div class="seat s3 folded"><div class="seat-dot">C</div><span class="seat-name">Carol</span></div>
+            <div class="seat s4">
+              <div class="seat-dot you">YOU</div>
+              <div class="cards" style="margin:2px 0;gap:1px;">
+                <span class="card xxs hi"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+                <span class="card xxs hi"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+              </div>
+            </div>
+            <div class="seat s5 folded"><div class="seat-dot">D</div><span class="seat-name">Dave</span></div>
+            <div class="seat s6 folded"><div class="seat-dot">E</div><span class="seat-name">Eve</span></div>
+            <span class="fragment bet-label bl-s4" data-fragment-index="0">20</span>
+            <span class="fragment bet-label bl-s1" data-fragment-index="1">20</span>
+            <span class="fragment pot-center" data-fragment-index="2">Pot: 79</span>
+          </div>
+
+          <div class="wt-actions">
+            <p class="fragment" data-fragment-index="0"><strong class="accent">You</strong>: <span class="badge bet">Bet 20</span></p>
+            <p class="fragment" data-fragment-index="1"><strong>Alice</strong>: <span class="badge call">Call 20</span></p>
+            <div class="pot fragment" data-fragment-index="2">Pot: 79 chips</div>
+          </div>
+        </div>
+        <aside class="notes">9 of spades on the turn. You bet 20, Alice calls. Pot is 79. One more card to come.</aside>
+      </section>
+
+      <!-- ===== SLIDE 21: RIVER (was #17) ===== -->
+      <section>
+        <div class="flow" style="margin-bottom:4px;">
+          <span class="flow-step">Preflop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Flop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Turn</span><span class="flow-sep">/</span>
+          <span class="flow-step active">River</span><span class="flow-sep">/</span>
+          <span class="flow-step">Showdown</span>
+        </div>
+
+        <p style="font-size:0.62em;">5th and final community card. Last betting round.</p>
+
+        <div class="wt-layout">
+          <div class="table-wrap" style="width:420px; height:260px; margin:0;">
+            <div class="table-felt" style="width:270px; height:142px;">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;gap:3px;">
+                <span class="card xxs"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+                <span class="card xxs"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+                <span class="card xxs"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+                <span class="card xxs"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+                <span class="card xxs hi"><span class="s-red"><span class="rank">2</span><span class="suit">♥</span></span></span>
+              </div>
+            </div>
+            <div class="seat s1">
+              <div class="seat-dot dealer">A</div>
+              <span class="seat-name bright">Alice</span>
+              <div class="cards" style="margin:2px 0;gap:1px;"><div class="card xxs facedown"></div><div class="card xxs facedown"></div></div>
+            </div>
+            <div class="seat s2 folded"><div class="seat-dot">B</div><span class="seat-name">Bob</span></div>
+            <div class="seat s3 folded"><div class="seat-dot">C</div><span class="seat-name">Carol</span></div>
+            <div class="seat s4">
+              <div class="seat-dot you">YOU</div>
+              <div class="cards" style="margin:2px 0;gap:1px;">
+                <span class="card xxs hi"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+                <span class="card xxs hi"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+              </div>
+            </div>
+            <div class="seat s5 folded"><div class="seat-dot">D</div><span class="seat-name">Dave</span></div>
+            <div class="seat s6 folded"><div class="seat-dot">E</div><span class="seat-name">Eve</span></div>
+            <span class="fragment bet-label bl-s4" data-fragment-index="0">30</span>
+            <span class="fragment bet-label bl-s1" data-fragment-index="1">30</span>
+            <span class="fragment pot-center" data-fragment-index="2">Pot: 139</span>
+          </div>
+
+          <div class="wt-actions">
+            <p class="fragment" data-fragment-index="0"><strong class="accent">You</strong>: <span class="badge bet">Bet 30</span></p>
+            <p class="fragment" data-fragment-index="1"><strong>Alice</strong>: <span class="badge call">Call 30</span></p>
+            <div class="pot fragment" data-fragment-index="2">Pot: 139 chips</div>
+          </div>
+        </div>
+        <aside class="notes">2 of hearts. You bet 30, Alice calls. 139 chips in the pot. Time for the reveal.</aside>
+      </section>
+
+      <!-- ===== SLIDE 22: SHOWDOWN (was #18) ===== -->
+      <section>
+        <div class="flow" style="margin-bottom:4px;">
+          <span class="flow-step">Preflop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Flop</span><span class="flow-sep">/</span>
+          <span class="flow-step">Turn</span><span class="flow-sep">/</span>
+          <span class="flow-step">River</span><span class="flow-sep">/</span>
+          <span class="flow-step active">Showdown</span>
+        </div>
+
+        <div class="board" style="margin-bottom:10px;">
+          <span class="card"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">7</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">9</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">2</span><span class="suit">♥</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name accent">You:</span>
+          <span class="card sm hi"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+          <span class="card sm hi"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+          <span style="font-size:0.7em;">&rarr; Best 5: <strong class="accent">K K A 9 7</strong> = Pair of Kings</span>
+        </div>
+
+        <p class="vs-text">vs.</p>
+
+        <div class="player-row fragment">
+          <span class="player-name">Alice:</span>
+          <span class="card sm"><span class="s-black"><span class="rank">Q</span><span class="suit">♠</span></span></span>
+          <span class="card sm"><span class="s-black"><span class="rank">Q</span><span class="suit">♣</span></span></span>
+          <span style="font-size:0.7em;">&rarr; Best 5: <strong>Q Q K 9 7</strong> = Pair of Queens</span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <p style="font-size:1.05em; font-weight:700;"><span class="accent">Kings beat Queens. You win 139 chips.</span></p>
+        </div>
+
+        <div class="note fragment" style="text-align:center;">
+          If Alice had folded at any point, you would have won without showing your cards.<br>
+          3 of the 6 players folded before the flop. Only 2 made it to showdown.
+        </div>
+        <aside class="notes">You show Ace-King, pair of Kings. Alice shows pocket Queens, pair of Queens. Kings beat Queens, you win 139 chips. 3 players folded preflop, Carol folded on the flop — only 2 made it to showdown. That's normal in 6-max.</aside>
+      </section>
+
+      <!-- ===== SLIDES 23-27: HARDER PRACTICE HANDS ===== -->
+
+      <!-- HARDER PRACTICE 1: Trips vs Two Pair -->
+      <section>
+        <div class="label">Practice &mdash; Hard</div>
+        <h2>Who wins? #1</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-red"><span class="rank">10</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">10</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">5</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">8</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">2</span><span class="suit">♣</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player A:</span>
+          <span class="card sm"><span class="s-black"><span class="rank">A</span><span class="suit">♠</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">10</span><span class="suit">♦</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player B:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">5</span><span class="suit">♥</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name accent">Player A:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Three 10s</strong> (10&#9829; 10&#9827; 10&#9830; A&#9824; 8&#9830;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name">Player B:</span>
+            <span style="font-size:0.72em;">Two Pair, 10s and 5s (10&#9829; 10&#9827; 5&#9824; 5&#9829; K&#9829;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player A wins.</span> Three of a kind beats two pair.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Player A has three 10s. Player B has two pair, 10s and 5s. Three of a kind beats two pair every time.</aside>
+      </section>
+
+      <!-- HARDER PRACTICE 2: The Fold Win (reworked, 6-player) -->
+      <section>
+        <div class="label">Practice &mdash; Hard</div>
+        <h2>The fold win</h2>
+
+        <div style="font-size:0.72em; text-align:left; max-width:620px; margin:0 auto;">
+          <p style="color:var(--text-faint); margin-bottom:8px;"><strong style="color:var(--text);">6 players.</strong> Alice deals. Bob (SB), Carol (BB). You, Dave, Eve.</p>
+
+          <p><strong>Preflop:</strong> You fold. Dave raises. Eve folds. Alice folds. Bob folds. Carol calls.</p>
+          <p><strong>Flop:</strong>
+            <span class="card xs" style="vertical-align:middle;"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+            <span class="card xs" style="vertical-align:middle;"><span class="s-red"><span class="rank">8</span><span class="suit">♥</span></span></span>
+            <span class="card xs" style="vertical-align:middle;"><span class="s-black"><span class="rank">4</span><span class="suit">♣</span></span></span>
+            &nbsp;Carol checks. Dave bets. Carol calls.</p>
+          <p><strong>Turn:</strong>
+            <span class="card xs hi" style="vertical-align:middle;"><span class="s-red"><span class="rank">Q</span><span class="suit">♦</span></span></span>
+            &nbsp;Carol checks. Dave bets big. Carol calls.</p>
+          <p><strong>River:</strong>
+            <span class="card xs hi" style="vertical-align:middle;"><span class="s-black"><span class="rank">6</span><span class="suit">♣</span></span></span>
+            &nbsp;Carol checks. Dave shoves all-in.</p>
+        </div>
+
+        <p style="font-size:1em; margin:16px 0;" class="fragment">
+          <strong>Carol:</strong> <span class="badge fold" style="font-size:0.8em;">Fold</span>
+        </p>
+
+        <p class="fragment" style="font-size:0.95em; font-weight:700;">
+          <span class="accent">Dave wins.</span> Cards are never shown.
+        </p>
+
+        <div class="note fragment" style="text-align:center;">
+          Dave might have had the nuts. Dave might have had nothing.<br>
+          When everyone folds, the winner never has to reveal. That ambiguity is what makes poker interesting.
+        </div>
+        <aside class="notes">6 players start. You fold preflop with a weak hand. By the river it's Dave vs Carol. Dave shoves all-in. Carol folds. Dave wins without ever showing cards. Could have been a monster hand. Could have been a bluff. That's poker.</aside>
+      </section>
+
+      <!-- HARDER PRACTICE 3: Full House vs Flush -->
+      <section>
+        <div class="label">Practice &mdash; Hard</div>
+        <h2>Who wins? #4</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-red"><span class="rank">8</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">8</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">J</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">5</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">3</span><span class="suit">♦</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player A:</span>
+          <span class="card sm"><span class="s-black"><span class="rank">8</span><span class="suit">♠</span></span></span>
+          <span class="card sm"><span class="s-black"><span class="rank">J</span><span class="suit">♣</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player B:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">9</span><span class="suit">♥</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name accent">Player A:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Full House</strong>, 8s full of Jacks (8&#9829; 8&#9827; 8&#9824; J&#9829; J&#9827;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name">Player B:</span>
+            <span style="font-size:0.72em;">Flush, Ace-high hearts (A&#9829; J&#9829; 9&#9829; 8&#9829; 5&#9829;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player A wins.</span> Full house beats a flush, even an Ace-high one.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Tricky one. Player B has a beautiful Ace-high flush. But Player A has three 8s and two Jacks for a full house. Full house beats flush every time, no matter how high the flush is.</aside>
+      </section>
+
+      <!-- HARDER PRACTICE 5: Kicker Battle -->
+      <section>
+        <div class="label">Practice &mdash; Hard</div>
+        <h2>Who wins? #5</h2>
+
+        <div class="board">
+          <span class="card"><span class="s-black"><span class="rank">K</span><span class="suit">♠</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">9</span><span class="suit">♦</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">4</span><span class="suit">♣</span></span></span>
+          <span class="card"><span class="s-red"><span class="rank">2</span><span class="suit">♥</span></span></span>
+          <span class="card"><span class="s-black"><span class="rank">7</span><span class="suit">♠</span></span></span>
+        </div>
+
+        <div class="player-row">
+          <span class="player-name">Player A:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">K</span><span class="suit">♥</span></span></span>
+          <span class="card sm"><span class="s-red"><span class="rank">Q</span><span class="suit">♦</span></span></span>
+        </div>
+        <div class="player-row">
+          <span class="player-name">Player B:</span>
+          <span class="card sm"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+          <span class="card sm"><span class="s-black"><span class="rank">J</span><span class="suit">♣</span></span></span>
+        </div>
+
+        <div class="fragment" style="margin-top:14px;">
+          <div class="player-row">
+            <span class="player-name accent">Player A:</span>
+            <span style="font-size:0.72em;"><strong class="accent">Pair of Kings, Queen kicker</strong> (K&#9824; K&#9829; Q&#9830; 9&#9830; 7&#9824;)</span>
+          </div>
+          <div class="player-row">
+            <span class="player-name">Player B:</span>
+            <span style="font-size:0.72em;">Pair of Kings, Jack kicker (K&#9824; K&#9830; J&#9827; 9&#9830; 7&#9824;)</span>
+          </div>
+          <p style="font-size:0.9em; font-weight:700; margin-top:8px;"><span class="accent">Player A wins.</span> Same pair, but Queen kicker beats Jack kicker.</p>
+          <p style="font-size:0.68em; color:var(--text-faint);">When pairs are tied, the highest remaining card (the "kicker") breaks it.</p>
+        </div>
+        <div class="hand-ref"><div class="hr-title">Rankings</div><ol><li>Royal Flush</li><li>Straight Flush</li><li>Four of a Kind</li><li>Full House</li><li>Flush</li><li class="hr-common">Straight</li><li class="hr-common">Three of a Kind</li><li class="hr-common">Two Pair</li><li class="hr-common">One Pair</li><li class="hr-common">High Card</li></ol></div>
+        <aside class="notes">Both have a pair of Kings. Same pair. So we look at the next highest card. Player A has a Queen, Player B has a Jack. Queen beats Jack. This is called a kicker. The kicker matters more than you'd think.</aside>
+      </section>
+
+      <!-- ===== RECAP ===== -->
+      <section>
+        <div class="label">Recap</div>
+        <h2>What you now know</h2>
+
+        <div class="recap-list">
+          <p><span class="recap-num">1.</span> Best <strong>5 of 7</strong> cards wins. 2 hole cards + 5 community.</p>
+          <p><span class="recap-num">2.</span> 10 hand rankings. Pair and two pair decide most pots.</p>
+          <p><span class="recap-num">3.</span> Blinds create action. The button rotates so everyone pays.</p>
+          <p><span class="recap-num">4.</span> Four betting rounds: <strong>preflop, flop, turn, river</strong>.</p>
+          <p><span class="recap-num">5.</span> Five actions: fold, check, call, bet, raise.</p>
+          <p><span class="recap-num">6.</span> You can win by making everyone else fold. No cards shown.</p>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:6px; margin-top:16px; flex-wrap:wrap;">
+          <span class="badge fold">Fold</span>
+          <span class="badge check">Check</span>
+          <span class="badge call">Call</span>
+          <span class="badge bet">Bet</span>
+          <span class="badge raise">Raise</span>
+        </div>
+        <aside class="notes">Six things. Best 5 of 7. Know the common hand rankings. Blinds rotate. Four betting rounds. Five possible actions. And you can win without the best hand if everyone folds. That's the complete ruleset.</aside>
+      </section>
+
+      <!-- ===== SLIDE 30: CHEAT SHEET ===== -->
+      <section>
+        <h2>Cheat Sheet</h2>
+        <div class="two-col">
+          <div>
+            <span class="col-head">Hand Rankings (best to worst)</span>
+            <ul>
+              <li><strong>Royal Flush</strong> &mdash; A K Q J 10, same suit</li>
+              <li><strong>Straight Flush</strong> &mdash; 5 in a row, same suit</li>
+              <li><strong>Four of a Kind</strong> &mdash; 4 of same rank</li>
+              <li><strong>Full House</strong> &mdash; 3 of a kind + pair</li>
+              <li><strong>Flush</strong> &mdash; 5 same suit</li>
+              <li><strong>Straight</strong> &mdash; 5 in a row</li>
+              <li><strong>Three of a Kind</strong> &mdash; 3 of same rank</li>
+              <li><strong>Two Pair</strong> &mdash; 2 different pairs</li>
+              <li><strong>One Pair</strong> &mdash; 2 of same rank</li>
+              <li><strong>High Card</strong> &mdash; nothing, best card plays</li>
+            </ul>
+          </div>
+          <div>
+            <span class="col-head">Betting Actions</span>
+            <ul>
+              <li><span class="badge fold" style="font-size:0.55em; padding:1px 7px;">Fold</span> &nbsp; Give up, out of the hand</li>
+              <li><span class="badge check" style="font-size:0.55em; padding:1px 7px;">Check</span> &nbsp; Pass (only if no bet yet)</li>
+              <li><span class="badge call" style="font-size:0.55em; padding:1px 7px;">Call</span> &nbsp; Match the current bet</li>
+              <li><span class="badge bet" style="font-size:0.55em; padding:1px 7px;">Bet</span> &nbsp; First chips in</li>
+              <li><span class="badge raise" style="font-size:0.55em; padding:1px 7px;">Raise</span> &nbsp; Increase someone's bet</li>
+            </ul>
+            <br>
+            <span class="col-head">Game Flow</span>
+            <ul>
+              <li><strong>Preflop</strong> &mdash; 2 hole cards, bet from left of BB</li>
+              <li><strong>Flop</strong> &mdash; 3 board cards, bet from left of Dealer</li>
+              <li><strong>Turn</strong> &mdash; 4th card, same as flop</li>
+              <li><strong>River</strong> &mdash; 5th card, same as flop</li>
+              <li><strong>Showdown</strong> &mdash; Best 5 of 7 wins</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin-top:14px; text-align:center; font-size:0.6em; color:var(--text-faint);">Take a screenshot.</p>
+        <aside class="notes">Take a photo of this. Left side: all the rankings. Right side: actions and game flow.</aside>
+      </section>
+
+      <!-- ===== BASIC STRATEGY ===== -->
+      <section>
+        <div class="label">Strategy Preview</div>
+        <h2>Quick strategy to get you started</h2>
+
+        <div style="max-width:760px; margin:14px auto;">
+          <p style="font-size:0.68em; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">Starting hands</p>
+          <p style="font-size:0.72em; color:var(--text-dim); margin-bottom:4px;">Not all hands are worth playing. Focus on:</p>
+          <div style="display:flex; gap:16px; justify-content:center; margin:10px 0 18px;">
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:6px; padding:10px 18px; text-align:center;">
+              <div class="cards" style="margin:0 0 4px;">
+                <span class="card xs"><span class="s-red"><span class="rank">Q</span><span class="suit">♥</span></span></span>
+                <span class="card xs"><span class="s-black"><span class="rank">Q</span><span class="suit">♠</span></span></span>
+              </div>
+              <p style="font-size:0.6em; font-weight:600; color:var(--text); margin:0;">Pairs</p>
+              <p style="font-size:0.52em; color:var(--text-faint); margin:2px 0 0;">Higher is better</p>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:6px; padding:10px 18px; text-align:center;">
+              <div class="cards" style="margin:0 0 4px;">
+                <span class="card xs"><span class="s-red"><span class="rank">A</span><span class="suit">♥</span></span></span>
+                <span class="card xs"><span class="s-red"><span class="rank">K</span><span class="suit">♦</span></span></span>
+              </div>
+              <p style="font-size:0.6em; font-weight:600; color:var(--text); margin:0;">Big cards</p>
+              <p style="font-size:0.52em; color:var(--text-faint); margin:2px 0 0;">AK, AQ, KQ, etc.</p>
+            </div>
+            <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:6px; padding:10px 18px; text-align:center;">
+              <div class="cards" style="margin:0 0 4px;">
+                <span class="card xs"><span class="s-black"><span class="rank">J</span><span class="suit">♠</span></span></span>
+                <span class="card xs"><span class="s-black"><span class="rank">10</span><span class="suit">♠</span></span></span>
+              </div>
+              <p style="font-size:0.6em; font-weight:600; color:var(--text); margin:0;">Suited connectors</p>
+              <p style="font-size:0.52em; color:var(--text-faint); margin:2px 0 0;">Straight &amp; flush potential</p>
+            </div>
+          </div>
+
+          <p style="font-size:0.68em; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;">When to take each action</p>
+          <div style="display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:0.68em; text-align:left;">
+            <span class="badge bet" style="font-size:0.85em; text-align:center;">Bet</span>
+            <span style="color:var(--text-dim);">You think you have the best hand and want to get paid (<strong>value</strong>), or you think you can make others fold (<strong>bluff</strong>).</span>
+
+            <span class="badge raise" style="font-size:0.85em; text-align:center;">Raise</span>
+            <span style="color:var(--text-dim);">Same reasons as betting, but stronger. You're very confident in your hand or your bluff.</span>
+
+            <span class="badge call" style="font-size:0.85em; text-align:center;">Call</span>
+            <span style="color:var(--text-dim);">You think you have a decent chance of winning on later streets. You're not ready to give up, but not strong enough to raise.</span>
+
+            <span class="badge fold" style="font-size:0.85em; text-align:center;">Fold</span>
+            <span style="color:var(--text-dim);">Your hand is weak and the price is too high. Save your chips for a better spot.</span>
+          </div>
+        </div>
+
+        <div class="note" style="text-align:center; margin-top:14px; max-width:640px;">
+          <p style="margin:0;">When in doubt: if your hand is strong, bet. If it's weak, fold. Calling is the middle ground &mdash; use it when you have a reason to see more cards.</p>
+        </div>
+
+        <p style="text-align:center; margin-top:12px; font-size:0.85em; font-weight:700;">Now let's play.</p>
+        <aside class="notes">Quick strategy overview before we play. Pairs and big cards are the best starting hands. When deciding what to do: bet when you think you're ahead or can make others fold. Raise for the same reasons but when you're more confident. Call when you have a reasonable chance on later streets. Fold when you're beat. This is just a starting framework — real strategy gets much deeper.</aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1100,
+      height: 700,
+      margin: 0.06,
+      plugins: [RevealNotes]
+    });
+  </script>
+</body>
+</html>

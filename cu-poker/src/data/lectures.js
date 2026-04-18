@@ -83,6 +83,17 @@ export const additionalLectures = [
     status: "completed",
     youtubeLink: "https://youtu.be/KCCoB3suWNM?si=yUXLVV28UkJqsNMQ",
     notesLink: null
+  },
+  {
+    id: 'add-2',
+    title: "Intro to No Limit Hold'em: Rules & Game Flow",
+    description: "A 30-minute beginner lesson: rules, game flow, and the combinatorial math behind hand rankings",
+    date: "2026-04-15",
+    instructor: "Jonah Aden",
+    status: "completed",
+    youtubeLink: null,
+    slidesLink: "/slides/poker-basics.html",
+    notesLink: "/notes/intro-nlhe"
   }
 ];
 
