@@ -55,21 +55,15 @@ function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'h-14' : 'h-16'}`}>
-          <Link
-            to="/"
-            className="flex items-center gap-3 group"
-          >
+          <Link to="/" className="flex items-center group pl-2">
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-secondary/40 blur-md group-hover:bg-secondary/70 transition-all duration-500" />
+              <div className="absolute inset-0 rounded-full bg-secondary/30 blur-md group-hover:bg-secondary/60 transition-all duration-500" />
               <img
                 src="/CU_Poker_Logo.png"
                 alt="Columbia Poker Club Logo"
-                className="relative h-9 w-9 rounded-full ring-1 ring-white/30"
+                className="relative h-9 w-9 rounded-full ring-1 ring-white/20"
               />
             </div>
-            <span className="hidden sm:block text-sm font-bold tracking-wide text-white/90">
-              Columbia Poker
-            </span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
@@ -79,27 +73,17 @@ function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                    active
-                      ? 'text-white'
-                      : 'text-white/70 hover:text-white'
+                  className={`relative px-4 py-2 text-lg transition-all duration-300 rounded-full ${
+                    active ? 'text-white' : 'text-white/75 hover:text-white'
                   }`}
                 >
                   {active && (
-                    <span className="absolute inset-0 rounded-full bg-white/10 ring-1 ring-white/20" />
+                    <span className="absolute inset-0 rounded-full bg-white/10 ring-1 ring-white/15" />
                   )}
                   <span className="relative">{link.label}</span>
                 </Link>
               );
             })}
-            <a
-              href="https://discord.gg/4yzGm64uQ8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-3 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-accent to-primary hover:shadow-glow-sm transition-all duration-300"
-            >
-              Join Discord
-            </a>
           </div>
 
           <button
@@ -148,14 +132,6 @@ function Navbar() {
               </Link>
             );
           })}
-          <a
-            href="https://discord.gg/4yzGm64uQ8"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 flex items-center justify-center px-4 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-accent to-primary"
-          >
-            Join Discord
-          </a>
         </div>
       </div>
     </nav>

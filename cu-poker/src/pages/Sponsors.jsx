@@ -1,7 +1,7 @@
 const SPONSOR_TIERS = [
   {
     tier: 'Gold',
-    tone: 'from-amber-300 via-yellow-400 to-amber-500',
+    tone: 'from-yellow-400 to-amber-500',
     ring: 'ring-amber-400/40',
     sponsors: [
       {
@@ -9,34 +9,34 @@ const SPONSOR_TIERS = [
         logo: '/CitSec_Logo.png',
         link: 'https://www.citadelsecurities.com/',
         description:
-          'A leading market maker providing liquidity to investors worldwide, improving market quality and reducing trading costs.',
+          'Citadel Securities is a leading market maker that provides liquidity to investors around the world. We help improve market quality and reduce trading costs for millions of people.',
       },
       {
         name: 'Hudson River Trading',
         logo: '/HRT_Logo.png',
         link: 'https://www.hudsonrivertrading.com/',
         description:
-          'A quantitative trading firm bringing a scientific approach to trading — algorithms, cutting-edge technology, rigorous research.',
+          'HRT is a quantitative trading firm focused on bringing a scientific approach to trading financial products. We use algorithms, cutting-edge technology, and rigorous research.',
       },
     ],
   },
   {
     tier: 'Silver',
-    tone: 'from-slate-200 via-slate-300 to-slate-500',
-    ring: 'ring-slate-300/40',
+    tone: 'from-gray-400 to-gray-500',
+    ring: 'ring-gray-300/40',
     sponsors: [
       {
         name: 'Jane Street',
         logo: '/JS_Logo.png',
         link: 'https://www.janestreet.com/',
         description:
-          'A quantitative trading firm and liquidity provider focused on technology and collaborative problem solving.',
+          'Jane Street is a quantitative trading firm and liquidity provider with a unique focus on technology and collaborative problem solving. We trade a wide range of financial instruments.',
       },
     ],
   },
   {
     tier: 'Bronze',
-    tone: 'from-orange-300 via-amber-500 to-orange-600',
+    tone: 'from-orange-400 to-amber-600',
     ring: 'ring-orange-400/40',
     sponsors: [
       {
@@ -44,13 +44,13 @@ const SPONSOR_TIERS = [
         logo: '/SIG_Logo.png',
         link: 'https://www.sig.com/',
         description:
-          'A global quantitative trading firm with an entrepreneurial mindset and rigorous analytical approach.',
+          'SIG is a global quantitative trading firm founded with an entrepreneurial mindset and a rigorous analytical approach. We leverage technology and research to provide liquidity across multiple asset classes.',
       },
     ],
   },
 ];
 
-function SponsorCard({ sponsor, tone, ring }) {
+function SponsorCard({ sponsor, tone }) {
   return (
     <a
       href={sponsor.link}
@@ -62,7 +62,7 @@ function SponsorCard({ sponsor, tone, ring }) {
         className={`absolute -top-12 -right-12 w-40 h-40 rounded-full bg-gradient-to-br ${tone} opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-500`}
       />
       <div className="relative flex flex-col h-full">
-        <div className="h-28 md:h-32 flex items-center justify-center mb-4">
+        <div className="h-24 md:h-32 flex items-center justify-center mb-4">
           <img
             src={sponsor.logo}
             alt={`${sponsor.name} logo`}
@@ -71,17 +71,9 @@ function SponsorCard({ sponsor, tone, ring }) {
             }`}
           />
         </div>
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 text-text-dark/60 text-xs font-semibold uppercase tracking-wider">
-            <span>Visit site</span>
-            <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M7 17l9.2-9.2M7 7h10v10" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <p className="mt-3 text-sm text-text-dark/80 leading-relaxed">
-            {sponsor.description}
-          </p>
-        </div>
+        <p className="text-sm text-text-dark/80 leading-relaxed text-center">
+          {sponsor.description}
+        </p>
       </div>
     </a>
   );
@@ -89,76 +81,38 @@ function SponsorCard({ sponsor, tone, ring }) {
 
 function Sponsors() {
   return (
-    <div className="w-full">
-      {/* Hero */}
-      <section className="relative pt-32 pb-12 md:pt-40 md:pb-16 overflow-hidden bg-gradient-to-b from-ink-950 via-ink-900 to-primary-dark">
-        <div className="absolute inset-0 bg-mesh-hero opacity-60" />
-        <div className="absolute inset-0 bg-grid-faint bg-grid-sm opacity-[0.06]" />
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <span className="chip-dark mb-5">Partners</span>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight text-balance text-white">
-            Our <span className="gradient-text">sponsors</span>
+    <div className="w-full min-h-screen bg-primary-light">
+      <section className="relative w-full pt-24 sm:pt-28 pb-12 md:pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-mesh-soft opacity-40" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-dark text-center mb-12 md:mb-16">
+            Our Sponsors
           </h1>
-          <p className="mt-5 text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-            Firms who back Columbia's poker community — through prize pools, strategy
-            talks, and recruiting events.
-          </p>
-        </div>
-      </section>
 
-      {/* Tiers */}
-      <section className="relative w-full py-16 md:py-24 bg-gradient-to-b from-primary-dark to-background-light overflow-hidden">
-        <div className="absolute inset-0 bg-mesh-soft opacity-30" />
-        <div className="relative max-w-6xl mx-auto px-6 space-y-14">
-          {SPONSOR_TIERS.map((tier) => (
-            <div key={tier.tier}>
-              <div className="flex items-center gap-4 mb-6">
-                <span
-                  className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-bold tracking-wider uppercase text-white bg-gradient-to-r ${tier.tone} ring-2 ${tier.ring} shadow-card`}
+          <div className="space-y-12">
+            {SPONSOR_TIERS.map((tier) => (
+              <div key={tier.tier}>
+                <div className="text-center mb-6">
+                  <span
+                    className={`inline-flex items-center px-6 py-2 rounded-full text-sm md:text-lg font-bold tracking-wider uppercase text-white bg-gradient-to-r ${tier.tone} ring-2 ${tier.ring} shadow-card`}
+                  >
+                    {tier.tier}
+                  </span>
+                </div>
+
+                <div
+                  className={`grid gap-5 ${
+                    tier.sponsors.length > 1
+                      ? 'grid-cols-1 md:grid-cols-2 max-w-4xl'
+                      : 'grid-cols-1 max-w-xl'
+                  } mx-auto`}
                 >
-                  {tier.tier}
-                </span>
-                <div className="flex-1 section-divider" />
+                  {tier.sponsors.map((sponsor) => (
+                    <SponsorCard key={sponsor.name} sponsor={sponsor} tone={tier.tone} />
+                  ))}
+                </div>
               </div>
-
-              <div
-                className={`grid gap-5 ${
-                  tier.sponsors.length > 1
-                    ? 'grid-cols-1 md:grid-cols-2'
-                    : 'grid-cols-1 max-w-xl mx-auto'
-                }`}
-              >
-                {tier.sponsors.map((sponsor) => (
-                  <SponsorCard
-                    key={sponsor.name}
-                    sponsor={sponsor}
-                    tone={tier.tone}
-                    ring={tier.ring}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <div className="mt-16 max-w-2xl mx-auto">
-            <div className="relative rounded-3xl p-8 md:p-10 overflow-hidden bg-ink-950 text-white text-center">
-              <div className="absolute inset-0 bg-mesh-hero opacity-40" />
-              <div className="relative">
-                <h3 className="text-2xl md:text-3xl font-black tracking-tight">
-                  Interested in sponsoring?
-                </h3>
-                <p className="mt-3 text-white/70">
-                  Connect with Columbia's quantitative and strategic minds over the
-                  felt. Email us to discuss partnership tiers.
-                </p>
-                <a
-                  href="mailto:pokerclub@columbia.edu"
-                  className="btn-primary mt-6"
-                >
-                  Get in touch
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

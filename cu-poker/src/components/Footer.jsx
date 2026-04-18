@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 const SOCIAL_LINKS = [
   {
     href: 'mailto:pokerclub@columbia.edu',
@@ -35,83 +33,26 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-auto w-full bg-ink-950 text-text-light overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-secondary/60 to-transparent" />
-      <div className="absolute inset-0 bg-mesh-soft opacity-20 pointer-events-none" />
-
-      <div className="relative mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3">
-              <img
-                src="/CU_Poker_Logo.png"
-                alt="Columbia Poker Club Logo"
-                className="h-10 w-10 rounded-full ring-1 ring-white/20"
-              />
-              <span className="text-xl font-bold">Columbia Poker Club</span>
-            </div>
-            <p className="mt-4 max-w-md text-sm text-white/60 leading-relaxed">
-              Weekly games, lectures, and tournaments for Columbia students — from
-              your first hand to deep runs in the main event.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">
-              Explore
-            </h4>
-            <ul className="space-y-2 text-sm">
-              {[
-                { to: '/', label: 'Home' },
-                { to: '/about', label: 'About' },
-                { to: '/learn', label: 'Learn' },
-                { to: '/sponsors', label: 'Sponsors' },
-                { to: '/spring-mtt', label: 'Tournament' },
-              ].map((link) => (
-                <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    className="text-white/70 hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">
-              Connect
-            </h4>
-            <div className="flex items-center gap-3">
-              {SOCIAL_LINKS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith('mailto') ? undefined : '_blank'}
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    {s.icon}
-                  </svg>
-                </a>
-              ))}
-            </div>
-            <a
-              href="mailto:pokerclub@columbia.edu"
-              className="mt-4 inline-block text-sm text-white/70 hover:text-accent transition-colors"
-            >
-              pokerclub@columbia.edu
-            </a>
-          </div>
+    <footer className="bg-primary-dark text-text-light w-full py-4 mt-auto">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+        <div className="text-sm mb-4 md:mb-0">
+          © {currentYear} Columbia Poker Club. All rights reserved.
         </div>
-
-        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/50">
-          <p>© {currentYear} Columbia Poker Club. All rights reserved.</p>
-          <p>Entertainment only — no real-money gambling.</p>
+        <div className="flex items-center space-x-6">
+          {SOCIAL_LINKS.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target={s.href.startsWith('mailto') ? undefined : '_blank'}
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="hover:text-accent transition"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                {s.icon}
+              </svg>
+            </a>
+          ))}
         </div>
       </div>
     </footer>
